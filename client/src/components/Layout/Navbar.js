@@ -1,10 +1,10 @@
-import React, { useState } from 'react';  
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from '../../components/withTranslation';
 import { Menu, X, User, LogOut, Settings } from 'lucide-react';
 import LanguageSwitcher from '../LanguageSwitcher';
-import logo from '../../Images/Logo.jpeg'; // ✅ Import your logo
+import logo from '../../Images/Logo.jpeg';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,88 +31,80 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-green-500 shadow-lg sticky top-0 z-50">
+    <nav className="bg-white shadow-md sticky top-0 z-50 border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              {/* ✅ Added Logo */}
-              <img
-                src={logo}
-                alt="UCAEP Logo"
-                className="w-10 h-10 object-contain"
-              />
-              <span className="font-bold text-xl text-gray-900">UCAEP</span>
-            </Link>
-          </div>
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-2">
+            <img src={logo} alt="UCAEP Logo" className="w-10 h-10 object-contain rounded-full" />
+            <span className="font-bold text-xl text-green-600">UCAEP</span>
+          </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-6">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+                className="text-gray-700 hover:text-green-600 transition font-medium text-sm"
               >
                 {item.name}
               </Link>
             ))}
           </div>
 
-          {/* User Menu */}
-          <div className="hidden md:flex items-center space-x-4">
-            {/* Language Switcher */}
+          {/* Right Side Controls */}
+          <div className="hidden md:flex items-center space-x-5">
             <LanguageSwitcher size="small" showLabel={false} />
-            
             {user ? (
               <div className="relative">
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                  className="flex items-center space-x-2 text-gray-700 hover:text-primary-600 transition-colors"
+                  className="flex items-center gap-2 text-gray-700 hover:text-green-600 transition"
                 >
                   <User className="w-5 h-5" />
-                  <span className="text-sm font-medium">{t('navigation.profile')}</span>
+                  <span className="text-sm">{t('navigation.profile')}</span>
                 </button>
 
                 {isUserMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border border-gray-100 overflow-hidden z-50">
                     <Link
                       to="/dashboard"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                       onClick={() => setIsUserMenuOpen(false)}
                     >
-                      <Settings className="w-4 h-4 mr-2" />
+                      <Settings className="w-4 h-4 mr-2 text-green-600" />
                       {t('navigation.dashboard')}
                     </Link>
                     <Link
                       to="/producer/profile"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                       onClick={() => setIsUserMenuOpen(false)}
                     >
-                      <User className="w-4 h-4 mr-2" />
+                      <User className="w-4 h-4 mr-2 text-green-600" />
                       {t('producer_profile.title')}
                     </Link>
                     <button
                       onClick={handleSignOut}
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                     >
-                      <LogOut className="w-4 h-4 mr-2" />
+                      <LogOut className="w-4 h-4 mr-2 text-red-500" />
                       {t('navigation.logout')}
                     </button>
                   </div>
                 )}
               </div>
             ) : (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center gap-3">
                 <Link
                   to="/login"
-                  className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition"
                 >
                   {t('navigation.login')}
                 </Link>
                 <Link
                   to="/register"
-                  className="btn-primary text-sm"
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full text-sm font-medium transition"
                 >
                   {t('navigation.register')}
                 </Link>
@@ -120,11 +112,11 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-primary-600 focus:outline-none focus:text-primary-600"
+              className="text-gray-700 hover:text-green-600 focus:outline-none"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -132,61 +124,60 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+        <div className="md:hidden bg-white border-t border-gray-200">
+          <div className="px-4 pt-3 pb-4 space-y-2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium"
+                className="block text-gray-700 hover:text-green-600 text-base font-medium py-2 border-b border-gray-100"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
-            
-            {/* Language Switcher for Mobile */}
-            <div className="border-t pt-2 px-3">
+
+            <div className="pt-3">
               <LanguageSwitcher size="default" showLabel={true} />
             </div>
-            
+
             {user ? (
-              <div className="border-t pt-2">
+              <div className="pt-3 border-t border-gray-200 space-y-2">
                 <Link
                   to="/dashboard"
-                  className="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium"
+                  className="block text-gray-700 hover:text-green-600 py-2"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('navigation.dashboard')}
                 </Link>
                 <Link
                   to="/producer/profile"
-                  className="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium"
+                  className="block text-gray-700 hover:text-green-600 py-2"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('producer_profile.title')}
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium w-full text-left"
+                  className="w-full text-left text-gray-700 hover:text-red-500 py-2 font-medium"
                 >
                   {t('navigation.logout')}
                 </button>
               </div>
             ) : (
-              <div className="border-t pt-2 space-y-2">
+              <div className="pt-3 border-t border-gray-200 space-y-2">
                 <Link
                   to="/login"
-                  className="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium"
+                  className="block text-gray-700 hover:text-green-600 py-2"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('navigation.login')}
                 </Link>
                 <Link
                   to="/register"
-                  className="btn-primary block text-center mx-3"
+                  className="block bg-green-600 hover:bg-green-700 text-white text-center py-2 rounded-full font-medium transition"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('navigation.register')}

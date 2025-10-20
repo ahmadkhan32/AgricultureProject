@@ -21,9 +21,9 @@ const Contact = () => {
       await crudService.contactMessages.create(data);
       setIsSubmitted(true);
       reset();
-      toast.success('Message sent successfully!');
+      toast.success('Message envoyé avec succès !');
     } catch (error) {
-      toast.error('Failed to send message. Please try again.');
+      toast.error("Échec de l'envoi du message. Veuillez réessayer.");
     } finally {
       setIsSubmitting(false);
     }
@@ -32,23 +32,23 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: MapPin,
-      title: 'Visit Us',
-      details: ['Moroni, Grande Comore', 'Union of the Comoros'],
+      title: 'Nous rendre visite',
+      details: ['Moroni, Grande Comore', 'Union des Comores'],
     },
     {
       icon: Phone,
-      title: 'Call Us',
-      details: ['+269 12 34 56 78', 'Mon - Fri, 8:00 AM - 5:00 PM'],
+      title: 'Nous appeler',
+      details: ['+269 12 34 56 78', 'Lun - Ven, 8h00 - 17h00'],
     },
     {
       icon: Mail,
-      title: 'Email Us',
+      title: 'Nous écrire',
       details: ['info@ucaeep.km', 'support@ucaeep.km'],
     },
     {
       icon: Clock,
-      title: 'Office Hours',
-      details: ['Monday - Friday: 8:00 AM - 5:00 PM', 'Saturday: 9:00 AM - 1:00 PM'],
+      title: 'Heures de bureau',
+      details: ['Lundi - Vendredi : 8h00 - 17h00', 'Samedi : 9h00 - 13h00'],
     },
   ];
 
@@ -59,15 +59,15 @@ const Contact = () => {
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="w-8 h-8 text-green-600" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Message Sent Successfully!</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Message envoyé avec succès !</h2>
           <p className="text-gray-600 mb-6">
-            Thank you for contacting us. We'll get back to you as soon as possible.
+            Merci de nous avoir contactés. Nous vous répondrons dès que possible.
           </p>
           <button
             onClick={() => setIsSubmitted(false)}
             className="btn-primary"
           >
-            Send Another Message
+            Envoyer un autre message
           </button>
         </div>
       </div>
@@ -78,39 +78,39 @@ const Contact = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <section className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Get in touch with us for any questions, support, or partnership opportunities. 
-              We're here to help you succeed in your agricultural journey.
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">Contactez-nous</h1>
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Contactez-nous pour toute question, assistance ou opportunité de partenariat.
+              Nous sommes là pour vous aider à réussir dans votre parcours agricole.
             </p>
           </div>
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
           {/* Contact Form */}
           <div className="card">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Envoyez-nous un message</h2>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name *
+                    Nom complet *
                   </label>
                   <input
                     {...register('name', {
-                      required: 'Name is required',
+                      required: 'Le nom est requis',
                       minLength: {
                         value: 2,
-                        message: 'Name must be at least 2 characters',
+                        message: 'Le nom doit comporter au moins 2 caractères',
                       },
                     })}
                     type="text"
                     className="input-field"
-                    placeholder="Enter your full name"
+                    placeholder="Entrez votre nom complet"
                   />
                   {errors.name && (
                     <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
@@ -119,19 +119,19 @@ const Contact = () => {
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address *
+                    Adresse e-mail *
                   </label>
                   <input
                     {...register('email', {
-                      required: 'Email is required',
+                      required: "L'e-mail est requis",
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: 'Invalid email address',
+                        message: 'Adresse e-mail invalide',
                       },
                     })}
                     type="email"
                     className="input-field"
-                    placeholder="Enter your email"
+                    placeholder="Entrez votre adresse e-mail"
                   />
                   {errors.email && (
                     <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
@@ -141,31 +141,31 @@ const Contact = () => {
 
               <div>
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                  Phone Number
+                  Numéro de téléphone
                 </label>
                 <input
                   {...register('phone')}
                   type="tel"
                   className="input-field"
-                  placeholder="Enter your phone number"
+                  placeholder="Entrez votre numéro de téléphone"
                 />
               </div>
 
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                  Subject *
+                  Sujet *
                 </label>
                 <input
                   {...register('subject', {
-                    required: 'Subject is required',
+                    required: 'Le sujet est requis',
                     minLength: {
                       value: 5,
-                      message: 'Subject must be at least 5 characters',
+                      message: 'Le sujet doit comporter au moins 5 caractères',
                     },
                   })}
                   type="text"
                   className="input-field"
-                  placeholder="What is this about?"
+                  placeholder="Quel est le sujet de votre message ?"
                 />
                 {errors.subject && (
                   <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>
@@ -178,15 +178,15 @@ const Contact = () => {
                 </label>
                 <textarea
                   {...register('message', {
-                    required: 'Message is required',
+                    required: 'Le message est requis',
                     minLength: {
                       value: 10,
-                      message: 'Message must be at least 10 characters',
+                      message: 'Le message doit comporter au moins 10 caractères',
                     },
                   })}
                   rows={6}
                   className="input-field"
-                  placeholder="Tell us how we can help you..."
+                  placeholder="Dites-nous comment nous pouvons vous aider..."
                 />
                 {errors.message && (
                   <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
@@ -203,7 +203,7 @@ const Contact = () => {
                 ) : (
                   <>
                     <Send className="w-4 h-4 mr-2" />
-                    Send Message
+                    Envoyer le message
                   </>
                 )}
               </button>
@@ -213,11 +213,10 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Entrer en contact</h2>
               <p className="text-gray-600 mb-8">
-                We're here to help you with any questions about our services, 
-                programs, or how to get involved with UCAEP. Reach out to us 
-                through any of the channels below.
+                Nous sommes là pour vous aider avec toutes vos questions concernant nos services,
+                programmes ou comment rejoindre l'UCAEP. Contactez-nous via l’un des moyens ci-dessous.
               </p>
             </div>
 
@@ -248,7 +247,7 @@ const Contact = () => {
             <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center">
               <div className="text-center">
                 <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                <p className="text-gray-500">Interactive Map</p>
+                <p className="text-gray-500">Carte interactive</p>
                 <p className="text-sm text-gray-400">Moroni, Grande Comore</p>
               </div>
             </div>
@@ -260,9 +259,9 @@ const Contact = () => {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title">Frequently Asked Questions</h2>
+            <h2 className="section-title">Questions fréquemment posées</h2>
             <p className="section-subtitle">
-              Quick answers to common questions about UCAEP
+              Réponses rapides aux questions courantes sur l'UCAEP
             </p>
           </div>
 
@@ -270,31 +269,31 @@ const Contact = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  How do I become a member?
+                  Comment devenir membre ?
                 </h3>
                 <p className="text-gray-600">
-                  You can register online through our website or visit our office 
-                  in Moroni to complete the registration process.
+                  Vous pouvez vous inscrire en ligne sur notre site web ou visiter notre bureau
+                  à Moroni pour finaliser le processus d’inscription.
                 </p>
               </div>
 
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  What services do you offer?
+                  Quels services proposez-vous ?
                 </h3>
                 <p className="text-gray-600">
-                  We provide training programs, technical support, market access, 
-                  and assistance with agricultural development projects.
+                  Nous proposons des programmes de formation, un soutien technique, 
+                  l’accès au marché et une assistance pour les projets agricoles.
                 </p>
               </div>
 
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  Do you offer financial assistance?
+                  Offrez-vous une aide financière ?
                 </h3>
                 <p className="text-gray-600">
-                  Yes, we have various assistance programs and can help connect 
-                  you with funding opportunities and financial institutions.
+                  Oui, nous disposons de divers programmes d’assistance et pouvons vous mettre en
+                  relation avec des institutions financières et des sources de financement.
                 </p>
               </div>
             </div>
@@ -302,31 +301,31 @@ const Contact = () => {
             <div className="space-y-6">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  How can I access training programs?
+                  Comment accéder aux programmes de formation ?
                 </h3>
                 <p className="text-gray-600">
-                  Check our events calendar for upcoming training sessions or 
-                  contact us to learn about available programs in your area.
+                  Consultez notre calendrier d’événements pour les prochaines formations 
+                  ou contactez-nous pour connaître les programmes disponibles dans votre région.
                 </p>
               </div>
 
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  Can I visit your office?
+                  Puis-je visiter votre bureau ?
                 </h3>
                 <p className="text-gray-600">
-                  Yes, our office is open Monday through Friday from 8:00 AM to 5:00 PM. 
-                  We recommend calling ahead to schedule an appointment.
+                  Oui, notre bureau est ouvert du lundi au vendredi de 8h00 à 17h00.
+                  Nous vous recommandons d’appeler à l’avance pour fixer un rendez-vous.
                 </p>
               </div>
 
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  How do I get updates about news and events?
+                  Comment recevoir les mises à jour sur les actualités et événements ?
                 </h3>
                 <p className="text-gray-600">
-                  Subscribe to our newsletter or follow us on social media to stay 
-                  updated with the latest news and upcoming events.
+                  Abonnez-vous à notre newsletter ou suivez-nous sur les réseaux sociaux 
+                  pour rester informé des dernières nouvelles et événements à venir.
                 </p>
               </div>
             </div>

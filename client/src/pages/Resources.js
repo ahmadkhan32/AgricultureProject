@@ -140,31 +140,31 @@ const Resources = () => {
 
       {/* Filters */}
       <section className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-between">
             {/* Search */}
-            <form onSubmit={handleSearch} className="flex-1 max-w-md">
+            <form onSubmit={handleSearch} className="flex-1 w-full sm:max-w-md">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Search className="h-5 w-5 text-gray-400" />
+                  <Search className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                 </div>
                 <input
                   type="text"
                   placeholder="Search resources..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="input-field pl-10"
+                  className="input-field pl-9 sm:pl-10 text-sm sm:text-base"
                 />
               </div>
             </form>
 
             {/* Category Filter */}
-            <div className="flex items-center space-x-2">
-              <Filter className="w-5 h-5 text-gray-400" />
+            <div className="flex items-center space-x-2 w-full sm:w-auto">
+              <Filter className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="input-field"
+                className="input-field flex-1 sm:flex-none text-sm sm:text-base"
               >
                 {categories.map((category) => (
                   <option key={category.value} value={category.value}>
@@ -178,10 +178,10 @@ const Resources = () => {
       </section>
 
       {/* Resources Grid */}
-      <section className="py-12">
+      <section className="py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div key={i} className="card animate-pulse">
                   <div className="h-4 bg-gray-200 rounded mb-2"></div>

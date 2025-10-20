@@ -190,25 +190,25 @@ const ProducerRegistration = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 py-6 sm:py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="card">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Producer Registration</h1>
-            <p className="text-gray-600">
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">Producer Registration</h1>
+            <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
               Join the UCAEP network and showcase your agricultural, livestock, or fisheries business to the world.
             </p>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 sm:space-y-8">
             {/* Business Information */}
-            <div className="space-y-6">
-              <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-                <Building className="w-5 h-5 mr-2" />
+            <div className="space-y-4 sm:space-y-6">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 flex items-center">
+                <Building className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 Business Information
               </h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Business Name *
@@ -216,11 +216,11 @@ const ProducerRegistration = () => {
                   <input
                     {...register('business_name', { required: 'Business name is required' })}
                     type="text"
-                    className="input-field"
+                    className="input-field text-sm sm:text-base"
                     placeholder="Enter your business name"
                   />
                   {errors.business_name && (
-                    <p className="mt-1 text-sm text-red-600">{errors.business_name.message}</p>
+                    <p className="mt-1 text-xs sm:text-sm text-red-600">{errors.business_name.message}</p>
                   )}
                 </div>
 
@@ -230,7 +230,7 @@ const ProducerRegistration = () => {
                   </label>
                   <select
                     {...register('business_type', { required: 'Business type is required' })}
-                    className="input-field"
+                    className="input-field text-sm sm:text-base"
                   >
                     <option value="">Select business type</option>
                     <option value="agriculture">Agriculture</option>
@@ -239,7 +239,7 @@ const ProducerRegistration = () => {
                     <option value="mixed">Mixed (Agriculture + Livestock/Fisheries)</option>
                   </select>
                   {errors.business_type && (
-                    <p className="mt-1 text-sm text-red-600">{errors.business_type.message}</p>
+                    <p className="mt-1 text-xs sm:text-sm text-red-600">{errors.business_type.message}</p>
                   )}
                 </div>
               </div>
@@ -251,22 +251,22 @@ const ProducerRegistration = () => {
                 <textarea
                   {...register('description', { required: 'Business description is required' })}
                   rows={4}
-                  className="input-field"
+                  className="input-field text-sm sm:text-base"
                   placeholder="Describe your business, products, and services..."
                 />
                 {errors.description && (
-                  <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>
+                  <p className="mt-1 text-xs sm:text-sm text-red-600">{errors.description.message}</p>
                 )}
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Region *
                   </label>
                   <select
                     {...register('region', { required: 'Region is required' })}
-                    className="input-field"
+                    className="input-field text-sm sm:text-base"
                   >
                     <option value="">Select region</option>
                     {comorianRegions.map(region => (
@@ -274,7 +274,7 @@ const ProducerRegistration = () => {
                     ))}
                   </select>
                   {errors.region && (
-                    <p className="mt-1 text-sm text-red-600">{errors.region.message}</p>
+                    <p className="mt-1 text-xs sm:text-sm text-red-600">{errors.region.message}</p>
                   )}
                 </div>
 
@@ -285,11 +285,11 @@ const ProducerRegistration = () => {
                   <input
                     {...register('location', { required: 'Location address is required' })}
                     type="text"
-                    className="input-field"
+                    className="input-field text-sm sm:text-base"
                     placeholder="Enter your business address"
                   />
                   {errors.location && (
-                    <p className="mt-1 text-sm text-red-600">{errors.location.message}</p>
+                    <p className="mt-1 text-xs sm:text-sm text-red-600">{errors.location.message}</p>
                   )}
                 </div>
               </div>

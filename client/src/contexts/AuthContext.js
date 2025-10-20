@@ -148,7 +148,10 @@ export const AuthProvider = ({ children }) => {
       if (isDevMode) {
         // Use mock authentication
         const { data, error } = await mockAuth.getUserProfile(user.id);
-        if (error) throw error;
+        if (error) {
+          console.warn('User profile not found in mock data:', error.message);
+          return null;
+        }
         return data;
       } else {
         // Use real Supabase authentication
@@ -158,11 +161,14 @@ export const AuthProvider = ({ children }) => {
           .eq('id', user.id)
           .single();
 
-        if (error) throw error;
+        if (error) {
+          console.warn('User profile not found in database:', error.message);
+          return null;
+        }
         return data;
       }
     } catch (error) {
-      console.error('Error fetching user profile:', error);
+      console.warn('Error fetching user profile:', error.message);
       return null;
     }
   };

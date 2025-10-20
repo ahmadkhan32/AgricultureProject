@@ -15,30 +15,27 @@ const Services = () => {
       if (selectedCategory) filters.category = selectedCategory;
 
       const allServices = await crudService.services.fetchAll(filters);
-      let filteredServices = allServices;
+      let filteredServices = allServices || [];
 
       if (searchTerm) {
-        filteredServices = filteredServices.filter(service =>
-          service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          service.description.toLowerCase().includes(searchTerm.toLowerCase())
+        filteredServices = filteredServices.filter(
+          (service) =>
+            service.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            service.description?.toLowerCase().includes(searchTerm.toLowerCase())
         );
       }
 
-      return {
-        services: filteredServices,
-      };
+      return { services: filteredServices };
     },
-    {
-      keepPreviousData: true,
-    }
+    { keepPreviousData: true }
   );
 
   const categories = [
-    { value: '', label: 'All Services' },
-    { value: 'support', label: 'Producer Support' },
-    { value: 'training', label: 'Training Programs' },
-    { value: 'assistance', label: 'Assistance Programs' },
-    { value: 'project', label: 'Projects' },
+    { value: '', label: 'Tous les services' },
+    { value: 'support', label: 'Soutien aux producteurs' },
+    { value: 'training', label: 'Programmes de formation' },
+    { value: 'assistance', label: 'Programmes d’assistance' },
+    { value: 'project', label: 'Projets' },
   ];
 
   const serviceIcons = {
@@ -48,20 +45,15 @@ const Services = () => {
     project: TrendingUp,
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-  };
-
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-  };
+  const handleSearch = (e) => e.preventDefault();
+  const handleCategoryChange = (category) => setSelectedCategory(category);
 
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Error Loading Services</h2>
-          <p className="text-gray-600">Please try again later.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Erreur de chargement des services</h2>
+          <p className="text-gray-600">Veuillez réessayer plus tard.</p>
         </div>
       </div>
     );
@@ -69,46 +61,46 @@ const Services = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      {/* ==== En-tête ==== */}
       <section className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive support programs designed to empower agricultural, livestock, 
-              and fisheries professionals across the Comoros.
-            </p>
-          </div>
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8 md:py-10 lg:py-12 text-center">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4 leading-tight">
+            Nos Services
+          </h1>
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-2">
+            Des programmes complets de soutien conçus pour renforcer les professionnels de l'agriculture,
+            de l'élevage et de la pêche à travers les Comores.
+          </p>
         </div>
       </section>
 
-      {/* Filters */}
+      {/* ==== Filtres ==== */}
       <section className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            {/* Search */}
-            <form onSubmit={handleSearch} className="flex-1 max-w-md">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 md:py-6">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 items-stretch sm:items-center justify-between">
+            {/* Barre de recherche */}
+            <form onSubmit={handleSearch} className="flex-1 w-full sm:max-w-md">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Search className="h-5 w-5 text-gray-400" />
+                  <Search className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                 </div>
                 <input
                   type="text"
-                  placeholder="Search services..."
+                  placeholder="Rechercher un service..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="input-field pl-10"
+                  className="w-full pl-9 sm:pl-10 pr-4 py-2 sm:py-2.5 text-xs sm:text-sm md:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:outline-none"
                 />
               </div>
             </form>
 
-            {/* Category Filter */}
-            <div className="flex items-center space-x-2">
-              <Filter className="w-5 h-5 text-gray-400" />
+            {/* Filtre de catégorie */}
+            <div className="flex items-center space-x-2 w-full sm:w-auto">
+              <Filter className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />
               <select
                 value={selectedCategory}
                 onChange={(e) => handleCategoryChange(e.target.value)}
-                className="input-field"
+                className="flex-1 sm:flex-none border border-gray-300 rounded-lg py-2 sm:py-2.5 px-3 text-xs sm:text-sm md:text-base focus:ring-2 focus:ring-primary-500 focus:outline-none"
               >
                 {categories.map((category) => (
                   <option key={category.value} value={category.value}>
@@ -121,110 +113,107 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ==== Grille des services ==== */}
+      <section className="py-6 sm:py-8 md:py-10 lg:py-12">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="card animate-pulse">
-                  <div className="h-48 bg-gray-200 rounded-lg mb-4"></div>
-                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-                  <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+            // Chargement
+            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="bg-white rounded-xl shadow p-3 sm:p-4 md:p-6 animate-pulse">
+                  <div className="h-24 sm:h-32 md:h-40 lg:h-48 bg-gray-200 rounded-lg mb-2 sm:mb-3 md:mb-4"></div>
+                  <div className="h-3 sm:h-4 bg-gray-200 rounded w-3/4 mb-1 sm:mb-2"></div>
+                  <div className="h-3 sm:h-4 bg-gray-200 rounded w-1/2"></div>
                 </div>
               ))}
             </div>
           ) : servicesData?.services?.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            // Liste des services
+            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
               {servicesData.services.map((service) => {
                 const Icon = serviceIcons[service.category] || Users;
                 return (
-                  <div key={service.id} className="card hover:shadow-lg transition-shadow">
+                  <div key={service.id} className="bg-white rounded-xl shadow p-3 sm:p-4 md:p-6 hover:shadow-lg transition-all duration-300 hover:scale-105">
                     {service.image_url && (
                       <img
                         src={service.image_url}
                         alt={service.title}
-                        className="w-full h-48 object-cover rounded-lg mb-4"
+                        className="w-full h-24 sm:h-32 md:h-40 lg:h-48 object-cover rounded-lg mb-2 sm:mb-3 md:mb-4"
                       />
                     )}
-                    
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mr-4">
-                        <Icon className="w-6 h-6 text-primary-600" />
+
+                    <div className="flex items-center mb-2 sm:mb-3 md:mb-4">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-primary-100 rounded-lg flex items-center justify-center mr-2 sm:mr-3 md:mr-4 flex-shrink-0">
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary-600" />
                       </div>
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
+                      <span className="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 truncate">
                         {service.category.replace('_', ' ')}
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-gray-900 mb-1 sm:mb-2 line-clamp-2 leading-tight">
                       {service.title}
                     </h3>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-xs sm:text-sm md:text-base text-gray-600 mb-2 sm:mb-3 md:mb-4 line-clamp-2 leading-relaxed">
                       {service.description}
                     </p>
 
                     {service.content && (
-                      <div className="mb-4">
-                        <p className="text-sm text-gray-500 line-clamp-3">
-                          {service.content}
-                        </p>
-                      </div>
+                      <p className="text-xs sm:text-sm text-gray-500 line-clamp-3 mb-2 sm:mb-3 md:mb-4 leading-relaxed">
+                        {service.content}
+                      </p>
                     )}
 
                     <Link
                       to={`/services/${service.id}`}
-                      className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
+                      className="inline-flex items-center text-sm sm:text-base text-primary-600 hover:text-primary-700 font-medium transition-colors"
                     >
-                      Learn More
-                      <ArrowRight className="w-4 h-4 ml-1" />
+                      En savoir plus
+                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1" />
                     </Link>
                   </div>
                 );
               })}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-12 h-12 text-gray-400" />
+            // Aucun service trouvé
+            <div className="text-center py-8 sm:py-12">
+              <div className="w-16 h-16 sm:w-24 sm:h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <Users className="w-8 h-8 sm:w-12 sm:h-12 text-gray-400" />
               </div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No services found</h3>
-              <p className="text-gray-500">
-                {searchTerm || selectedCategory 
-                  ? 'Try adjusting your search criteria.'
-                  : 'Check back later for available services.'
-                }
+              <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">Aucun service trouvé</h3>
+              <p className="text-sm sm:text-base text-gray-500 max-w-md mx-auto">
+                {searchTerm || selectedCategory
+                  ? 'Essayez d\'ajuster vos critères de recherche.'
+                  : 'Revenez plus tard pour découvrir nos services disponibles.'}
               </p>
             </div>
           )}
         </div>
       </section>
 
-      {/* Service Categories Overview */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="section-title">Service Categories</h2>
-            <p className="section-subtitle">
-              Explore our comprehensive range of services designed to support your agricultural journey
-            </p>
-          </div>
+      {/* ==== Catégories de services ==== */}
+      <section className="py-12 sm:py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Catégories de services</h2>
+          <p className="text-sm sm:text-base text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto">
+            Découvrez notre gamme complète de services conçus pour accompagner votre parcours agricole.
+          </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {Object.entries(serviceIcons).map(([category, Icon]) => (
-              <div key={category} className="text-center">
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Icon className="w-8 h-8 text-primary-600" />
+              <div key={category} className="text-center p-4 sm:p-6 rounded-lg hover:bg-gray-50 transition-colors">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                  <Icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {category.charAt(0).toUpperCase() + category.slice(1).replace('_', ' ')}
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 capitalize">
+                  {category.replace('_', ' ')}
                 </h3>
-                <p className="text-gray-600 text-sm">
-                  {category === 'support' && 'Comprehensive assistance for producers'}
-                  {category === 'training' && 'Educational programs and workshops'}
-                  {category === 'assistance' && 'Financial and technical support'}
-                  {category === 'project' && 'Development initiatives and partnerships'}
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                  {category === 'support' && 'Assistance complète pour les producteurs.'}
+                  {category === 'training' && 'Programmes éducatifs et ateliers.'}
+                  {category === 'assistance' && 'Aide financière et technique.'}
+                  {category === 'project' && 'Initiatives et partenariats de développement.'}
                 </p>
               </div>
             ))}
@@ -232,54 +221,47 @@ const Services = () => {
         </div>
       </section>
 
-      {/* How to Access Services */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="section-title">How to Access Our Services</h2>
-            <p className="section-subtitle">
-              Simple steps to get the support you need
-            </p>
-          </div>
+      {/* ==== Comment accéder aux services ==== */}
+      <section className="py-12 sm:py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Comment accéder à nos services</h2>
+          <p className="text-sm sm:text-base text-gray-600 mb-8 sm:mb-12 max-w-2xl mx-auto">Des étapes simples pour obtenir le soutien dont vous avez besoin.</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-xl">1</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="p-4 sm:p-6">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <span className="text-white font-bold text-lg sm:text-xl">1</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Register</h3>
-              <p className="text-gray-600">
-                Create your account and complete your producer profile to access our services.
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">Inscrivez-vous</h3>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                Créez votre compte et complétez votre profil producteur pour accéder à nos services.
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-xl">2</span>
+            <div className="p-4 sm:p-6">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <span className="text-white font-bold text-lg sm:text-xl">2</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Explore</h3>
-              <p className="text-gray-600">
-                Browse our services and find the programs that best match your needs.
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">Explorez</h3>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                Parcourez nos services et trouvez les programmes qui correspondent le mieux à vos besoins.
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white font-bold text-xl">3</span>
+            <div className="p-4 sm:p-6 sm:col-span-2 lg:col-span-1">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                <span className="text-white font-bold text-lg sm:text-xl">3</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Apply</h3>
-              <p className="text-gray-600">
-                Submit your application and our team will guide you through the process.
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">Postulez</h3>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                Soumettez votre demande et notre équipe vous guidera tout au long du processus.
               </p>
             </div>
           </div>
 
-          <div className="text-center mt-12">
-            <Link
-              to="/register"
-              className="btn-primary"
-            >
-              Get Started Today
+          <div className="text-center mt-8 sm:mt-12">
+            <Link to="/register" className="btn-primary text-sm sm:text-base px-6 py-3 sm:px-8 sm:py-4">
+              Commencez dès aujourd'hui
             </Link>
           </div>
         </div>

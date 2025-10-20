@@ -167,10 +167,10 @@ const ProducerProfile = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Please Log In</h2>
-          <p className="text-gray-600">You need to be logged in to access your producer profile.</p>
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+        <div className="text-center max-w-md mx-auto">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Please Log In</h2>
+          <p className="text-sm sm:text-base text-gray-600">You need to be logged in to access your producer profile.</p>
         </div>
       </div>
     );
@@ -186,15 +186,15 @@ const ProducerProfile = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex-1">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
                 {producerProfile ? 'Producer Profile' : 'Create Producer Profile'}
               </h1>
-              <p className="text-gray-600 mt-2">
+              <p className="text-sm sm:text-base text-gray-600 mt-2">
                 {producerProfile 
                   ? 'Manage your business information and showcase your products'
                   : 'Set up your producer profile to connect with the agricultural community'
@@ -204,7 +204,7 @@ const ProducerProfile = () => {
             {producerProfile && !isEditing && (
               <button
                 onClick={handleEdit}
-                className="btn-primary flex items-center"
+                className="btn-primary flex items-center justify-center w-full sm:w-auto text-sm sm:text-base px-4 py-2 sm:px-6 sm:py-3"
               >
                 <Save className="w-4 h-4 mr-2" />
                 Edit Profile
@@ -215,26 +215,26 @@ const ProducerProfile = () => {
 
         {/* Status Banner */}
         {producerProfile && (
-          <div className={`mb-8 p-4 rounded-lg border ${
+          <div className={`mb-6 sm:mb-8 p-3 sm:p-4 rounded-lg border ${
             producerProfile.status === 'approved' ? 'bg-green-50 border-green-200' :
             producerProfile.status === 'pending' ? 'bg-yellow-50 border-yellow-200' :
             producerProfile.status === 'rejected' ? 'bg-red-50 border-red-200' :
             'bg-gray-50 border-gray-200'
           }`}>
-            <div className="flex items-center">
-              <div className={`w-3 h-3 rounded-full mr-3 ${
+            <div className="flex items-start sm:items-center">
+              <div className={`w-3 h-3 rounded-full mr-3 mt-1 sm:mt-0 flex-shrink-0 ${
                 producerProfile.status === 'approved' ? 'bg-green-500' :
                 producerProfile.status === 'pending' ? 'bg-yellow-500' :
                 producerProfile.status === 'rejected' ? 'bg-red-500' :
                 'bg-gray-500'
               }`}></div>
-              <p className={`text-sm ${
+              <p className={`text-xs sm:text-sm leading-relaxed ${
                 producerProfile.status === 'approved' ? 'text-green-800' :
                 producerProfile.status === 'pending' ? 'text-yellow-800' :
                 producerProfile.status === 'rejected' ? 'text-red-800' :
                 'text-gray-800'
               }`}>
-                Status: <span className="font-medium capitalize">{producerProfile.status}</span>
+                <span className="font-medium">Status:</span> <span className="font-medium capitalize">{producerProfile.status}</span>
                 {producerProfile.status === 'pending' && ' - Your profile is under review'}
                 {producerProfile.status === 'approved' && ' - Your profile is live and visible to the public'}
                 {producerProfile.status === 'rejected' && ' - Please update your profile and resubmit'}
@@ -244,11 +244,11 @@ const ProducerProfile = () => {
         )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 sm:space-y-8">
           {/* Basic Information */}
           <div className="card">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">Basic Information</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6">Basic Information</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div>
                 <label htmlFor="business_name" className="block text-sm font-medium text-gray-700 mb-2">
                   Business Name *
@@ -262,12 +262,12 @@ const ProducerProfile = () => {
                     },
                   })}
                   type="text"
-                  className="input-field"
+                  className="input-field text-sm sm:text-base"
                   placeholder="Enter your business name"
                   disabled={!isEditing && producerProfile}
                 />
                 {errors.business_name && (
-                  <p className="mt-1 text-sm text-red-600">{errors.business_name.message}</p>
+                  <p className="mt-1 text-xs sm:text-sm text-red-600">{errors.business_name.message}</p>
                 )}
               </div>
 
@@ -277,7 +277,7 @@ const ProducerProfile = () => {
                 </label>
                 <select
                   {...register('business_type', { required: 'Business type is required' })}
-                  className="input-field"
+                  className="input-field text-sm sm:text-base"
                   disabled={!isEditing && producerProfile}
                 >
                   {businessTypes.map((type) => (
@@ -287,12 +287,12 @@ const ProducerProfile = () => {
                   ))}
                 </select>
                 {errors.business_type && (
-                  <p className="mt-1 text-sm text-red-600">{errors.business_type.message}</p>
+                  <p className="mt-1 text-xs sm:text-sm text-red-600">{errors.business_type.message}</p>
                 )}
               </div>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-4 sm:mt-6">
               <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
                 Business Description *
               </label>
@@ -305,20 +305,20 @@ const ProducerProfile = () => {
                   },
                 })}
                 rows={4}
-                className="input-field"
+                className="input-field text-sm sm:text-base"
                 placeholder="Describe your business, products, and services..."
                 disabled={!isEditing && producerProfile}
               />
               {errors.description && (
-                <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>
+                <p className="mt-1 text-xs sm:text-sm text-red-600">{errors.description.message}</p>
               )}
             </div>
           </div>
 
           {/* Location Information */}
           <div className="card">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">Location Information</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 sm:mb-6">Location Information</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div>
                 <label htmlFor="region" className="block text-sm font-medium text-gray-700 mb-2">
                   Region *

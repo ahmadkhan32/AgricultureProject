@@ -97,10 +97,14 @@ const Producers = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center px-3 sm:px-4">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Error Loading Producers</h2>
-          <p className="text-gray-600">Please try again later.</p>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">
+            Error Loading Producers
+          </h2>
+          <p className="text-xs sm:text-sm md:text-base text-gray-600 leading-relaxed">
+            Please try again later.
+          </p>
         </div>
       </div>
     );
@@ -110,10 +114,12 @@ const Producers = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <section className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-6 sm:py-8 md:py-10 lg:py-12">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Producers</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4 leading-tight">
+              Our Producers
+            </h1>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-2">
               Discover local farmers, breeders, and fishers who are part of our network. 
               Connect with producers in your region and explore their products and services.
             </p>
@@ -123,10 +129,10 @@ const Producers = () => {
 
       {/* Filters */}
       <section className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-4 md:py-6">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 items-stretch sm:items-center justify-between">
             {/* Search */}
-            <form onSubmit={handleSearch} className="flex-1 max-w-md">
+            <form onSubmit={handleSearch} className="flex-1 w-full sm:max-w-md">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Search className="h-5 w-5 text-gray-400" />

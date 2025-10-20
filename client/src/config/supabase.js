@@ -10,7 +10,20 @@ if (devMode) {
   console.log('📝 To use real Supabase, set REACT_APP_SUPABASE_URL and REACT_APP_SUPABASE_ANON_KEY in your .env file');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+// Create Supabase client with proper configuration
+export const supabase = createClient(
+  devMode ? 'http://localhost:3000' : supabaseUrl, // Use localhost in dev mode to prevent network requests
+  devMode ? 'mock_key' : supabaseKey,
+  {
+    auth: {
+      persistSession: !devMode, // Disable session persistence in dev mode
+      autoRefreshToken: !devMode, // Disable token refresh in dev mode
+    },
+    global: {
+      headers: devMode ? { 'x-mock-mode': 'true' } : {},
+    }
+  }
+);
 
 // Export dev mode flag for use in other components
 export const isDevMode = devMode;
