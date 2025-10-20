@@ -1,5 +1,9 @@
 {
   "version": 2,
+  "buildCommand": "cd client && npm install && npm run build",
+  "outputDirectory": "client/build",
+  "installCommand": "npm install",
+  "framework": "create-react-app",
   "builds": [
     {
       "src": "client/package.json",
@@ -20,8 +24,8 @@
     }
   ],
   "env": {
-    "REACT_APP_API_URL": "@react_app_api_url",
-    "REACT_APP_SUPABASE_URL": "@react_app_supabase_url",
-    "REACT_APP_SUPABASE_ANON_KEY": "@react_app_supabase_anon_key"
+    "REACT_APP_API_URL": "https://nzsydskdetneulvvpqxn.supabase.co",
+    "REACT_APP_SUPABASE_URL": "https://nzsydskdetneulvvpqxn.supabase.co",
+    "REACT_APP_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56c3lkc2tkZXRuZXVsdnZwcXhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA4NzcyMTUsImV4cCI6MjA3NjQ1MzIxNX0.wX0wUeWNaLsng6AWM51CqAFJ9s3RcjNGorRkcaYgYyM"
   }
 }
