@@ -1,0 +1,368 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "create": "Créer",
+    "update": "Mettre à jour",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "submit": "Soumettre",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "close": "Fermer",
+    "open": "Ouvrir",
+    "view": "Voir",
+    "download": "Télécharger",
+    "upload": "Téléverser",
+    "yes": "Oui",
+    "no": "Non",
+    "confirm": "Confirmer",
+    "required": "Requis",
+    "optional": "Optionnel",
+    "all": "Tous",
+    "none": "Aucun",
+    "select": "Sélectionner",
+    "clear": "Effacer",
+    "reset": "Réinitialiser",
+    "apply": "Appliquer",
+    "refresh": "Actualiser",
+    "copy": "Copier",
+    "share": "Partager",
+    "print": "Imprimer",
+    "export": "Exporter",
+    "import": "Importer"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "about": "À propos",
+    "news": "Actualités",
+    "services": "Services",
+    "producers": "Producteurs",
+    "partnerships": "Partenariats",
+    "resources": "Ressources",
+    "contact": "Contact",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "dashboard": "Tableau de bord",
+    "admin": "Administration",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "logout": "Déconnexion"
+  },
+  "home": {
+    "title": "Union des Chambres d'Agriculture, d'Élevage et de Pêche des Comores",
+    "subtitle": "Promouvoir et développer l'agriculture, l'élevage et la pêche aux Comores",
+    "hero": {
+      "title": "Bienvenue à l'UCAEP",
+      "subtitle": "Votre partenaire pour le développement agricole aux Comores",
+      "description": "L'Union des Chambres d'Agriculture, d'Élevage et de Pêche des Comores (UCAEP) œuvre pour le développement durable du secteur agricole, de l'élevage et de la pêche dans notre archipel.",
+      "cta": "Découvrir nos services"
+    },
+    "features": {
+      "producer_network": {
+        "title": "Réseau de Producteurs",
+        "description": "Connectez-vous avec les agriculteurs, éleveurs et pêcheurs locaux à travers les Comores"
+      },
+      "latest_news": {
+        "title": "Dernières Actualités",
+        "description": "Restez informé des dernières nouvelles du secteur agricole et des politiques"
+      },
+      "services": {
+        "title": "Services",
+        "description": "Accédez à nos services de formation, conseil et assistance technique"
+      },
+      "partnerships": {
+        "title": "Partenariats",
+        "description": "Découvrez nos collaborations locales et internationales"
+      },
+      "interactive_map": {
+        "title": "Carte Interactive",
+        "description": "Découvrez les producteurs et activités agricoles par région"
+      }
+    },
+    "stats": {
+      "producers": "Producteurs",
+      "services": "Services",
+      "partnerships": "Partenariats",
+      "resources": "Ressources"
+    }
+  },
+  "about": {
+    "title": "À propos de l'UCAEP",
+    "mission": {
+      "title": "Notre Mission",
+      "description": "Promouvoir et développer l'agriculture, l'élevage et la pêche aux Comores en offrant des services de qualité aux professionnels du secteur."
+    },
+    "vision": {
+      "title": "Notre Vision",
+      "description": "Devenir la référence en matière de développement agricole durable aux Comores et contribuer à la sécurité alimentaire de notre nation."
+    },
+    "values": {
+      "title": "Nos Valeurs",
+      "sustainability": "Développement durable",
+      "collaboration": "Collaboration",
+      "innovation": "Innovation",
+      "excellence": "Excellence"
+    }
+  },
+  "news": {
+    "title": "Actualités",
+    "latest": "Dernières actualités",
+    "categories": {
+      "all": "Toutes",
+      "agriculture": "Agriculture",
+      "livestock": "Élevage",
+      "fisheries": "Pêche",
+      "policy": "Politique",
+      "events": "Événements"
+    },
+    "read_more": "Lire la suite",
+    "published_on": "Publié le",
+    "by": "par",
+    "share": "Partager",
+    "no_news": "Aucune actualité disponible",
+    "search_placeholder": "Rechercher des actualités..."
+  },
+  "services": {
+    "title": "Services",
+    "description": "Découvrez nos services pour les professionnels de l'agriculture, de l'élevage et de la pêche",
+    "categories": {
+      "all": "Tous",
+      "training": "Formation",
+      "consulting": "Conseil",
+      "technical": "Assistance technique",
+      "financial": "Financement",
+      "marketing": "Commercialisation"
+    },
+    "view_details": "Voir les détails",
+    "contact_service": "Contacter le service",
+    "no_services": "Aucun service disponible",
+    "search_placeholder": "Rechercher des services..."
+  },
+  "producers": {
+    "title": "Producteurs",
+    "description": "Découvrez notre réseau de producteurs locaux",
+    "map_view": "Vue carte",
+    "list_view": "Vue liste",
+    "regions": {
+      "all": "Toutes les régions",
+      "grande_comore": "Grande Comore",
+      "anjouan": "Anjouan",
+      "moheli": "Mohéli",
+      "mayotte": "Mayotte"
+    },
+    "types": {
+      "all": "Tous les types",
+      "agriculture": "Agriculture",
+      "livestock": "Élevage",
+      "fisheries": "Pêche",
+      "mixed": "Mixte"
+    },
+    "view_profile": "Voir le profil",
+    "contact_producer": "Contacter le producteur",
+    "no_producers": "Aucun producteur disponible",
+    "search_placeholder": "Rechercher des producteurs...",
+    "register": "S'inscrire comme producteur",
+    "profile": "Mon profil producteur"
+  },
+  "partnerships": {
+    "title": "Partenariats",
+    "description": "Nos collaborations locales et internationales",
+    "types": {
+      "all": "Tous",
+      "local": "Local",
+      "national": "National",
+      "international": "International",
+      "ngo": "ONG",
+      "government": "Gouvernement"
+    },
+    "view_partnership": "Voir le partenariat",
+    "contact_partner": "Contacter le partenaire",
+    "no_partnerships": "Aucun partenariat disponible",
+    "search_placeholder": "Rechercher des partenariats..."
+  },
+  "resources": {
+    "title": "Ressources",
+    "description": "Documents, guides et ressources utiles",
+    "categories": {
+      "all": "Toutes",
+      "guide": "Guide",
+      "manual": "Manuel",
+      "report": "Rapport",
+      "form": "Formulaire",
+      "regulation": "Réglementation",
+      "statistics": "Statistiques"
+    },
+    "download": "Télécharger",
+    "file_size": "Taille du fichier",
+    "download_count": "Téléchargements",
+    "published_on": "Publié le",
+    "no_resources": "Aucune ressource disponible",
+    "search_placeholder": "Rechercher des ressources..."
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Contactez-nous pour plus d'informations",
+    "form": {
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "phone": "Numéro de téléphone",
+      "subject": "Sujet",
+      "message": "Message",
+      "send": "Envoyer le message",
+      "sending": "Envoi en cours...",
+      "sent": "Message envoyé avec succès",
+      "error": "Erreur lors de l'envoi du message"
+    },
+    "info": {
+      "address": "Adresse",
+      "phone": "Téléphone",
+      "email": "E-mail",
+      "hours": "Heures d'ouverture"
+    },
+    "visit_us": "Visitez-nous",
+    "call_us": "Appelez-nous",
+    "email_us": "Écrivez-nous",
+    "opening_hours": "Heures d'ouverture"
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "remember": "Se souvenir de moi",
+      "forgot_password": "Mot de passe oublié ?",
+      "login_button": "Se connecter",
+      "no_account": "Pas de compte ?",
+      "register_link": "S'inscrire ici"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "first_name": "Prénom",
+      "last_name": "Nom",
+      "email": "Adresse e-mail",
+      "phone": "Numéro de téléphone",
+      "password": "Mot de passe",
+      "confirm_password": "Confirmer le mot de passe",
+      "role": "Rôle",
+      "roles": {
+        "producer": "Producteur",
+        "viewer": "Visiteur"
+      },
+      "register_button": "S'inscrire",
+      "has_account": "Déjà un compte ?",
+      "login_link": "Se connecter ici"
+    },
+    "admin_register": {
+      "title": "Inscription Administrateur",
+      "description": "Créer un compte administrateur pour l'UCAEP"
+    },
+    "logout": "Déconnexion",
+    "profile": "Profil",
+    "settings": "Paramètres"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bienvenue",
+    "overview": "Aperçu",
+    "recent_activity": "Activité récente",
+    "quick_actions": "Actions rapides",
+    "stats": {
+      "profile_status": "Statut du profil",
+      "pending_approval": "En attente d'approbation",
+      "approved": "Approuvé",
+      "rejected": "Rejeté"
+    }
+  },
+  "admin": {
+    "title": "Administration",
+    "dashboard": "Tableau de bord",
+    "users": "Utilisateurs",
+    "news": "Actualités",
+    "producers": "Producteurs",
+    "services": "Services",
+    "partnerships": "Partenariats",
+    "resources": "Ressources",
+    "messages": "Messages",
+    "events": "Événements",
+    "security": "Sécurité",
+    "analytics": "Analytiques",
+    "settings": "Paramètres"
+  },
+  "producer_profile": {
+    "title": "Profil Producteur",
+    "create_title": "Créer un profil producteur",
+    "edit_title": "Modifier le profil producteur",
+    "basic_info": "Informations de base",
+    "business_name": "Nom de l'entreprise",
+    "business_type": "Type d'activité",
+    "business_types": {
+      "agriculture": "Agriculture",
+      "livestock": "Élevage",
+      "fisheries": "Pêche",
+      "mixed": "Mixte"
+    },
+    "description": "Description de l'entreprise",
+    "location_info": "Informations de localisation",
+    "region": "Région",
+    "regions": {
+      "grande_comore": "Grande Comore",
+      "anjouan": "Anjouan",
+      "moheli": "Mohéli",
+      "mayotte": "Mayotte"
+    },
+    "location": "Localisation",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "contact_info": "Informations de contact",
+    "contact_email": "E-mail de contact",
+    "contact_phone": "Téléphone de contact",
+    "website": "Site web",
+    "products": "Produits et services",
+    "products_placeholder": "Listez vos produits, un par ligne...",
+    "certifications": "Certifications",
+    "certifications_placeholder": "Listez vos certifications, une par ligne...",
+    "status": {
+      "pending": "En attente",
+      "approved": "Approuvé",
+      "rejected": "Rejeté"
+    },
+    "status_messages": {
+      "pending": "Votre profil est en cours d'examen",
+      "approved": "Votre profil est en ligne et visible par le public",
+      "rejected": "Veuillez mettre à jour votre profil et le soumettre à nouveau"
+    }
+  },
+  "errors": {
+    "page_not_found": "Page non trouvée",
+    "unauthorized": "Accès non autorisé",
+    "forbidden": "Accès interdit",
+    "server_error": "Erreur du serveur",
+    "network_error": "Erreur de réseau",
+    "validation_error": "Erreur de validation",
+    "generic_error": "Une erreur s'est produite"
+  },
+  "validation": {
+    "required": "Ce champ est requis",
+    "email": "Adresse e-mail invalide",
+    "phone": "Numéro de téléphone invalide",
+    "password": "Le mot de passe doit contenir au moins 8 caractères",
+    "password_match": "Les mots de passe ne correspondent pas",
+    "min_length": "Minimum {min} caractères requis",
+    "max_length": "Maximum {max} caractères autorisés"
+  },
+  "success": {
+    "profile_created": "Profil créé avec succès",
+    "profile_updated": "Profil mis à jour avec succès",
+    "message_sent": "Message envoyé avec succès",
+    "data_saved": "Données enregistrées avec succès",
+    "login_success": "Connexion réussie",
+    "logout_success": "Déconnexion réussie"
+  }
+}

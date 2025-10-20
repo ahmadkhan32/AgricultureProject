@@ -1,0 +1,368 @@
+{
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "create": "إنشاء",
+    "update": "تحديث",
+    "search": "بحث",
+    "filter": "تصفية",
+    "submit": "إرسال",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "close": "إغلاق",
+    "open": "فتح",
+    "view": "عرض",
+    "download": "تحميل",
+    "upload": "رفع",
+    "yes": "نعم",
+    "no": "لا",
+    "confirm": "تأكيد",
+    "required": "مطلوب",
+    "optional": "اختياري",
+    "all": "الكل",
+    "none": "لا شيء",
+    "select": "اختيار",
+    "clear": "مسح",
+    "reset": "إعادة تعيين",
+    "apply": "تطبيق",
+    "refresh": "تحديث",
+    "copy": "نسخ",
+    "share": "مشاركة",
+    "print": "طباعة",
+    "export": "تصدير",
+    "import": "استيراد"
+  },
+  "navigation": {
+    "home": "الرئيسية",
+    "about": "حول",
+    "news": "الأخبار",
+    "services": "الخدمات",
+    "producers": "المنتجون",
+    "partnerships": "الشراكات",
+    "resources": "الموارد",
+    "contact": "اتصل بنا",
+    "login": "تسجيل الدخول",
+    "register": "التسجيل",
+    "dashboard": "لوحة التحكم",
+    "admin": "الإدارة",
+    "profile": "الملف الشخصي",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج"
+  },
+  "home": {
+    "title": "اتحاد غرف الزراعة والثروة الحيوانية ومصايد الأسماك في جزر القمر",
+    "subtitle": "تعزيز وتطوير الزراعة والثروة الحيوانية ومصايد الأسماك في جزر القمر",
+    "hero": {
+      "title": "مرحباً بك في اتحاد غرف الزراعة",
+      "subtitle": "شريكك في التنمية الزراعية في جزر القمر",
+      "description": "يعمل اتحاد غرف الزراعة والثروة الحيوانية ومصايد الأسماك في جزر القمر (UCAEP) من أجل التنمية المستدامة للقطاع الزراعي والثروة الحيوانية ومصايد الأسماك في أرخبيلنا.",
+      "cta": "اكتشف خدماتنا"
+    },
+    "features": {
+      "producer_network": {
+        "title": "شبكة المنتجين",
+        "description": "تواصل مع المزارعين ومربي الماشية والصيادين المحليين في جميع أنحاء جزر القمر"
+      },
+      "latest_news": {
+        "title": "آخر الأخبار",
+        "description": "ابق على اطلاع بأحدث الأخبار في القطاع الزراعي والسياسات"
+      },
+      "services": {
+        "title": "الخدمات",
+        "description": "الوصول إلى خدماتنا في التدريب والاستشارة والمساعدة التقنية"
+      },
+      "partnerships": {
+        "title": "الشراكات",
+        "description": "اكتشف تعاوننا المحلي والدولي"
+      },
+      "interactive_map": {
+        "title": "خريطة تفاعلية",
+        "description": "اكتشف المنتجين والأنشطة الزراعية حسب المنطقة"
+      }
+    },
+    "stats": {
+      "producers": "المنتجون",
+      "services": "الخدمات",
+      "partnerships": "الشراكات",
+      "resources": "الموارد"
+    }
+  },
+  "about": {
+    "title": "حول اتحاد غرف الزراعة",
+    "mission": {
+      "title": "مهمتنا",
+      "description": "تعزيز وتطوير الزراعة والثروة الحيوانية ومصايد الأسماك في جزر القمر من خلال تقديم خدمات عالية الجودة للمهنيين في القطاع."
+    },
+    "vision": {
+      "title": "رؤيتنا",
+      "description": "أن نصبح المرجع في التنمية الزراعية المستدامة في جزر القمر والمساهمة في الأمن الغذائي لأمتنا."
+    },
+    "values": {
+      "title": "قيمنا",
+      "sustainability": "التنمية المستدامة",
+      "collaboration": "التعاون",
+      "innovation": "الابتكار",
+      "excellence": "التميز"
+    }
+  },
+  "news": {
+    "title": "الأخبار",
+    "latest": "آخر الأخبار",
+    "categories": {
+      "all": "الكل",
+      "agriculture": "الزراعة",
+      "livestock": "الثروة الحيوانية",
+      "fisheries": "مصايد الأسماك",
+      "policy": "السياسة",
+      "events": "الأحداث"
+    },
+    "read_more": "اقرأ المزيد",
+    "published_on": "نشر في",
+    "by": "بواسطة",
+    "share": "مشاركة",
+    "no_news": "لا توجد أخبار متاحة",
+    "search_placeholder": "البحث في الأخبار..."
+  },
+  "services": {
+    "title": "الخدمات",
+    "description": "اكتشف خدماتنا للمهنيين في الزراعة والثروة الحيوانية ومصايد الأسماك",
+    "categories": {
+      "all": "الكل",
+      "training": "التدريب",
+      "consulting": "الاستشارة",
+      "technical": "المساعدة التقنية",
+      "financial": "التمويل",
+      "marketing": "التسويق"
+    },
+    "view_details": "عرض التفاصيل",
+    "contact_service": "اتصل بالخدمة",
+    "no_services": "لا توجد خدمات متاحة",
+    "search_placeholder": "البحث في الخدمات..."
+  },
+  "producers": {
+    "title": "المنتجون",
+    "description": "اكتشف شبكة المنتجين المحليين لدينا",
+    "map_view": "عرض الخريطة",
+    "list_view": "عرض القائمة",
+    "regions": {
+      "all": "جميع المناطق",
+      "grande_comore": "القمر الكبرى",
+      "anjouan": "أنجوان",
+      "moheli": "موهيلي",
+      "mayotte": "مايوت"
+    },
+    "types": {
+      "all": "جميع الأنواع",
+      "agriculture": "الزراعة",
+      "livestock": "الثروة الحيوانية",
+      "fisheries": "مصايد الأسماك",
+      "mixed": "مختلط"
+    },
+    "view_profile": "عرض الملف الشخصي",
+    "contact_producer": "اتصل بالمنتج",
+    "no_producers": "لا يوجد منتجون متاحون",
+    "search_placeholder": "البحث في المنتجين...",
+    "register": "التسجيل كمنتج",
+    "profile": "ملفي الشخصي كمنتج"
+  },
+  "partnerships": {
+    "title": "الشراكات",
+    "description": "تعاوننا المحلي والدولي",
+    "types": {
+      "all": "الكل",
+      "local": "محلي",
+      "national": "وطني",
+      "international": "دولي",
+      "ngo": "منظمة غير حكومية",
+      "government": "حكومي"
+    },
+    "view_partnership": "عرض الشراكة",
+    "contact_partner": "اتصل بالشريك",
+    "no_partnerships": "لا توجد شراكات متاحة",
+    "search_placeholder": "البحث في الشراكات..."
+  },
+  "resources": {
+    "title": "الموارد",
+    "description": "الوثائق والأدلة والموارد المفيدة",
+    "categories": {
+      "all": "الكل",
+      "guide": "دليل",
+      "manual": "دليل",
+      "report": "تقرير",
+      "form": "نموذج",
+      "regulation": "تنظيم",
+      "statistics": "إحصائيات"
+    },
+    "download": "تحميل",
+    "file_size": "حجم الملف",
+    "download_count": "عدد التحميلات",
+    "published_on": "نشر في",
+    "no_resources": "لا توجد موارد متاحة",
+    "search_placeholder": "البحث في الموارد..."
+  },
+  "contact": {
+    "title": "اتصل بنا",
+    "description": "اتصل بنا للحصول على مزيد من المعلومات",
+    "form": {
+      "name": "الاسم الكامل",
+      "email": "عنوان البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "subject": "الموضوع",
+      "message": "الرسالة",
+      "send": "إرسال الرسالة",
+      "sending": "جاري الإرسال...",
+      "sent": "تم إرسال الرسالة بنجاح",
+      "error": "خطأ في إرسال الرسالة"
+    },
+    "info": {
+      "address": "العنوان",
+      "phone": "الهاتف",
+      "email": "البريد الإلكتروني",
+      "hours": "ساعات العمل"
+    },
+    "visit_us": "زرنا",
+    "call_us": "اتصل بنا",
+    "email_us": "اكتب لنا",
+    "opening_hours": "ساعات العمل"
+  },
+  "auth": {
+    "login": {
+      "title": "تسجيل الدخول",
+      "email": "عنوان البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "remember": "تذكرني",
+      "forgot_password": "نسيت كلمة المرور؟",
+      "login_button": "تسجيل الدخول",
+      "no_account": "ليس لديك حساب؟",
+      "register_link": "سجل هنا"
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "first_name": "الاسم الأول",
+      "last_name": "اسم العائلة",
+      "email": "عنوان البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "password": "كلمة المرور",
+      "confirm_password": "تأكيد كلمة المرور",
+      "role": "الدور",
+      "roles": {
+        "producer": "منتج",
+        "viewer": "مشاهد"
+      },
+      "register_button": "التسجيل",
+      "has_account": "لديك حساب بالفعل؟",
+      "login_link": "سجل دخولك هنا"
+    },
+    "admin_register": {
+      "title": "تسجيل المدير",
+      "description": "إنشاء حساب مدير لاتحاد غرف الزراعة"
+    },
+    "logout": "تسجيل الخروج",
+    "profile": "الملف الشخصي",
+    "settings": "الإعدادات"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "welcome": "مرحباً",
+    "overview": "نظرة عامة",
+    "recent_activity": "النشاط الأخير",
+    "quick_actions": "الإجراءات السريعة",
+    "stats": {
+      "profile_status": "حالة الملف الشخصي",
+      "pending_approval": "في انتظار الموافقة",
+      "approved": "موافق عليه",
+      "rejected": "مرفوض"
+    }
+  },
+  "admin": {
+    "title": "الإدارة",
+    "dashboard": "لوحة التحكم",
+    "users": "المستخدمون",
+    "news": "الأخبار",
+    "producers": "المنتجون",
+    "services": "الخدمات",
+    "partnerships": "الشراكات",
+    "resources": "الموارد",
+    "messages": "الرسائل",
+    "events": "الأحداث",
+    "security": "الأمان",
+    "analytics": "التحليلات",
+    "settings": "الإعدادات"
+  },
+  "producer_profile": {
+    "title": "ملف المنتج الشخصي",
+    "create_title": "إنشاء ملف منتج شخصي",
+    "edit_title": "تعديل ملف المنتج الشخصي",
+    "basic_info": "المعلومات الأساسية",
+    "business_name": "اسم الشركة",
+    "business_type": "نوع النشاط",
+    "business_types": {
+      "agriculture": "الزراعة",
+      "livestock": "الثروة الحيوانية",
+      "fisheries": "مصايد الأسماك",
+      "mixed": "مختلط"
+    },
+    "description": "وصف الشركة",
+    "location_info": "معلومات الموقع",
+    "region": "المنطقة",
+    "regions": {
+      "grande_comore": "القمر الكبرى",
+      "anjouan": "أنجوان",
+      "moheli": "موهيلي",
+      "mayotte": "مايوت"
+    },
+    "location": "الموقع",
+    "latitude": "خط العرض",
+    "longitude": "خط الطول",
+    "contact_info": "معلومات الاتصال",
+    "contact_email": "بريد الاتصال الإلكتروني",
+    "contact_phone": "هاتف الاتصال",
+    "website": "الموقع الإلكتروني",
+    "products": "المنتجات والخدمات",
+    "products_placeholder": "اذكر منتجاتك، واحد في كل سطر...",
+    "certifications": "الشهادات",
+    "certifications_placeholder": "اذكر شهاداتك، واحدة في كل سطر...",
+    "status": {
+      "pending": "في الانتظار",
+      "approved": "موافق عليه",
+      "rejected": "مرفوض"
+    },
+    "status_messages": {
+      "pending": "ملفك الشخصي قيد المراجعة",
+      "approved": "ملفك الشخصي متاح ومتاح للجمهور",
+      "rejected": "يرجى تحديث ملفك الشخصي وإعادة تقديمه"
+    }
+  },
+  "errors": {
+    "page_not_found": "الصفحة غير موجودة",
+    "unauthorized": "غير مخول",
+    "forbidden": "ممنوع",
+    "server_error": "خطأ في الخادم",
+    "network_error": "خطأ في الشبكة",
+    "validation_error": "خطأ في التحقق",
+    "generic_error": "حدث خطأ"
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "email": "عنوان بريد إلكتروني غير صحيح",
+    "phone": "رقم هاتف غير صحيح",
+    "password": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل",
+    "password_match": "كلمات المرور غير متطابقة",
+    "min_length": "مطلوب {min} أحرف على الأقل",
+    "max_length": "مسموح {max} حرف كحد أقصى"
+  },
+  "success": {
+    "profile_created": "تم إنشاء الملف الشخصي بنجاح",
+    "profile_updated": "تم تحديث الملف الشخصي بنجاح",
+    "message_sent": "تم إرسال الرسالة بنجاح",
+    "data_saved": "تم حفظ البيانات بنجاح",
+    "login_success": "تم تسجيل الدخول بنجاح",
+    "logout_success": "تم تسجيل الخروج بنجاح"
+  }
+}

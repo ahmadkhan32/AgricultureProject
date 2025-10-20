@@ -1,0 +1,368 @@
+{
+  "common": {
+    "loading": "Hupvua...",
+    "error": "Makosa",
+    "success": "Mafanikio",
+    "cancel": "Ghairi",
+    "save": "Hifadhi",
+    "edit": "Hariri",
+    "delete": "Futa",
+    "create": "Unda",
+    "update": "Sasisha",
+    "search": "Tafuta",
+    "filter": "Chuja",
+    "submit": "Wasilisha",
+    "back": "Rudi",
+    "next": "Ifuatayo",
+    "previous": "Iliyotangulia",
+    "close": "Funga",
+    "open": "Fungua",
+    "view": "Ona",
+    "download": "Pakua",
+    "upload": "Pakia",
+    "yes": "Ndiyo",
+    "no": "Hapana",
+    "confirm": "Thibitisha",
+    "required": "Inahitajika",
+    "optional": "Si lazima",
+    "all": "Wote",
+    "none": "Hakuna",
+    "select": "Chagua",
+    "clear": "Safisha",
+    "reset": "Weka upya",
+    "apply": "Tumia",
+    "refresh": "Sasisha",
+    "copy": "Nakili",
+    "share": "Shiriki",
+    "print": "Chapisha",
+    "export": "Hamisha",
+    "import": "Ingiza"
+  },
+  "navigation": {
+    "home": "Nyumbani",
+    "about": "Kuhusu",
+    "news": "Habari",
+    "services": "Huduma",
+    "producers": "Wazalishaji",
+    "partnerships": "Ushirikiano",
+    "resources": "Rasilimali",
+    "contact": "Mawasiliano",
+    "login": "Ingia",
+    "register": "Jisajili",
+    "dashboard": "Dashibodi",
+    "admin": "Utawala",
+    "profile": "Wasifu",
+    "settings": "Mipangilio",
+    "logout": "Ondoka"
+  },
+  "home": {
+    "title": "Muungano wa Vyumba vya Kilimo, Mifugo na Uvuvi wa Komori",
+    "subtitle": "Kuendeleza na kukuza kilimo, ufugaji na uvuvi huko Komori",
+    "hero": {
+      "title": "Karibu UCAEP",
+      "subtitle": "Mshirika wako wa maendeleo ya kilimo huko Komori",
+      "description": "Muungano wa Vyumba vya Kilimo, Mifugo na Uvuvi wa Komori (UCAEP) unafanya kazi kwa maendeleo endelevu ya sekta ya kilimo, ufugaji na uvuvi katika funguvisiwa letu.",
+      "cta": "Gundua huduma zetu"
+    },
+    "features": {
+      "producer_network": {
+        "title": "Mtandao wa Wazalishaji",
+        "description": "Ungana na wakulima, wafugaji na wavuvi wa ndani katika Komori zote"
+      },
+      "latest_news": {
+        "title": "Habari za Hivi Karibuni",
+        "description": "Endelea kufuatilia habari za hivi karibuni za sekta ya kilimo na sera"
+      },
+      "services": {
+        "title": "Huduma",
+        "description": "Pata huduma zetu za mafunzo, ushauri na msaada wa kiufundi"
+      },
+      "partnerships": {
+        "title": "Ushirikiano",
+        "description": "Gundua ushirikiano wetu wa ndani na wa kimataifa"
+      },
+      "interactive_map": {
+        "title": "Ramani ya Kiingilizi",
+        "description": "Gundua wazalishaji na shughuli za kilimo kwa mkoa"
+      }
+    },
+    "stats": {
+      "producers": "Wazalishaji",
+      "services": "Huduma",
+      "partnerships": "Ushirikiano",
+      "resources": "Rasilimali"
+    }
+  },
+  "about": {
+    "title": "Kuhusu UCAEP",
+    "mission": {
+      "title": "Dhamira Yetu",
+      "description": "Kuendeleza na kukuza kilimo, ufugaji na uvuvi huko Komori kwa kutoa huduma za hali ya juu kwa wataalamu wa sekta."
+    },
+    "vision": {
+      "title": "Maono Yetu",
+      "description": "Kuwa kielelezo cha maendeleo endelevu ya kilimo huko Komori na kuchangia katika usalama wa chakula wa taifa letu."
+    },
+    "values": {
+      "title": "Maadili Yetu",
+      "sustainability": "Maendeleo endelevu",
+      "collaboration": "Ushirikiano",
+      "innovation": "Ubunifu",
+      "excellence": "Ubora"
+    }
+  },
+  "news": {
+    "title": "Habari",
+    "latest": "Habari za hivi karibuni",
+    "categories": {
+      "all": "Zote",
+      "agriculture": "Kilimo",
+      "livestock": "Mifugo",
+      "fisheries": "Uvuvi",
+      "policy": "Sera",
+      "events": "Matukio"
+    },
+    "read_more": "Soma zaidi",
+    "published_on": "Imechapishwa",
+    "by": "na",
+    "share": "Shiriki",
+    "no_news": "Hakuna habari zinazopatikana",
+    "search_placeholder": "Tafuta habari..."
+  },
+  "services": {
+    "title": "Huduma",
+    "description": "Gundua huduma zetu kwa wataalamu wa kilimo, ufugaji na uvuvi",
+    "categories": {
+      "all": "Zote",
+      "training": "Mafunzo",
+      "consulting": "Ushauri",
+      "technical": "Msaada wa kiufundi",
+      "financial": "Ufadhili",
+      "marketing": "Uuzaji"
+    },
+    "view_details": "Ona maelezo",
+    "contact_service": "Wasiliana na huduma",
+    "no_services": "Hakuna huduma zinazopatikana",
+    "search_placeholder": "Tafuta huduma..."
+  },
+  "producers": {
+    "title": "Wazalishaji",
+    "description": "Gundua mtandao wetu wa wazalishaji wa ndani",
+    "map_view": "Mwonekano wa ramani",
+    "list_view": "Mwonekano wa orodha",
+    "regions": {
+      "all": "Mikoa yote",
+      "grande_comore": "Komori Kuu",
+      "anjouan": "Anjouan",
+      "moheli": "Moheli",
+      "mayotte": "Mayotte"
+    },
+    "types": {
+      "all": "Aina zote",
+      "agriculture": "Kilimo",
+      "livestock": "Mifugo",
+      "fisheries": "Uvuvi",
+      "mixed": "Mchanganyiko"
+    },
+    "view_profile": "Ona wasifu",
+    "contact_producer": "Wasiliana na mzalishaji",
+    "no_producers": "Hakuna wazalishaji wanazopatikana",
+    "search_placeholder": "Tafuta wazalishaji...",
+    "register": "Jisajili kama mzalishaji",
+    "profile": "Wasifu wangu wa mzalishaji"
+  },
+  "partnerships": {
+    "title": "Ushirikiano",
+    "description": "Ushirikiano wetu wa ndani na wa kimataifa",
+    "types": {
+      "all": "Zote",
+      "local": "Ndani",
+      "national": "Kitaifa",
+      "international": "Kimataifa",
+      "ngo": "NGO",
+      "government": "Serikali"
+    },
+    "view_partnership": "Ona ushirikiano",
+    "contact_partner": "Wasiliana na mshirika",
+    "no_partnerships": "Hakuna ushirikiano unaopatikana",
+    "search_placeholder": "Tafuta ushirikiano..."
+  },
+  "resources": {
+    "title": "Rasilimali",
+    "description": "Nyaraka, miongozo na rasilimali muhimu",
+    "categories": {
+      "all": "Zote",
+      "guide": "Mwongozo",
+      "manual": "Kitabu cha maagizo",
+      "report": "Ripoti",
+      "form": "Fomu",
+      "regulation": "Kanuni",
+      "statistics": "Takwimu"
+    },
+    "download": "Pakua",
+    "file_size": "Ukubwa wa faili",
+    "download_count": "Idadi ya upakuaji",
+    "published_on": "Imechapishwa",
+    "no_resources": "Hakuna rasilimali zinazopatikana",
+    "search_placeholder": "Tafuta rasilimali..."
+  },
+  "contact": {
+    "title": "Mawasiliano",
+    "description": "Wasiliana nasi kwa maelezo zaidi",
+    "form": {
+      "name": "Jina kamili",
+      "email": "Anwani ya barua pepe",
+      "phone": "Nambari ya simu",
+      "subject": "Mada",
+      "message": "Ujumbe",
+      "send": "Tuma ujumbe",
+      "sending": "Inatumwa...",
+      "sent": "Ujumbe umetumwa kwa mafanikio",
+      "error": "Hitilafu katika kutuma ujumbe"
+    },
+    "info": {
+      "address": "Anwani",
+      "phone": "Simu",
+      "email": "Barua pepe",
+      "hours": "Masaa ya kazi"
+    },
+    "visit_us": "Tutembelee",
+    "call_us": "Utupigie simu",
+    "email_us": "Utuandikie",
+    "opening_hours": "Masaa ya kazi"
+  },
+  "auth": {
+    "login": {
+      "title": "Ingia",
+      "email": "Anwani ya barua pepe",
+      "password": "Nywila",
+      "remember": "Nikumbuke",
+      "forgot_password": "Umesahau nywila?",
+      "login_button": "Ingia",
+      "no_account": "Huna akaunti?",
+      "register_link": "Jisajili hapa"
+    },
+    "register": {
+      "title": "Unda akaunti",
+      "first_name": "Jina la kwanza",
+      "last_name": "Jina la ukoo",
+      "email": "Anwani ya barua pepe",
+      "phone": "Nambari ya simu",
+      "password": "Nywila",
+      "confirm_password": "Thibitisha nywila",
+      "role": "Jukumu",
+      "roles": {
+        "producer": "Mzalishaji",
+        "viewer": "Mtazamaji"
+      },
+      "register_button": "Jisajili",
+      "has_account": "Una akaunti tayari?",
+      "login_link": "Ingia hapa"
+    },
+    "admin_register": {
+      "title": "Usajili wa Msimamizi",
+      "description": "Unda akaunti ya msimamizi kwa UCAEP"
+    },
+    "logout": "Ondoka",
+    "profile": "Wasifu",
+    "settings": "Mipangilio"
+  },
+  "dashboard": {
+    "title": "Dashibodi",
+    "welcome": "Karibu",
+    "overview": "Muhtasari",
+    "recent_activity": "Shughuli za hivi karibuni",
+    "quick_actions": "Vitendo vya haraka",
+    "stats": {
+      "profile_status": "Hali ya wasifu",
+      "pending_approval": "Inasubiri idhini",
+      "approved": "Imekubaliwa",
+      "rejected": "Imekataliwa"
+    }
+  },
+  "admin": {
+    "title": "Utawala",
+    "dashboard": "Dashibodi",
+    "users": "Watumiaji",
+    "news": "Habari",
+    "producers": "Wazalishaji",
+    "services": "Huduma",
+    "partnerships": "Ushirikiano",
+    "resources": "Rasilimali",
+    "messages": "Ujumbe",
+    "events": "Matukio",
+    "security": "Usalama",
+    "analytics": "Uchambuzi",
+    "settings": "Mipangilio"
+  },
+  "producer_profile": {
+    "title": "Wasifu wa Mzalishaji",
+    "create_title": "Unda wasifu wa mzalishaji",
+    "edit_title": "Hariri wasifu wa mzalishaji",
+    "basic_info": "Taarifa za msingi",
+    "business_name": "Jina la biashara",
+    "business_type": "Aina ya biashara",
+    "business_types": {
+      "agriculture": "Kilimo",
+      "livestock": "Mifugo",
+      "fisheries": "Uvuvi",
+      "mixed": "Mchanganyiko"
+    },
+    "description": "Maelezo ya biashara",
+    "location_info": "Taarifa za eneo",
+    "region": "Mkoa",
+    "regions": {
+      "grande_comore": "Komori Kuu",
+      "anjouan": "Anjouan",
+      "moheli": "Moheli",
+      "mayotte": "Mayotte"
+    },
+    "location": "Eneo",
+    "latitude": "Latitudo",
+    "longitude": "Longitudo",
+    "contact_info": "Taarifa za mawasiliano",
+    "contact_email": "Barua pepe ya mawasiliano",
+    "contact_phone": "Simu ya mawasiliano",
+    "website": "Tovuti",
+    "products": "Bidhaa na huduma",
+    "products_placeholder": "Orodhesha bidhaa zako, moja kwa kila mstari...",
+    "certifications": "Vibali",
+    "certifications_placeholder": "Orodhesha vibali vyako, kimoja kwa kila mstari...",
+    "status": {
+      "pending": "Inasubiri",
+      "approved": "Imekubaliwa",
+      "rejected": "Imekataliwa"
+    },
+    "status_messages": {
+      "pending": "Wasifu wako unakaguliwa",
+      "approved": "Wasifu wako uko mtandaoni na unaonekana na umma",
+      "rejected": "Tafadhali sasisha wasifu wako na uwasilishe tena"
+    }
+  },
+  "errors": {
+    "page_not_found": "Ukurasa haupatikani",
+    "unauthorized": "Hauna ruhusa",
+    "forbidden": "Imepigwa marufuku",
+    "server_error": "Hitilafu ya seva",
+    "network_error": "Hitilafu ya mtandao",
+    "validation_error": "Hitilafu ya uthibitishaji",
+    "generic_error": "Hitilafu imetokea"
+  },
+  "validation": {
+    "required": "Sehemu hii inahitajika",
+    "email": "Anwani ya barua pepe si sahihi",
+    "phone": "Nambari ya simu si sahihi",
+    "password": "Nywila lazima iwe na herufi 8 angalau",
+    "password_match": "Nywila hazifanani",
+    "min_length": "Herufi {min} angalau zinahitajika",
+    "max_length": "Herufi {max} kwa kiwango cha juu zinaruhusiwa"
+  },
+  "success": {
+    "profile_created": "Wasifu umeundwa kwa mafanikio",
+    "profile_updated": "Wasifu umesasishwa kwa mafanikio",
+    "message_sent": "Ujumbe umetumwa kwa mafanikio",
+    "data_saved": "Data imehifadhiwa kwa mafanikio",
+    "login_success": "Umeingia kwa mafanikio",
+    "logout_success": "Umeondoka kwa mafanikio"
+  }
+}

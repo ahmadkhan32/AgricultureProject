@@ -1,0 +1,51 @@
+{
+  "name": "ucaeep-backend",
+  "description": "Backend API for UCAEP website",
+  "repository": "https://github.com/yourusername/ucaeep-website",
+  "logo": "https://your-logo-url.com/logo.png",
+  "keywords": ["node", "express", "api", "agriculture", "comoros"],
+  "image": "heroku/nodejs",
+  "stack": "heroku-22",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "NODE_ENV": {
+      "description": "Environment",
+      "value": "production"
+    },
+    "PORT": {
+      "description": "Port for the server",
+      "value": "5000"
+    },
+    "SUPABASE_URL": {
+      "description": "Supabase project URL",
+      "required": true
+    },
+    "SUPABASE_ANON_KEY": {
+      "description": "Supabase anonymous key",
+      "required": true
+    },
+    "SUPABASE_SERVICE_ROLE_KEY": {
+      "description": "Supabase service role key",
+      "required": true
+    },
+    "JWT_SECRET": {
+      "description": "JWT secret key",
+      "generator": "secret"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:mini"
+    }
+  ]
+}

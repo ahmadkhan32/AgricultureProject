@@ -1,0 +1,250 @@
+/* RTL (Right-to-Left) Support for Arabic */
+
+/* Base RTL styles */
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl * {
+  direction: rtl;
+}
+
+/* Flexbox RTL adjustments */
+.rtl .flex {
+  flex-direction: row-reverse;
+}
+
+.rtl .flex-col {
+  flex-direction: column;
+}
+
+.rtl .justify-start {
+  justify-content: flex-end;
+}
+
+.rtl .justify-end {
+  justify-content: flex-start;
+}
+
+.rtl .items-start {
+  align-items: flex-end;
+}
+
+.rtl .items-end {
+  align-items: flex-start;
+}
+
+/* Text alignment */
+.rtl .text-left {
+  text-align: right;
+}
+
+.rtl .text-right {
+  text-align: left;
+}
+
+/* Margin and padding adjustments */
+.rtl .ml-1 { margin-left: 0; margin-right: 0.25rem; }
+.rtl .ml-2 { margin-left: 0; margin-right: 0.5rem; }
+.rtl .ml-3 { margin-left: 0; margin-right: 0.75rem; }
+.rtl .ml-4 { margin-left: 0; margin-right: 1rem; }
+.rtl .ml-5 { margin-left: 0; margin-right: 1.25rem; }
+.rtl .ml-6 { margin-left: 0; margin-right: 1.5rem; }
+.rtl .ml-8 { margin-left: 0; margin-right: 2rem; }
+.rtl .ml-10 { margin-left: 0; margin-right: 2.5rem; }
+.rtl .ml-12 { margin-left: 0; margin-right: 3rem; }
+
+.rtl .mr-1 { margin-right: 0; margin-left: 0.25rem; }
+.rtl .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+.rtl .mr-3 { margin-right: 0; margin-left: 0.75rem; }
+.rtl .mr-4 { margin-right: 0; margin-left: 1rem; }
+.rtl .mr-5 { margin-right: 0; margin-left: 1.25rem; }
+.rtl .mr-6 { margin-right: 0; margin-left: 1.5rem; }
+.rtl .mr-8 { margin-right: 0; margin-left: 2rem; }
+.rtl .mr-10 { margin-right: 0; margin-left: 2.5rem; }
+.rtl .mr-12 { margin-right: 0; margin-left: 3rem; }
+
+.rtl .pl-1 { padding-left: 0; padding-right: 0.25rem; }
+.rtl .pl-2 { padding-left: 0; padding-right: 0.5rem; }
+.rtl .pl-3 { padding-left: 0; padding-right: 0.75rem; }
+.rtl .pl-4 { padding-left: 0; padding-right: 1rem; }
+.rtl .pl-5 { padding-left: 0; padding-right: 1.25rem; }
+.rtl .pl-6 { padding-left: 0; padding-right: 1.5rem; }
+.rtl .pl-8 { padding-left: 0; padding-right: 2rem; }
+.rtl .pl-10 { padding-left: 0; padding-right: 2.5rem; }
+.rtl .pl-12 { padding-left: 0; padding-right: 3rem; }
+
+.rtl .pr-1 { padding-right: 0; padding-left: 0.25rem; }
+.rtl .pr-2 { padding-right: 0; padding-left: 0.5rem; }
+.rtl .pr-3 { padding-right: 0; padding-left: 0.75rem; }
+.rtl .pr-4 { padding-right: 0; padding-left: 1rem; }
+.rtl .pr-5 { padding-right: 0; padding-left: 1.25rem; }
+.rtl .pr-6 { padding-right: 0; padding-left: 1.5rem; }
+.rtl .pr-8 { padding-right: 0; padding-left: 2rem; }
+.rtl .pr-10 { padding-right: 0; padding-left: 2.5rem; }
+.rtl .pr-12 { padding-right: 0; padding-left: 3rem; }
+
+/* Border adjustments */
+.rtl .border-l { border-left: 0; border-right: 1px solid; }
+.rtl .border-r { border-right: 0; border-left: 1px solid; }
+
+.rtl .border-l-2 { border-left: 0; border-right: 2px solid; }
+.rtl .border-r-2 { border-right: 0; border-left: 2px solid; }
+
+.rtl .border-l-4 { border-left: 0; border-right: 4px solid; }
+.rtl .border-r-4 { border-right: 0; border-left: 4px solid; }
+
+/* Position adjustments */
+.rtl .left-0 { left: auto; right: 0; }
+.rtl .right-0 { right: auto; left: 0; }
+.rtl .left-2 { left: auto; right: 0.5rem; }
+.rtl .right-2 { right: auto; left: 0.5rem; }
+.rtl .left-4 { left: auto; right: 1rem; }
+.rtl .right-4 { right: auto; left: 1rem; }
+
+/* Transform adjustments */
+.rtl .transform { transform: scaleX(-1); }
+
+/* Icon adjustments for RTL */
+.rtl .lucide-arrow-left { transform: scaleX(-1); }
+.rtl .lucide-arrow-right { transform: scaleX(-1); }
+.rtl .lucide-chevron-left { transform: scaleX(-1); }
+.rtl .lucide-chevron-right { transform: scaleX(-1); }
+.rtl .lucide-arrow-left-circle { transform: scaleX(-1); }
+.rtl .lucide-arrow-right-circle { transform: scaleX(-1); }
+
+/* Form elements */
+.rtl input[type="text"],
+.rtl input[type="email"],
+.rtl input[type="password"],
+.rtl input[type="tel"],
+.rtl textarea,
+.rtl select {
+  text-align: right;
+}
+
+/* Navigation adjustments */
+.rtl .navbar-nav {
+  flex-direction: row-reverse;
+}
+
+.rtl .dropdown-menu {
+  right: auto;
+  left: 0;
+}
+
+.rtl .dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+
+/* Card adjustments */
+.rtl .card-header {
+  text-align: right;
+}
+
+.rtl .card-body {
+  text-align: right;
+}
+
+/* Button groups */
+.rtl .btn-group {
+  flex-direction: row-reverse;
+}
+
+/* Breadcrumb adjustments */
+.rtl .breadcrumb {
+  flex-direction: row-reverse;
+}
+
+.rtl .breadcrumb-item + .breadcrumb-item::before {
+  content: "\\";
+  transform: scaleX(-1);
+}
+
+/* Table adjustments */
+.rtl table {
+  direction: rtl;
+}
+
+.rtl th,
+.rtl td {
+  text-align: right;
+}
+
+/* Modal adjustments */
+.rtl .modal-header {
+  flex-direction: row-reverse;
+}
+
+.rtl .modal-footer {
+  flex-direction: row-reverse;
+}
+
+/* Alert adjustments */
+.rtl .alert {
+  text-align: right;
+}
+
+/* List adjustments */
+.rtl ul,
+.rtl ol {
+  padding-right: 1.5rem;
+  padding-left: 0;
+}
+
+.rtl li {
+  text-align: right;
+}
+
+/* Custom RTL utilities */
+.rtl .rtl-flip {
+  transform: scaleX(-1);
+}
+
+.rtl .rtl-no-flip {
+  transform: none;
+}
+
+/* Language switcher RTL adjustments */
+.rtl .language-switcher {
+  direction: ltr; /* Keep language switcher in LTR */
+}
+
+/* Form validation messages */
+.rtl .invalid-feedback {
+  text-align: right;
+}
+
+.rtl .valid-feedback {
+  text-align: right;
+}
+
+/* Loading spinner adjustments */
+.rtl .spinner {
+  animation-direction: reverse;
+}
+
+/* Responsive RTL adjustments */
+@media (max-width: 768px) {
+  .rtl .mobile-menu {
+    right: 0;
+    left: auto;
+  }
+  
+  .rtl .mobile-nav {
+    flex-direction: column-reverse;
+  }
+}
+
+/* Print styles for RTL */
+@media print {
+  .rtl {
+    direction: rtl;
+  }
+  
+  .rtl * {
+    direction: rtl;
+  }
+}
