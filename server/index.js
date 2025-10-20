@@ -15,6 +15,7 @@ app.use(helmet());
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
     ? [
+        process.env.FRONTEND_URL || 'https://agricul-website.vercel.app',
         'https://agricul-website.vercel.app',
         'https://agricul-website-git-main.vercel.app',
         'https://agricul-website-git-develop.vercel.app'
