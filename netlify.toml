@@ -27,13 +27,13 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Environment variables (replace with your actual values)
+# Environment variables
 [context.production.environment]
-  REACT_APP_API_URL = "https://your-backend-url.herokuapp.com/api"
+  REACT_APP_API_URL = "https://web-production-dcbca.up.railway.app/api"
   REACT_APP_SUPABASE_URL = "https://nzsydskdetneulvvpqxn.supabase.co"
   REACT_APP_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56c3lkc2tkZXRuZXVsdnZwcXhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA4NzcyMTUsImV4cCI6MjA3NjQ1MzIxNX0.wX0wUeWNaLsng6AWM51CqAFJ9s3RcjNGorRkcaYgYyM"
 
 [context.deploy-preview.environment]
-  REACT_APP_API_URL = "https://your-backend-url.herokuapp.com/api"
+  REACT_APP_API_URL = "https://web-production-dcbca.up.railway.app/api"
   REACT_APP_SUPABASE_URL = "https://nzsydskdetneulvvpqxn.supabase.co"
   REACT_APP_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56c3lkc2tkZXRuZXVsdnZwcXhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA4NzcyMTUsImV4cCI6MjA3NjQ1MzIxNX0.wX0wUeWNaLsng6AWM51CqAFJ9s3RcjNGorRkcaYgYyM"

@@ -145,22 +145,21 @@ const About = () => {
             <div className="space-y-6 sm:space-y-8">
               <div className="flex items-start space-x-3 sm:space-x-4">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-xs sm:text-sm">2008</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">2014</span>
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-1 sm:mb-2 leading-tight">
                     Fondation
                   </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                    L'UCAEP a été créée avec la vision d'unifier les acteurs agricoles
-                    à travers les Comores pour promouvoir le développement durable.
+                  Ucaep à etait crée par loi avec la
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3 sm:space-x-4">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-xs sm:text-sm">2012</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">2018</span>
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-1 sm:mb-2 leading-tight">
@@ -175,15 +174,14 @@ const About = () => {
 
               <div className="flex items-start space-x-3 sm:space-x-4">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-600 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-xs sm:text-sm">2018</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">2023</span>
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-1 sm:mb-2 leading-tight">
                     Transformation numérique
                   </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                    Mise en place de plateformes numériques et d'outils modernes de communication
-                    pour mieux servir nos membres et partenaires.
+                  inauguration officielle
                   </p>
                 </div>
               </div>
@@ -194,11 +192,11 @@ const About = () => {
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-1 sm:mb-2 leading-tight">
-                    Nouvelle ère
+                  nouvelle ère, transformation numérique.
+ 
                   </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                    Lancement de cette plateforme numérique complète pour connecter les producteurs,
-                    partager les connaissances et promouvoir les pratiques agricoles durables.
+                  Mise en place de plateformes numériques complète pour connecter les producteurs, partager les connaissances et promouvoir les pratiques agricoles durables et d'outils modernes de communication pour mieux servir nos membres et partenaires.
                   </p>
                 </div>
               </div>
@@ -263,8 +261,8 @@ const About = () => {
                 Venez nous voir
               </h3>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                Moroni, Grande Comore<br />
-                Union des Comores
+              route de la corniche,Moroni grande Comores .<br />
+              Union des Comores
               </p>
             </div>
 
@@ -276,8 +274,8 @@ const About = () => {
                 Appelez-nous
               </h3>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                +269 12 34 56 78<br />
-                Lun - Ven, 8h00 - 17h00
+              +2697332394<br />
+              Lundi-vendredi,8h-17
               </p>
             </div>
 
@@ -289,8 +287,7 @@ const About = () => {
                 Envoyez-nous un e-mail
               </h3>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                info@ucaeep.km<br />
-                support@ucaeep.km
+              contactcomores@gmail.com
               </p>
             </div>
           </div>

@@ -210,10 +210,10 @@ const Services = () => {
                   {category.replace('_', ' ')}
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                  {category === 'support' && 'Assistance complète pour les producteurs.'}
-                  {category === 'training' && 'Programmes éducatifs et ateliers.'}
-                  {category === 'assistance' && 'Aide financière et technique.'}
-                  {category === 'project' && 'Initiatives et partenariats de développement.'}
+                  {category === 'suotion' && 'Nous offrons un accompagnement complet aux producteurs, incluant des conseils personnalisés, un suivi sur le terrain et des ressources adaptées pour améliorer leurs pratiques et leur rentabilité..'}
+                  {category === 'Développement de capacités' && 'Nous mettons en œuvre des initiatives et des partenariats visant à renforcer les compétences des acteurs locaux, encourager l’innovation et construire des systèmes agricoles durables à long terme.'}
+                  {category === 'Assistance' && 'Nous proposons une aide technique spécialisée et un appui financier ciblé pour permettre l’adoption de solutions durables et renforcer la résilience des producteurs.'}
+                  {category === 'Projet' && 'Nous développons et mettons en œuvre des projets structurants en partenariat avec des acteurs locaux et internationaux, axés sur le développement des capacités, l’innovation locale et la transformation durable des filières agricoles.'}
                 </p>
               </div>
             ))}

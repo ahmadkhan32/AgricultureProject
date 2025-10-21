@@ -103,7 +103,7 @@ const Footer = () => {
                 <MapPin className="w-5 h-5 text-primary-400 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="text-gray-300 text-sm">
-                    Moroni, Grande Comore<br />
+                  route de la corniche,Moroni grande Comores.<br />
                     Union of the Comoros
                   </p>
                 </div>
@@ -114,7 +114,7 @@ const Footer = () => {
                   href="tel:+26912345678"
                   className="text-gray-300 hover:text-primary-400 transition-colors text-sm"
                 >
-                  +269 12 34 56 78
+                  +2697332394
                 </a>
               </div>
               <div className="flex items-center space-x-3">
@@ -123,7 +123,7 @@ const Footer = () => {
                   href="mailto:info@ucaeep.km"
                   className="text-gray-300 hover:text-primary-400 transition-colors text-sm"
                 >
-                  info@ucaeep.km
+                  contactcomores@gmail.com
                 </a>
               </div>
             </div>
