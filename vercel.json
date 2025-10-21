@@ -46,10 +46,6 @@
       "dest": "/Images/$1"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "/index.html",
       "headers": {
@@ -57,11 +53,6 @@
       }
     }
   ],
-  "functions": {
-    "client/src/**/*.js": {
-      "maxDuration": 10
-    }
-  },
   "env": {
     "REACT_APP_API_URL": "https://your-railway-url.railway.app/api",
     "REACT_APP_SUPABASE_URL": "https://nzsydskdetneulvvpqxn.supabase.co",
