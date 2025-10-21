@@ -12,8 +12,8 @@ if (devMode) {
 
 // Create Supabase client with proper configuration
 export const supabase = createClient(
-  devMode ? 'http://localhost:3000' : supabaseUrl, // Use localhost in dev mode to prevent network requests
-  devMode ? 'mock_key' : supabaseKey,
+  supabaseUrl, // Always use the real Supabase URL
+  supabaseKey, // Always use the real Supabase key
   {
     auth: {
       persistSession: !devMode, // Disable session persistence in dev mode

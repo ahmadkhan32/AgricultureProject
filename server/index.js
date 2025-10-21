@@ -18,7 +18,12 @@ app.use(cors({
         process.env.FRONTEND_URL || 'https://agricul-website.vercel.app',
         'https://agricul-website.vercel.app',
         'https://agricul-website-git-main.vercel.app',
-        'https://agricul-website-git-develop.vercel.app'
+        'https://agricul-website-git-develop.vercel.app',
+        'https://ucaeep-website.vercel.app',
+        'https://ucaeep-website-git-main.vercel.app',
+        'https://agricul-website.vercel.app',
+        /\.vercel\.app$/, // Allow all Vercel preview deployments
+        /\.railway\.app$/  // Allow Railway deployments
       ] 
     : ['http://localhost:3000', 'http://localhost:3001'],
   credentials: true
