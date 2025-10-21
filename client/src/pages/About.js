@@ -4,22 +4,22 @@ import { Users, Target, Award, Globe, MapPin, Phone, Mail } from 'lucide-react';
 const About = () => {
   const team = [
     {
-      name: 'Dr. Ahmed Mohamed',
+      name: 'Abdillah Msaidie',
       position: 'Président',
-      image: '/api/placeholder/150/150',
-      bio: "Expert agricole avec plus de 20 ans d'expérience dans les pratiques agricoles durables."
+      image: 'https://via.placeholder.com/150x150/3B82F6/FFFFFF?text=AM',
+      Objective: "Est l'exècutif de la chambre ,il  assume la responsabilité de tous les services de la chambre:convoque les assemblées,les présides est assure l'exécution des décision qui y sont prises."
     },
     {
       name: 'Fatima Ali',
       position: 'Vice-Présidente',
-      image: '/api/placeholder/150/150',
+      image: 'https://via.placeholder.com/150x150/10B981/FFFFFF?text=FA',
       bio: "Spécialiste en gestion du bétail et en programmes de développement rural."
     },
     {
-      name: 'Omar Said',
+      name: 'Ahmed mze Ali Said gamaou ',
       position: 'Directeur des Pêches',
-      image: '/api/placeholder/150/150',
-      bio: "Biologiste marin axé sur les pratiques de pêche durables et les communautés côtières."
+      image: 'https://via.placeholder.com/150x150/8B5CF6/FFFFFF?text=AS',
+      bio: "Le directeur assure la coordination des activités entre les chambres insulaires d'agriculture, d'élevage et de pêche, ainsi qu'au sein de l'UCAEP elle‑même."
     }
   ];
 
@@ -49,13 +49,13 @@ const About = () => {
   return (
     <div className="min-h-screen">
       {/* Section Héro */}
-      <section className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
+      <section className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 text-white py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight">
               À propos de l'UCAEP
             </h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-primary-100 max-w-3xl mx-auto leading-relaxed px-2">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed px-2">
               La Chambre de l'Agriculture, de l'Élevage et des Pêches des Comores (UCAEP)
               est dédiée à la promotion du développement agricole durable et au soutien
               des producteurs locaux à travers l'archipel.
@@ -65,12 +65,12 @@ const About = () => {
       </section>
 
       {/* Mission et Vision */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-white">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
             <div className="card">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-primary-100 rounded-full flex items-center justify-center mb-4 sm:mb-5 md:mb-6">
-                <Target className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-primary-600" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-4 sm:mb-5 md:mb-6 shadow-lg">
+                <Target className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
               </div>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">Notre Mission</h2>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
@@ -82,8 +82,8 @@ const About = () => {
             </div>
 
             <div className="card">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-secondary-100 rounded-full flex items-center justify-center mb-4 sm:mb-5 md:mb-6">
-                <Globe className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-secondary-600" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center mb-4 sm:mb-5 md:mb-6 shadow-lg">
+                <Globe className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
               </div>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">Notre Vision</h2>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
@@ -97,7 +97,7 @@ const About = () => {
       </section>
 
       {/* Nos Valeurs */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gray-50">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-b from-slate-100 to-slate-50">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">
@@ -113,8 +113,8 @@ const About = () => {
               const Icon = value.icon;
               return (
                 <div key={index} className="text-center">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                    <Icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-primary-600" />
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg">
+                    <Icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
                   </div>
                   <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-gray-900 mb-1 sm:mb-2 leading-tight">
                     {value.title}
@@ -130,7 +130,7 @@ const About = () => {
       </section>
 
       {/* Histoire */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-white">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-b from-white to-slate-50">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">
@@ -144,7 +144,7 @@ const About = () => {
           <div className="max-w-4xl mx-auto">
             <div className="space-y-6 sm:space-y-8">
               <div className="flex items-start space-x-3 sm:space-x-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
                   <span className="text-white font-bold text-xs sm:text-sm">2014</span>
                 </div>
                 <div>
@@ -152,13 +152,13 @@ const About = () => {
                     Fondation
                   </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  Ucaep à etait crée par loi avec la
+                  UCAEP a été créée par la loi pour structurer et soutenir le secteur agricole national.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3 sm:space-x-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
                   <span className="text-white font-bold text-xs sm:text-sm">2018</span>
                 </div>
                 <div>
@@ -173,7 +173,7 @@ const About = () => {
               </div>
 
               <div className="flex items-start space-x-3 sm:space-x-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-600 to-purple-700 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
                   <span className="text-white font-bold text-xs sm:text-sm">2023</span>
                 </div>
                 <div>
@@ -181,19 +181,18 @@ const About = () => {
                     Transformation numérique
                   </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                  inauguration officielle
+                  Inauguration officielle d'une nouvelle ère technologique pour le secteur agricole comorien.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3 sm:space-x-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-600 to-red-600 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
                   <span className="text-white font-bold text-xs sm:text-sm">2024</span>
                 </div>
                 <div>
                   <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-1 sm:mb-2 leading-tight">
-                  nouvelle ère, transformation numérique.
- 
+                    Nouvelle ère, transformation numérique
                   </h3>
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                   Mise en place de plateformes numériques complète pour connecter les producteurs, partager les connaissances et promouvoir les pratiques agricoles durables et d'outils modernes de communication pour mieux servir nos membres et partenaires.
@@ -206,7 +205,7 @@ const About = () => {
       </section>
 
       {/* Équipe */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gray-50">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-b from-slate-100 to-slate-50">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">
@@ -228,11 +227,11 @@ const About = () => {
                 <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-1 leading-tight">
                   {member.name}
                 </h3>
-                <p className="text-primary-600 font-medium mb-2 sm:mb-3 text-sm sm:text-base">
+                <p className="text-blue-600 font-medium mb-2 sm:mb-3 text-sm sm:text-base">
                   {member.position}
                 </p>
                 <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-                  {member.bio}
+                  {member.bio || member.Objective}
                 </p>
               </div>
             ))}
@@ -241,7 +240,7 @@ const About = () => {
       </section>
 
       {/* Contact */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-white">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gradient-to-b from-slate-50 to-white">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="text-center mb-6 sm:mb-8 md:mb-10 lg:mb-12">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 sm:mb-3 md:mb-4">
@@ -254,40 +253,40 @@ const About = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             <div className="text-center">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <MapPin className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-primary-600" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg">
+                <MapPin className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
               </div>
               <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-1 sm:mb-2 leading-tight">
                 Venez nous voir
               </h3>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-              route de la corniche,Moroni grande Comores .<br />
-              Union des Comores
+                Route de la corniche, Moroni, Grande Comore<br />
+                Union des Comores
               </p>
             </div>
 
             <div className="text-center">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <Phone className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-primary-600" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg">
+                <Phone className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
               </div>
               <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-1 sm:mb-2 leading-tight">
                 Appelez-nous
               </h3>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-              +2697332394<br />
-              Lundi-vendredi,8h-17
+                +269 7332394<br />
+                Lundi – Vendredi, 8h – 17h
               </p>
             </div>
 
             <div className="text-center">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <Mail className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-primary-600" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg">
+                <Mail className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white" />
               </div>
               <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-1 sm:mb-2 leading-tight">
                 Envoyez-nous un e-mail
               </h3>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-              contactcomores@gmail.com
+                contactcomores@gmail.com
               </p>
             </div>
           </div>
