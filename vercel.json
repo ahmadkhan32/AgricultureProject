@@ -19,6 +19,11 @@
       "dest": "/index.html"
     }
   ],
+  "functions": {
+    "client/src/**/*.js": {
+      "maxDuration": 30
+    }
+  },
   "env": {
     "REACT_APP_API_URL": "https://your-railway-url.railway.app/api",
     "REACT_APP_SUPABASE_URL": "https://nzsydskdetneulvvpqxn.supabase.co",
