@@ -20,7 +20,7 @@
     }
   ],
   "env": {
-    "REACT_APP_API_URL": "http://localhost:5000/api",
+    "REACT_APP_API_URL": "https://your-railway-url.railway.app/api",
     "REACT_APP_SUPABASE_URL": "https://nzsydskdetneulvvpqxn.supabase.co",
     "REACT_APP_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im56c3lkc2tkZXRuZXVsdnZwcXhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA4NzcyMTUsImV4cCI6MjA3NjQ1MzIxNX0.wX0wUeWNaLsng6AWM51CqAFJ9s3RcjNGorRkcaYgYyM"
   }
