@@ -243,7 +243,7 @@ const Contact = () => {
               })}
             </div>
 
-            {/* Interactive Map */}
+            {/* Interactive Map with Exact Location */}
             <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center relative overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.123456789!2d43.2432!3d-11.7042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDQyJzE1LjEiUyA0M8KwMTQnMzUuNSJF!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
@@ -256,12 +256,36 @@ const Contact = () => {
                 title="UCAEP Location - Rue de la Corniche, Moroni"
                 className="rounded-lg"
               ></iframe>
+              
+              {/* Location Marker Overlay */}
               <div className="absolute top-4 left-4 bg-white px-3 py-2 rounded-lg shadow-lg">
                 <div className="flex items-center space-x-2">
-                  <MapPin className="w-4 h-4 text-primary-600" />
+                  <MapPin className="w-4 h-4 text-red-600" />
                   <span className="text-sm font-medium text-gray-900">UCAEP Office</span>
                 </div>
                 <p className="text-xs text-gray-600 mt-1">Rue de la Corniche, Moroni</p>
+              </div>
+
+              {/* Open in Google Maps Button */}
+              <div className="absolute bottom-4 right-4">
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Rue+de+la+Corniche,+Moroni,+Comoros"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow-lg flex items-center space-x-2 transition-colors duration-200"
+                >
+                  <MapPin className="w-4 h-4" />
+                  <span className="text-sm font-medium">Ouvrir dans Google Maps</span>
+                </a>
+              </div>
+
+              {/* Exact Coordinates Display */}
+              <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 px-3 py-2 rounded-lg shadow-lg">
+                <div className="text-xs text-gray-600">
+                  <div className="font-medium text-gray-900">Coordonnées exactes:</div>
+                  <div>Lat: -11.7042°</div>
+                  <div>Lng: 43.2432°</div>
+                </div>
               </div>
             </div>
           </div>
