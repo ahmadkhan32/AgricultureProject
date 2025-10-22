@@ -1,24 +1,27 @@
 import React from 'react';
 import { Users, Target, Award, Globe, MapPin, Phone, Mail } from 'lucide-react';
+import AbdillahMsaidie from '../Images/Abdillah_Msaidie.jpg';
+import AhmedSaidGamaou from '../Images/Ahmed_Photo.jpg';
+import AliMouignidah from '../Images/Ali Ahmed gamaou.jpeg';
 
 const About = () => {
   const team = [
     {
       name: 'Abdillah Msaidie',
       position: 'Président',
-      image: 'https://via.placeholder.com/150x150/3B82F6/FFFFFF?text=AM',
+      image: AbdillahMsaidie,
       Objective: "Est l'exècutif de la chambre ,il  assume la responsabilité de tous les services de la chambre:convoque les assemblées,les présides est assure l'exécution des décision qui y sont prises."
     },
     {
-      name: 'Fatima Ali',
-      position: 'Vice-Présidente',
-      image: 'https://via.placeholder.com/150x150/10B981/FFFFFF?text=FA',
+      name: 'ALI MOUIGNIDAHO',
+      position: 'president',
+      image: AliMouignidah,
       bio: "Spécialiste en gestion du bétail et en programmes de développement rural."
     },
     {
       name: 'Ahmed mze Ali Said gamaou ',
       position: 'Directeur des Pêches',
-      image: 'https://via.placeholder.com/150x150/8B5CF6/FFFFFF?text=AS',
+      image: AhmedSaidGamaou,
       bio: "Le directeur assure la coordination des activités entre les chambres insulaires d'agriculture, d'élevage et de pêche, ainsi qu'au sein de l'UCAEP elle‑même."
     }
   ];
