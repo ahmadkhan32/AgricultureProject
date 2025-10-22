@@ -1,26 +1,25 @@
 import React from 'react';
 import { Users, Target, Award, Globe, MapPin, Phone, Mail } from 'lucide-react';
-import AbdillahMsaidie from '../Images/Abdillah_Msaidie.jpg';
-import AhmedSaidGamaou from '../Images/Ahmed_Photo.jpg';
-import AliMouignidah from '../Images/Ali_Mouignidah_Updated.jpg';
-
+import AbdillahMsaidie from '../Images/Ahmed gamaou.jpeg';
+import AhmedSaidGamaou from '../Images/Ahmed_Said_gamaouu.jpeg';
+import AliMouignidah from '../Images/Ali.jpeg';
 const About = () => {
   const team = [
     {
       name: 'Abdillah Msaidie',
-      position: 'Président',
+      position: 'president Ucaep',
       image: AbdillahMsaidie,
       Objective: "Est l'exècutif de la chambre ,il  assume la responsabilité de tous les services de la chambre:convoque les assemblées,les présides est assure l'exécution des décision qui y sont prises."
     },
     {
-      name: 'ALI MOUIGNIDAHO',
+      name: 'Ali Mouignidaho',
       position: 'president d’insulaire (CIAEP)',
       image: AliMouignidah,
       bio: "Le Président du CIAEP assure la direction et la représentation de la chambre au niveau territorial.Il coordonne les actions agricoles, d’élevage et de pêche, et veille à leur alignement avec la stratégie nationale de l’UCAEP pour un développement durable et inclusif."
     },
     {
       name: 'Ahmed mze Ali Said gamaou ',
-      position: 'Directeur des Pêches',
+      position: 'directeur Ucaep',
       image: AhmedSaidGamaou,
       bio: "Le directeur assure la coordination des activités entre les chambres insulaires d'agriculture, d'élevage et de pêche, ainsi qu'au sein de l'UCAEP elle‑même."
     }
@@ -225,7 +224,7 @@ const About = () => {
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full mx-auto mb-3 sm:mb-4 object-cover"
+                  className="w-32 h-40 sm:w-36 sm:h-44 md:w-40 md:h-48 rounded-lg mx-auto mb-3 sm:mb-4 object-cover shadow-md"
                 />
                 <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-1 leading-tight">
                   {member.name}

@@ -33,22 +33,22 @@ const Contact = () => {
     {
       icon: MapPin,
       title: 'Nous rendre visite',
-      details: ['Moroni, Grande Comore', 'Union des Comores'],
+      details: ['Rue de la Corniche, Moroni', 'Grande Comore, Comoros'],
     },
     {
       icon: Phone,
       title: 'Nous appeler',
-      details: ['+269 12 34 56 78', 'Lun - Ven, 8h00 - 17h00'],
+      details: ['+2697332394', 'Lundi - Vendredi : 8h- 17h'],
     },
     {
       icon: Mail,
       title: 'Nous écrire',
-      details: ['info@ucaeep.km', 'support@ucaeep.km'],
+      details: ['contactcomores@gmail.com'],
     },
     {
       icon: Clock,
       title: 'Heures de bureau',
-      details: ['Lundi - Vendredi : 8h00 - 17h00', 'Samedi : 9h00 - 13h00'],
+      details: ['Lundi - Vendredi : 8h - 17h'],
     },
   ];
 
@@ -243,12 +243,25 @@ const Contact = () => {
               })}
             </div>
 
-            {/* Map Placeholder */}
-            <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                <p className="text-gray-500">Carte interactive</p>
-                <p className="text-sm text-gray-400">Moroni, Grande Comore</p>
+            {/* Interactive Map */}
+            <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center relative overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.123456789!2d43.2432!3d-11.7042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDQyJzE1LjEiUyA0M8KwMTQnMzUuNSJF!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="UCAEP Location - Rue de la Corniche, Moroni"
+                className="rounded-lg"
+              ></iframe>
+              <div className="absolute top-4 left-4 bg-white px-3 py-2 rounded-lg shadow-lg">
+                <div className="flex items-center space-x-2">
+                  <MapPin className="w-4 h-4 text-primary-600" />
+                  <span className="text-sm font-medium text-gray-900">UCAEP Office</span>
+                </div>
+                <p className="text-xs text-gray-600 mt-1">Rue de la Corniche, Moroni</p>
               </div>
             </div>
           </div>
