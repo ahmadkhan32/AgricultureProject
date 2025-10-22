@@ -2,7 +2,7 @@ import React from 'react';
 import { Users, Target, Award, Globe, MapPin, Phone, Mail } from 'lucide-react';
 import AbdillahMsaidie from '../Images/Abdillah_Msaidie.jpg';
 import AhmedSaidGamaou from '../Images/Ahmed_Photo.jpg';
-import AliMouignidah from '../Images/Ali Ahmed gamaou.jpeg';
+import AliMouignidah from '../Images/Ali_Mouignidah_Updated.jpg';
 
 const About = () => {
   const team = [
@@ -14,9 +14,9 @@ const About = () => {
     },
     {
       name: 'ALI MOUIGNIDAHO',
-      position: 'president',
+      position: 'president d’insulaire (CIAEP)',
       image: AliMouignidah,
-      bio: "Spécialiste en gestion du bétail et en programmes de développement rural."
+      bio: "Le Président du CIAEP assure la direction et la représentation de la chambre au niveau territorial.Il coordonne les actions agricoles, d’élevage et de pêche, et veille à leur alignement avec la stratégie nationale de l’UCAEP pour un développement durable et inclusif."
     },
     {
       name: 'Ahmed mze Ali Said gamaou ',
