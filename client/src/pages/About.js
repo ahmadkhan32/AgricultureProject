@@ -288,7 +288,7 @@ const About = () => {
                 Envoyez-nous un e-mail
               </h3>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                contactcomores@gmail.com
+                contactucaepcomores@gmail.com
               </p>
             </div>
           </div>

@@ -123,7 +123,7 @@ const Footer = () => {
                   href="mailto:info@ucaeep.km"
                   className="text-gray-300 hover:text-primary-400 transition-colors text-sm"
                 >
-                  contactcomores@gmail.com
+                  contactucaepcomores@gmail.com
                 </a>
               </div>
             </div>

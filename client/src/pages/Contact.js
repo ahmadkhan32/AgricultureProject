@@ -43,7 +43,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Nous écrire',
-      details: ['contactcomores@gmail.com'],
+      details: ['contactucaepcomores@gmail.com'],
     },
     {
       icon: Clock,
