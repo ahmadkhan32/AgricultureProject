@@ -351,12 +351,12 @@ const Resources = () => {
                 <FileText className="w-5 h-5 text-primary-600 mr-2" />
                 <span className="text-sm text-gray-500">Document</span>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Agricultural Best Practices Guide</h3>
-              <p className="text-gray-600 text-sm mb-3">Comprehensive guide for sustainable farming practices</p>
+              <h3 className="font-semibold text-gray-900 mb-2">Guide des Meilleures Pratiques Agricoles</h3>
+              <p className="text-gray-600 text-sm mb-3">Guide complet pour des pratiques agricoles durables</p>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">1,234 downloads</span>
+                <span className="text-sm text-gray-500">1,234 téléchargements</span>
                 <button className="text-primary-600 hover:text-primary-700 text-sm font-medium">
-                  Download
+                  Télécharger
                 </button>
               </div>
             </div>
@@ -364,14 +364,14 @@ const Resources = () => {
             <div className="card">
               <div className="flex items-center mb-3">
                 <File className="w-5 h-5 text-green-600 mr-2" />
-                <span className="text-sm text-gray-500">Form</span>
+                <span className="text-sm text-gray-500">Formulaire</span>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Producer Registration Form</h3>
-              <p className="text-gray-600 text-sm mb-3">Application form for new producer members</p>
+              <h3 className="font-semibold text-gray-900 mb-2">Formulaire d'Inscription Producteur</h3>
+              <p className="text-gray-600 text-sm mb-3">Formulaire de candidature pour nouveaux membres producteurs</p>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">856 downloads</span>
+                <span className="text-sm text-gray-500">856 téléchargements</span>
                 <button className="text-primary-600 hover:text-primary-700 text-sm font-medium">
-                  Download
+                  Télécharger
                 </button>
               </div>
             </div>
@@ -379,14 +379,14 @@ const Resources = () => {
             <div className="card">
               <div className="flex items-center mb-3">
                 <BarChart className="w-5 h-5 text-purple-600 mr-2" />
-                <span className="text-sm text-gray-500">Report</span>
+                <span className="text-sm text-gray-500">Rapport</span>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Annual Agricultural Report 2023</h3>
-              <p className="text-gray-600 text-sm mb-3">Comprehensive overview of agricultural sector performance</p>
+              <h3 className="font-semibold text-gray-900 mb-2">Rapport Agricole Annuel 2023</h3>
+              <p className="text-gray-600 text-sm mb-3">Aperçu complet des performances du secteur agricole</p>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">642 downloads</span>
+                <span className="text-sm text-gray-500">642 téléchargements</span>
                 <button className="text-primary-600 hover:text-primary-700 text-sm font-medium">
-                  Download
+                  Télécharger
                 </button>
               </div>
             </div>
