@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Leaf, Fish, Heart, BookOpen, Users, Globe, Search, Filter, UserCheck, GraduationCap, HandHeart, Briefcase } from "lucide-react";
+import { Leaf, Fish, Heart, BookOpen, Users, Globe, Search, Filter, UserCheck, GraduationCap, Hand, Briefcase } from "lucide-react";
 import service1 from "../Images/Farmning 1.jpg";
 import service2 from "../Images/fisheries-management.jpg";
 import service3 from "../Images/Livestock vaccines.jpg";
@@ -89,7 +89,7 @@ const Services = () => {
     },
     {
       name: "Assistance",
-      icon: HandHeart,
+      icon: Hand,
       description: "Nous proposons une aide technique spécialisée et un appui financier ciblé pour permettre l'adoption de solutions durables et renforcer la résilience des producteurs."
     },
     {
