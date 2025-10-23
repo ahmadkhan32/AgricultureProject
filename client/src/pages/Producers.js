@@ -6,8 +6,8 @@ import producer3 from "../Images/Ali_Mouignidah.jpg";
 
 const Producers = () => {
   const [search, setSearch] = useState("");
-  const [region, setRegion] = useState("All Regions");
-  const [type, setType] = useState("All Types");
+  const [region, setRegion] = useState("Toutes les régions");
+  const [type, setType] = useState("Tous les types");
 
   const producers = [
     {
@@ -21,7 +21,7 @@ const Producers = () => {
     {
       id: 2,
       name: "Fatima Said",
-      type: "Fisheries",
+      type: "Pêche",
       region: "Anjouan",
       products: ["Thon", "Poisson frais", "Crustacés"],
       image: producer2,
@@ -29,7 +29,7 @@ const Producers = () => {
     {
       id: 3,
       name: "Omar Abdallah",
-      type: "Livestock",
+      type: "Élevage",
       region: "Mohéli",
       products: ["Bovins", "Volaille", "Lait frais"],
       image: producer3,
@@ -38,8 +38,8 @@ const Producers = () => {
 
   const filtered = producers.filter(
     (p) =>
-      (region === "All Regions" || p.region === region) &&
-      (type === "All Types" || p.type === type) &&
+      (region === "Toutes les régions" || p.region === region) &&
+      (type === "Tous les types" || p.type === type) &&
       p.name.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -77,7 +77,7 @@ const Producers = () => {
           value={region}
           onChange={(e) => setRegion(e.target.value)}
         >
-          <option>All Regions</option>
+          <option>Toutes les régions</option>
           <option>Grande Comore</option>
           <option>Anjouan</option>
           <option>Mohéli</option>
@@ -87,10 +87,10 @@ const Producers = () => {
           value={type}
           onChange={(e) => setType(e.target.value)}
         >
-          <option>All Types</option>
+          <option>Tous les types</option>
           <option>Agriculture</option>
-          <option>Livestock</option>
-          <option>Fisheries</option>
+          <option>Élevage</option>
+          <option>Pêche</option>
               </select>
             </div>
 
@@ -113,8 +113,8 @@ const Producers = () => {
                 </span>
                 <span className="flex items-center">
                   {producer.type === "Agriculture" && <Leaf className="w-4 h-4 text-green-600" />}
-                  {producer.type === "Fisheries" && <Fish className="w-4 h-4 text-blue-600" />}
-                  {producer.type === "Livestock" && <PawPrint className="w-4 h-4 text-amber-600" />}
+                  {producer.type === "Pêche" && <Fish className="w-4 h-4 text-blue-600" />}
+                  {producer.type === "Élevage" && <PawPrint className="w-4 h-4 text-amber-600" />}
                   <span className="ml-1">{producer.type}</span>
                       </span>
                     </div>
