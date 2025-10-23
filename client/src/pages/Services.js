@@ -83,7 +83,7 @@ const Services = () => {
       description: "Nous offrons un accompagnement complet aux producteurs, incluant des conseils personnalisés, un suivi sur le terrain et des ressources adaptées pour améliorer leurs pratiques et leur rentabilité."
     },
     {
-      name: "Formation",
+      name: "Développement de capacités",
       icon: GraduationCap,
       description: "Nous mettons en œuvre des initiatives et des partenariats visant à renforcer les compétences des acteurs locaux, encourager l'innovation et construire des systèmes agricoles durables à long terme."
     },
