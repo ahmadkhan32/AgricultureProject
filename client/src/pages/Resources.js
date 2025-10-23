@@ -63,12 +63,12 @@ const Resources = () => {
   );
 
   const categories = [
-    { value: '', label: 'All Resources' },
+    { value: '', label: 'Toutes les Ressources' },
     { value: 'document', label: 'Documents' },
-    { value: 'form', label: 'Forms' },
-    { value: 'report', label: 'Reports' },
-    { value: 'law', label: 'Laws & Regulations' },
-    { value: 'statistics', label: 'Statistics' },
+    { value: 'form', label: 'Formulaires' },
+    { value: 'report', label: 'Rapports' },
+    { value: 'law', label: 'Lois et Règlements' },
+    { value: 'statistics', label: 'Statistiques' },
     { value: 'guide', label: 'Guides' },
   ];
 
@@ -129,10 +129,10 @@ const Resources = () => {
       <section className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Resources</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Ressources</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Access documents, forms, reports, and other resources to support your 
-              agricultural, livestock, and fisheries activities.
+              Accédez aux documents, formulaires, rapports et autres ressources pour soutenir vos 
+              activités agricoles, d'élevage et de pêche.
             </p>
           </div>
         </div>
@@ -150,7 +150,7 @@ const Resources = () => {
                 </div>
                 <input
                   type="text"
-                  placeholder="Search resources..."
+                  placeholder="Rechercher des ressources..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="input-field pl-9 sm:pl-10 text-sm sm:text-base"
@@ -229,14 +229,14 @@ const Resources = () => {
 
                       <div className="flex items-center justify-between">
                         <span className="text-sm text-gray-500">
-                          {resource.download_count} downloads
+                          {resource.download_count} téléchargements
                         </span>
                         <button
                           onClick={() => handleDownload(resource)}
                           className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
                         >
                           <Download className="w-4 h-4 mr-1" />
-                          Download
+                          Télécharger
                         </button>
                       </div>
                     </div>
@@ -253,7 +253,7 @@ const Resources = () => {
                       disabled={currentPage === 1}
                       className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Previous
+                      Précédent
                     </button>
                     
                     {Array.from({ length: Math.min(5, resourcesData.pagination.pages) }, (_, i) => {
@@ -278,7 +278,7 @@ const Resources = () => {
                       disabled={currentPage === resourcesData.pagination.pages}
                       className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Next
+                      Suivant
                     </button>
                   </nav>
                 </div>
@@ -289,11 +289,11 @@ const Resources = () => {
               <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <FileText className="w-12 h-12 text-gray-400" />
               </div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No resources found</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Aucune ressource trouvée</h3>
               <p className="text-gray-500">
                 {searchTerm || selectedCategory 
-                  ? 'Try adjusting your search criteria.'
-                  : 'Check back later for available resources.'
+                  ? 'Essayez d\'ajuster vos critères de recherche.'
+                  : 'Revenez plus tard pour les ressources disponibles.'
                 }
               </p>
             </div>
@@ -305,9 +305,9 @@ const Resources = () => {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title">Resource Categories</h2>
+            <h2 className="section-title">Catégories de Ressources</h2>
             <p className="section-subtitle">
-              Find the information you need across different resource types
+              Trouvez les informations dont vous avez besoin parmi différents types de ressources
             </p>
           </div>
 
@@ -321,12 +321,12 @@ const Resources = () => {
                   {category.charAt(0).toUpperCase() + category.slice(1).replace('_', ' ')}
                 </h3>
                 <p className="text-gray-600 text-sm">
-                  {category === 'document' && 'Official documents and publications'}
-                  {category === 'form' && 'Application forms and templates'}
-                  {category === 'report' && 'Research reports and studies'}
-                  {category === 'law' && 'Laws, regulations, and policies'}
-                  {category === 'statistics' && 'Data and statistical information'}
-                  {category === 'guide' && 'How-to guides and manuals'}
+                  {category === 'document' && 'Documents officiels et publications'}
+                  {category === 'form' && 'Formulaires de candidature et modèles'}
+                  {category === 'report' && 'Rapports de recherche et études'}
+                  {category === 'law' && 'Lois, règlements et politiques'}
+                  {category === 'statistics' && 'Données et informations statistiques'}
+                  {category === 'guide' && 'Guides pratiques et manuels'}
                 </p>
               </div>
             ))}
@@ -338,9 +338,9 @@ const Resources = () => {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title">Most Downloaded Resources</h2>
+            <h2 className="section-title">Ressources les Plus Téléchargées</h2>
             <p className="section-subtitle">
-              Popular documents and resources from our community
+              Documents et ressources populaires de notre communauté
             </p>
           </div>
 
