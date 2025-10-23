@@ -13,10 +13,14 @@ const Partnerships = () => {
     ['partnerships', { search: searchTerm, partner_type: selectedType }],
     async () => {
       try {
+        // Ensure partnerships data exists
         await ensurePartnershipsData();
+        
         const allPartnerships = await crudService.partnerships.fetchAll();
+        
+        // Filter partnerships based on search term and partner type
         let filteredPartnerships = allPartnerships;
-
+        
         if (searchTerm) {
           filteredPartnerships = filteredPartnerships.filter(partnership => 
             partnership.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -29,13 +33,14 @@ const Partnerships = () => {
           filteredPartnerships = filteredPartnerships.filter(partnership => partnership.partner_type === selectedType);
         }
         
+        // Sort by created_at date (newest first)
         filteredPartnerships.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         
         return {
           partnerships: filteredPartnerships || []
         };
       } catch (error) {
-        console.error('Erreur lors de la récupération des partenariats :', error);
+        console.error('Error fetching partnerships:', error);
         throw error;
       }
     },
@@ -45,12 +50,12 @@ const Partnerships = () => {
   );
 
   const partnerTypes = [
-    { value: '', label: 'Tous les partenaires' },
-    { value: 'local', label: 'Partenaires locaux' },
-    { value: 'international', label: 'Partenaires internationaux' },
-    { value: 'government', label: 'Gouvernement' },
-    { value: 'ngo', label: 'ONG' },
-    { value: 'private', label: 'Secteur privé' },
+    { value: '', label: 'All Partners' },
+    { value: 'local', label: 'Local Partners' },
+    { value: 'international', label: 'International Partners' },
+    { value: 'government', label: 'Government' },
+    { value: 'ngo', label: 'NGOs' },
+    { value: 'private', label: 'Private Sector' },
   ];
 
   const typeIcons = {
@@ -77,8 +82,8 @@ const Partnerships = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Erreur lors du chargement des partenariats</h2>
-          <p className="text-gray-600">Veuillez réessayer plus tard.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Error Loading Partnerships</h2>
+          <p className="text-gray-600">Please try again later.</p>
         </div>
       </div>
     );
@@ -90,10 +95,10 @@ const Partnerships = () => {
       <section className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Nos Partenariats</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Partnerships</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Établir des relations solides avec des organisations locales et internationales
-              pour promouvoir le développement agricole aux Comores.
+              Building strong relationships with local and international organizations 
+              to advance agricultural development in the Comoros.
             </p>
           </div>
         </div>
@@ -111,7 +116,7 @@ const Partnerships = () => {
                 </div>
                 <input
                   type="text"
-                  placeholder="Rechercher des partenariats..."
+                  placeholder="Search partnerships..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="input-field pl-10"
@@ -193,7 +198,7 @@ const Partnerships = () => {
                         rel="noopener noreferrer"
                         className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
                       >
-                        Visiter le site
+                        Visit Website
                         <ArrowRight className="w-4 h-4 ml-1" />
                       </a>
                     )}
@@ -206,11 +211,11 @@ const Partnerships = () => {
               <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users2 className="w-12 h-12 text-gray-400" />
               </div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Aucun partenariat trouvé</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No partnerships found</h3>
               <p className="text-gray-500">
                 {searchTerm || selectedType 
-                  ? 'Essayez d’ajuster vos critères de recherche.'
-                  : 'Revenez plus tard pour consulter les informations sur les partenariats.'
+                  ? 'Try adjusting your search criteria.'
+                  : 'Check back later for partnership information.'
                 }
               </p>
             </div>
@@ -222,9 +227,9 @@ const Partnerships = () => {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title">Catégories de partenariats</h2>
+            <h2 className="section-title">Partnership Categories</h2>
             <p className="section-subtitle">
-              Nous collaborons avec diverses organisations pour maximiser notre impact
+              We collaborate with diverse organizations to maximize our impact
             </p>
           </div>
 
@@ -238,11 +243,11 @@ const Partnerships = () => {
                   {type.charAt(0).toUpperCase() + type.slice(1).replace('_', ' ')}
                 </h3>
                 <p className="text-gray-600 text-sm">
-                  {type === 'local' && 'Organisations et entreprises locales'}
-                  {type === 'international' && 'Partenaires internationaux'}
-                  {type === 'government' && 'Agences et ministères gouvernementaux'}
-                  {type === 'ngo' && 'Organisations non gouvernementales'}
-                  {type === 'private' && 'Entreprises du secteur privé'}
+                  {type === 'local' && 'Local organizations and businesses'}
+                  {type === 'international' && 'Global development partners'}
+                  {type === 'government' && 'Government agencies and ministries'}
+                  {type === 'ngo' && 'Non-governmental organizations'}
+                  {type === 'private' && 'Private sector companies'}
                 </p>
               </div>
             ))}
@@ -254,9 +259,9 @@ const Partnerships = () => {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="section-title">Avantages du partenariat</h2>
+            <h2 className="section-title">Benefits of Partnership</h2>
             <p className="section-subtitle">
-              Pourquoi les organisations choisissent de collaborer avec UCAEP
+              Why organizations choose to partner with UCAEP
             </p>
           </div>
 
@@ -265,9 +270,9 @@ const Partnerships = () => {
               <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Globe className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Rayonnement mondial</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Global Reach</h3>
               <p className="text-gray-600">
-                Accès à un réseau de professionnels de l'agriculture aux Comores et au-delà.
+                Access to a network of agricultural professionals across the Comoros and beyond.
               </p>
             </div>
 
@@ -275,9 +280,9 @@ const Partnerships = () => {
               <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Impact communautaire</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Community Impact</h3>
               <p className="text-gray-600">
-                Faire une différence significative dans la vie des agriculteurs, éleveurs et pêcheurs locaux.
+                Make a meaningful difference in the lives of local farmers, breeders, and fishers.
               </p>
             </div>
 
@@ -285,9 +290,9 @@ const Partnerships = () => {
               <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users2 className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Croissance collaborative</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Collaborative Growth</h3>
               <p className="text-gray-600">
-                Travailler ensemble pour développer des solutions innovantes pour une agriculture durable.
+                Work together to develop innovative solutions for sustainable agriculture.
               </p>
             </div>
           </div>
@@ -298,16 +303,16 @@ const Partnerships = () => {
       <section className="py-16 bg-primary-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Intéressé par un partenariat avec nous ?
+            Interested in Partnering with Us?
           </h2>
           <p className="text-xl text-primary-100 mb-8">
-            Rejoignez notre réseau de partenaires et contribuez au développement agricole aux Comores.
+            Join our network of partners and help us advance agricultural development in the Comoros
           </p>
           <Link
             to="/contact"
             className="bg-white text-primary-600 hover:bg-gray-100 font-medium py-3 px-8 rounded-lg transition-colors duration-200"
           >
-            Contactez-nous
+            Contact Us
           </Link>
         </div>
       </section>
