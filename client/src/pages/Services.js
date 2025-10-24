@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Leaf, Fish, Heart, BookOpen, Users, Globe, Search, Filter, UserCheck, GraduationCap, Hand, Briefcase } from "lucide-react";
-import service1 from "../Images/Farmning 1.jpg";
+import service1 from "../Images/Agricul (1).jpeg";
 import service2 from "../Images/fisheries-management.jpg";
 import service3 from "../Images/Livestock vaccines.jpg";
 import service4 from "../Images/BRECOMA-1.jpg";
