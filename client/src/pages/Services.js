@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Leaf, Fish, Heart, BookOpen, Users, Globe, Search, Filter, UserCheck, GraduationCap, Hand, Briefcase } from "lucide-react";
-import service1 from "../Images/Agricul (1).jpeg";
+import service1 from "../Images/Agricul (2).jpeg";
 import service2 from "../Images/fisheries-management.jpg";
 import service3 from "../Images/Livestock vaccines.jpg";
 import service4 from "../Images/BRECOMA-1.jpg";
@@ -162,7 +162,7 @@ const Services = () => {
               <img
                 src={service.image}
                 alt={service.title}
-                className="w-full h-48 object-cover"
+                className="w-full h-48 object-contain bg-gray-100"
               />
               <div className="p-6 flex-1 flex flex-col">
                 <div className="flex items-center justify-between mb-4">
