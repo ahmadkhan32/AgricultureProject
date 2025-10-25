@@ -204,20 +204,20 @@ const Services = () => {
                 <h3 className="text-xl font-semibold text-gray-800 mb-3">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 mb-6">{service.description}</p>
-                <button 
-                  onClick={() => handleReadMore(service)}
-                  className="mt-auto inline-flex items-center text-green-700 font-medium hover:underline"
-                >
-                  {service.isGenerated ? (
-                    <>
-                      <Eye className="w-4 h-4 mr-2" />
-                      Lire l'article complet →
-                    </>
-                  ) : (
-                    'En savoir plus →'
-                  )}
-                </button>
+                 <p className="text-gray-600 mb-6">{service.description}</p>
+                 <button 
+                   onClick={() => handleReadMore(service)}
+                   className="mt-auto inline-flex items-center text-green-700 font-medium hover:underline"
+                 >
+                   {service.isGenerated ? (
+                     <>
+                       <Eye className="w-4 h-4 mr-2" />
+                       Lire l'article complet →
+                     </>
+                   ) : (
+                     'En savoir plus →'
+                   )}
+                 </button>
               </div>
             </div>
           ))}
@@ -317,89 +317,89 @@ const Services = () => {
         <p className="text-green-100 mb-6 max-w-2xl mx-auto">
           Nous collaborons avec des institutions locales et internationales pour promouvoir le développement durable et renforcer les capacités des acteurs du secteur agricole et maritime.
         </p>
-        <button className="bg-white text-green-700 px-6 py-3 rounded-full font-semibold hover:bg-green-100 transition">
-          Découvrir nos partenaires
-        </button>
-      </section>
+         <button className="bg-white text-green-700 px-6 py-3 rounded-full font-semibold hover:bg-green-100 transition">
+           Découvrir nos partenaires
+         </button>
+       </section>
 
-      {/* Read More Modal */}
-      {showModal && selectedService && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold text-gray-900">{selectedService.title}</h2>
-                <button
-                  onClick={closeModal}
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-              
-              <div className="mb-6">
-                <img
-                  src={selectedService.image}
-                  alt={selectedService.title}
-                  className="w-full h-64 object-contain bg-gray-100 rounded-lg"
-                />
-              </div>
-              
-              <div className="prose max-w-none">
-                <div className="mb-4">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                    {selectedService.category}
-                  </span>
-                </div>
-                
-                <p className="text-lg text-gray-600 mb-6">{selectedService.description}</p>
-                
-                {selectedService.blogContent && (
-                  <div className="border-t pt-6">
-                    <h3 className="text-xl font-semibold mb-4">Article Complet</h3>
-                    <div 
-                      className="text-gray-700 leading-relaxed whitespace-pre-wrap"
-                      dangerouslySetInnerHTML={{ 
-                        __html: selectedService.blogContent.replace(/\n/g, '<br/>') 
-                      }}
-                    />
-                  </div>
-                )}
-                
-                {selectedService.tags && (
-                  <div className="mt-6 pt-6 border-t">
-                    <h4 className="font-semibold mb-2">Tags:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedService.tags.map((tag, index) => (
-                        <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-              
-              <div className="mt-6 flex justify-end space-x-4">
-                <button
-                  onClick={closeModal}
-                  className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
-                >
-                  Fermer
-                </button>
-                <button className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 flex items-center">
-                  <ExternalLink className="w-4 h-4 mr-2" />
-                  Partager
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </section>
-  );
-};
-
-export default Services;
+       {/* Read More Modal */}
+       {showModal && selectedService && (
+         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+           <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+             <div className="p-6">
+               <div className="flex items-center justify-between mb-4">
+                 <h2 className="text-2xl font-bold text-gray-900">{selectedService.title}</h2>
+                 <button
+                   onClick={closeModal}
+                   className="text-gray-500 hover:text-gray-700"
+                 >
+                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                   </svg>
+                 </button>
+               </div>
+               
+               <div className="mb-6">
+                 <img
+                   src={selectedService.image}
+                   alt={selectedService.title}
+                   className="w-full h-64 object-contain bg-gray-100 rounded-lg"
+                 />
+               </div>
+               
+               <div className="prose max-w-none">
+                 <div className="mb-4">
+                   <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                     {selectedService.category}
+                   </span>
+                 </div>
+                 
+                 <p className="text-lg text-gray-600 mb-6">{selectedService.description}</p>
+                 
+                 {selectedService.blogContent && (
+                   <div className="border-t pt-6">
+                     <h3 className="text-xl font-semibold mb-4">Article Complet</h3>
+                     <div 
+                       className="text-gray-700 leading-relaxed whitespace-pre-wrap"
+                       dangerouslySetInnerHTML={{ 
+                         __html: selectedService.blogContent.replace(/\n/g, '<br/>') 
+                       }}
+                     />
+                   </div>
+                 )}
+                 
+                 {selectedService.tags && (
+                   <div className="mt-6 pt-6 border-t">
+                     <h4 className="font-semibold mb-2">Tags:</h4>
+                     <div className="flex flex-wrap gap-2">
+                       {selectedService.tags.map((tag, index) => (
+                         <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">
+                           {tag}
+                         </span>
+                       ))}
+                     </div>
+                   </div>
+                 )}
+               </div>
+               
+               <div className="mt-6 flex justify-end space-x-4">
+                 <button
+                   onClick={closeModal}
+                   className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
+                 >
+                   Fermer
+                 </button>
+                 <button className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 flex items-center">
+                   <ExternalLink className="w-4 h-4 mr-2" />
+                   Partager
+                 </button>
+               </div>
+             </div>
+           </div>
+         </div>
+       )}
+     </section>
+   );
+ };
+ 
+ export default Services;

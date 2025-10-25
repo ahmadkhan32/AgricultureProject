@@ -16,7 +16,7 @@ import ProducerMap from './pages/ProducerMap';
 import Partnerships from './pages/Partnerships';
 import Resources from './pages/Resources';
 import Contact from './pages/Contact';
-import ContentDashboard from './pages/ContentDashboard';
+import ContentDashboard from './components/ContentDashboard';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import AdminRegister from './pages/Auth/AdminRegister';

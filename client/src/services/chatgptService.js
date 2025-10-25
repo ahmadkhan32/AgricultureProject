@@ -1,17 +1,17 @@
-// ChatGPT Integration Service
+// ChatGPT Service for AI content generation
 class ChatGPTService {
   constructor() {
-    this.apiKey = process.env.REACT_APP_OPENAI_API_KEY || 'demo-key';
+    this.apiKey = process.env.REACT_APP_OPENAI_API_KEY || null;
     this.baseURL = 'https://api.openai.com/v1/chat/completions';
-    this.isDemoMode = !process.env.REACT_APP_OPENAI_API_KEY;
+    this.demoMode = !this.apiKey; // Use demo mode if no API key
   }
 
-  // Generate content using ChatGPT API
-  async generateContent(prompt, contentType = 'service') {
-    if (this.isDemoMode) {
-      return this.generateDemoContent(prompt, contentType);
+  // Generate content using ChatGPT API or demo mode
+  async generateContent(prompt, type = 'service') {
+    if (this.demoMode) {
+      return this.generateDemoContent(prompt, type);
     }
-
+    
     try {
       const response = await fetch(this.baseURL, {
         method: 'POST',
@@ -24,7 +24,7 @@ class ChatGPTService {
           messages: [
             {
               role: 'system',
-              content: this.getSystemPrompt(contentType)
+              content: this.getSystemPrompt(type)
             },
             {
               role: 'user',
@@ -41,127 +41,103 @@ class ChatGPTService {
       }
 
       const data = await response.json();
-      return this.parseResponse(data.choices[0].message.content, contentType);
+      return this.parseAIResponse(data.choices[0].message.content, type);
     } catch (error) {
       console.error('ChatGPT API Error:', error);
-      // Fallback to demo content
-      return this.generateDemoContent(prompt, contentType);
+      return this.generateDemoContent(prompt, type);
     }
-  }
-
-  // Generate demo content when API key is not available
-  generateDemoContent(prompt, contentType) {
-    const templates = {
-      service: {
-        title: `Service: ${prompt}`,
-        description: `This service provides comprehensive support for ${prompt}. Our expert team offers specialized assistance to help you achieve your goals in this area.`,
-        blogContent: `# ${prompt}\n\n## Overview\nThis comprehensive guide covers everything you need to know about ${prompt}.\n\n## Key Benefits\n- Professional expertise\n- Customized solutions\n- Ongoing support\n\n## Getting Started\nContact our team to learn more about how we can help you with ${prompt}.`,
-        category: 'Agricultural Services',
-        tags: ['agriculture', 'support', 'expertise']
-      },
-      producer: {
-        title: `Producer Profile: ${prompt}`,
-        description: `Meet our featured producer specializing in ${prompt}. With years of experience and dedication to quality, they represent the best of our agricultural community.`,
-        blogContent: `# Producer Spotlight: ${prompt}\n\n## About This Producer\nThis dedicated producer has been working in ${prompt} for many years, bringing expertise and passion to their craft.\n\n## Products & Services\n- High-quality products\n- Sustainable practices\n- Community involvement\n\n## Contact Information\nLearn more about this producer and their offerings.`,
-        category: 'Producer Profile',
-        tags: ['producer', 'agriculture', 'community']
-      }
-    };
-
-    return templates[contentType] || templates.service;
   }
 
   // Get system prompt based on content type
-  getSystemPrompt(contentType) {
-    const prompts = {
-      service: `You are an expert content writer for an agricultural website. Generate professional service descriptions and blog content for agricultural services. Focus on practical benefits, expertise, and value for farmers and agricultural professionals.`,
-      producer: `You are an expert content writer for an agricultural website. Generate engaging producer profiles and blog content that highlights individual farmers, their products, and their contributions to the agricultural community.`
+  getSystemPrompt(type) {
+    if (type === 'service') {
+      return `You are an expert content writer for an agricultural organization in Comoros. 
+      Generate a service description in French with the following structure:
+      - Title: A compelling service title
+      - Description: Brief service description (2-3 sentences)
+      - Blog Content: Detailed article about the service (3-4 paragraphs)
+      - Tags: Relevant tags for the service
+      - Category: Service category
+      
+      Format your response as JSON with these exact keys: title, description, blogContent, tags, category`;
+    } else {
+      return `You are an expert content writer for an agricultural organization in Comoros.
+      Generate a producer profile in French with the following structure:
+      - Name: Producer name
+      - Location: Island/region in Comoros
+      - Category: Agriculture, Livestock, or Fishing
+      - Products: List of products (3-5 items)
+      - Description: Brief producer description
+      - Blog Content: Detailed article about the producer (3-4 paragraphs)
+      - Tags: Relevant tags
+      
+      Format your response as JSON with these exact keys: name, location, category, products, description, blogContent, tags`;
+    }
+  }
+
+  // Parse AI response into structured data
+  parseAIResponse(content, type) {
+    try {
+      // Extract JSON from response
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        return JSON.parse(jsonMatch[0]);
+      }
+      throw new Error('No JSON found in response');
+    } catch (error) {
+      console.error('Error parsing AI response:', error);
+      return this.generateDemoContent('', type);
+    }
+  }
+
+  // Generate demo content when API is not available
+  generateDemoContent(prompt, type) {
+    const demoContent = {
+      service: {
+        title: "Formation en Agriculture Durable",
+        description: "Programme complet de formation pour les agriculteurs comoriens sur les pratiques agricoles durables et respectueuses de l'environnement.",
+        blogContent: `L'agriculture durable représente l'avenir de l'agriculture aux Comores. Ce programme de formation innovant vise à équiper les agriculteurs locaux avec les connaissances et compétences nécessaires pour adopter des pratiques respectueuses de l'environnement.
+
+        Notre approche holistique couvre tous les aspects de l'agriculture durable, depuis la gestion des sols jusqu'aux techniques de conservation de l'eau. Les participants apprendront à utiliser des méthodes naturelles pour améliorer la fertilité des sols, réduire l'utilisation de pesticides chimiques et maximiser les rendements tout en préservant l'écosystème local.
+
+        Le programme inclut des sessions pratiques sur le terrain, des ateliers interactifs et un suivi personnalisé pour chaque participant. Nous travaillons en étroite collaboration avec les communautés locales pour adapter nos formations aux conditions spécifiques de chaque île de l'archipel comorien.
+
+        Cette initiative s'inscrit dans notre vision de développement durable et de sécurité alimentaire pour les Comores. En formant nos agriculteurs aux meilleures pratiques, nous contribuons à la résilience de nos communautés face aux défis climatiques et économiques.`,
+        tags: ["agriculture", "formation", "durable", "environnement", "comores"],
+        category: "Programmes de formation"
+      },
+      producer: {
+        name: "Ahmed Mohamed",
+        location: "Grande Comore",
+        category: "Agriculture",
+        products: ["Vanille", "Girofle", "Cacao", "Légumes", "Fruits tropicaux"],
+        description: "Producteur expérimenté spécialisé dans la culture de vanille et d'épices de qualité supérieure.",
+        blogContent: `Ahmed Mohamed est un producteur passionné qui a transformé sa ferme familiale en un modèle d'excellence agricole aux Comores. Depuis plus de 15 ans, il cultive la vanille, le girofle et d'autres épices précieuses qui font la renommée de l'archipel.
+
+        Sa ferme de 5 hectares, située dans les hauteurs de Grande Comore, bénéficie d'un microclimat idéal pour la culture de la vanille. Ahmed a développé des techniques de culture traditionnelles améliorées qui respectent l'environnement tout en maximisant la qualité de ses produits.
+
+        En plus de ses cultures principales, Ahmed diversifie sa production avec des légumes et fruits tropicaux pour assurer la sécurité alimentaire de sa famille et de sa communauté. Il partage volontiers ses connaissances avec d'autres producteurs locaux, contribuant ainsi au développement de l'agriculture dans sa région.
+
+        Son engagement pour l'agriculture durable et sa passion pour l'innovation font d'Ahmed un exemple inspirant pour la nouvelle génération d'agriculteurs comoriens.`,
+        tags: ["vanille", "girofle", "agriculture", "grande comore", "épices"]
+      }
     };
 
-    return prompts[contentType] || prompts.service;
+    return demoContent[type] || demoContent.service;
   }
 
-  // Parse ChatGPT response into structured content
-  parseResponse(response, contentType) {
-    try {
-      // Try to parse as JSON first
-      if (response.startsWith('{')) {
-        return JSON.parse(response);
-      }
-
-      // Parse structured text response
-      const lines = response.split('\n').filter(line => line.trim());
-      const content = {
-        title: '',
-        description: '',
-        blogContent: response,
-        category: contentType === 'service' ? 'Agricultural Services' : 'Producer Profile',
-        tags: ['agriculture', 'farming']
-      };
-
-      // Extract title and description from structured response
-      for (const line of lines) {
-        if (line.startsWith('Title:') || line.startsWith('Titre:')) {
-          content.title = line.replace(/^(Title|Titre):\s*/, '');
-        } else if (line.startsWith('Description:') || line.startsWith('Description:')) {
-          content.description = line.replace(/^(Description|Description):\s*/, '');
-        }
-      }
-
-      // If no title found, generate one
-      if (!content.title) {
-        content.title = `${contentType === 'service' ? 'Service' : 'Producer'}: ${contentType}`;
-      }
-
-      return content;
-    } catch (error) {
-      console.error('Error parsing ChatGPT response:', error);
-      return this.generateDemoContent('Error parsing response', contentType);
-    }
-  }
-
-  // Generate image suggestions (placeholder for future image generation)
-  async generateImageSuggestions(content) {
-    // This would integrate with DALL-E or similar image generation API
-    return {
-      suggestions: [
-        'Agricultural field with crops',
-        'Farmer working in field',
-        'Modern farming equipment',
-        'Fresh produce display'
-      ],
-      recommended: 'Agricultural field with crops'
-    };
-  }
-
-  // Validate API key
-  async validateApiKey() {
-    if (this.isDemoMode) {
-      return { valid: false, mode: 'demo' };
-    }
-
-    try {
-      const response = await fetch(this.baseURL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.apiKey}`
-        },
-        body: JSON.stringify({
-          model: 'gpt-3.5-turbo',
-          messages: [{ role: 'user', content: 'test' }],
-          max_tokens: 5
-        })
-      });
-
-      return { valid: response.ok, mode: 'api' };
-    } catch (error) {
-      return { valid: false, mode: 'demo' };
-    }
+  // Generate image suggestions (demo)
+  generateImageSuggestions(content) {
+    const suggestions = [
+      "agriculture-comores-1.jpg",
+      "agriculture-comores-2.jpg", 
+      "agriculture-comores-3.jpg",
+      "farming-comores-1.jpg",
+      "farming-comores-2.jpg"
+    ];
+    
+    return suggestions[Math.floor(Math.random() * suggestions.length)];
   }
 }
 
-// Create singleton instance
-const chatgptService = new ChatGPTService();
-
-export default chatgptService;
+export default new ChatGPTService();

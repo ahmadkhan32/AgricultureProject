@@ -1,153 +1,97 @@
 // Content Management Service for AI-generated content
 class ContentService {
   constructor() {
-    this.content = this.loadContent();
+    this.storageKey = 'agricul_generated_content';
+    this.servicesKey = 'agricul_services';
+    this.producersKey = 'agricul_producers';
   }
 
-  // Load content from localStorage
-  loadContent() {
-    try {
-      const saved = localStorage.getItem('agriculture_content');
-      return saved ? JSON.parse(saved) : {
-        services: [],
-        producers: [],
-        blogs: []
-      };
-    } catch (error) {
-      console.error('Error loading content:', error);
-      return { services: [], producers: [], blogs: [] };
-    }
-  }
-
-  // Save content to localStorage
-  saveContent() {
-    try {
-      localStorage.setItem('agriculture_content', JSON.stringify(this.content));
-      return true;
-    } catch (error) {
-      console.error('Error saving content:', error);
-      return false;
-    }
-  }
-
-  // Add new service content
-  addServiceContent(content) {
-    const newService = {
-      id: Date.now(),
-      type: 'service',
-      ...content,
-      createdAt: new Date().toISOString(),
-      published: false
-    };
-    
-    this.content.services.push(newService);
-    this.saveContent();
-    return newService;
-  }
-
-  // Add new producer content
-  addProducerContent(content) {
-    const newProducer = {
-      id: Date.now(),
-      type: 'producer',
-      ...content,
-      createdAt: new Date().toISOString(),
-      published: false
-    };
-    
-    this.content.producers.push(newProducer);
-    this.saveContent();
-    return newProducer;
-  }
-
-  // Get all services
+  // Get all generated services
   getServices() {
-    return this.content.services.filter(item => item.published);
-  }
-
-  // Get all producers
-  getProducers() {
-    return this.content.producers.filter(item => item.published);
-  }
-
-  // Get content by ID
-  getContentById(id) {
-    const allContent = [...this.content.services, ...this.content.producers, ...this.content.blogs];
-    return allContent.find(item => item.id === id);
-  }
-
-  // Update content
-  updateContent(id, updates) {
-    const allContent = [...this.content.services, ...this.content.producers, ...this.content.blogs];
-    const index = allContent.findIndex(item => item.id === id);
-    
-    if (index !== -1) {
-      allContent[index] = { ...allContent[index], ...updates };
-      
-      // Update in the appropriate array
-      if (allContent[index].type === 'service') {
-        const serviceIndex = this.content.services.findIndex(s => s.id === id);
-        if (serviceIndex !== -1) {
-          this.content.services[serviceIndex] = allContent[index];
-        }
-      } else if (allContent[index].type === 'producer') {
-        const producerIndex = this.content.producers.findIndex(p => p.id === id);
-        if (producerIndex !== -1) {
-          this.content.producers[producerIndex] = allContent[index];
-        }
-      }
-      
-      this.saveContent();
-      return allContent[index];
+    try {
+      const services = localStorage.getItem(this.servicesKey);
+      return services ? JSON.parse(services) : [];
+    } catch (error) {
+      console.error('Error loading services:', error);
+      return [];
     }
-    return null;
+  }
+
+  // Get all generated producers
+  getProducers() {
+    try {
+      const producers = localStorage.getItem(this.producersKey);
+      return producers ? JSON.parse(producers) : [];
+    } catch (error) {
+      console.error('Error loading producers:', error);
+      return [];
+    }
+  }
+
+  // Save generated service
+  saveService(service) {
+    try {
+      const services = this.getServices();
+      const newService = {
+        id: Date.now(),
+        ...service,
+        createdAt: new Date().toISOString(),
+        type: 'service'
+      };
+      services.push(newService);
+      localStorage.setItem(this.servicesKey, JSON.stringify(services));
+      return newService;
+    } catch (error) {
+      console.error('Error saving service:', error);
+      return null;
+    }
+  }
+
+  // Save generated producer
+  saveProducer(producer) {
+    try {
+      const producers = this.getProducers();
+      const newProducer = {
+        id: Date.now(),
+        ...producer,
+        createdAt: new Date().toISOString(),
+        type: 'producer'
+      };
+      producers.push(newProducer);
+      localStorage.setItem(this.producersKey, JSON.stringify(producers));
+      return newProducer;
+    } catch (error) {
+      console.error('Error saving producer:', error);
+      return null;
+    }
   }
 
   // Delete content
-  deleteContent(id) {
-    this.content.services = this.content.services.filter(item => item.id !== id);
-    this.content.producers = this.content.producers.filter(item => item.id !== id);
-    this.content.blogs = this.content.blogs.filter(item => item.id !== id);
-    this.saveContent();
-    return true;
+  deleteContent(id, type) {
+    try {
+      if (type === 'service') {
+        const services = this.getServices();
+        const filtered = services.filter(s => s.id !== id);
+        localStorage.setItem(this.servicesKey, JSON.stringify(filtered));
+      } else if (type === 'producer') {
+        const producers = this.getProducers();
+        const filtered = producers.filter(p => p.id !== id);
+        localStorage.setItem(this.producersKey, JSON.stringify(filtered));
+      }
+    } catch (error) {
+      console.error('Error deleting content:', error);
+    }
   }
 
-  // Publish content
-  publishContent(id) {
-    return this.updateContent(id, { published: true });
-  }
-
-  // Unpublish content
-  unpublishContent(id) {
-    return this.updateContent(id, { published: false });
-  }
-
-  // Get content statistics
-  getStats() {
-    return {
-      totalServices: this.content.services.length,
-      publishedServices: this.content.services.filter(s => s.published).length,
-      totalProducers: this.content.producers.length,
-      publishedProducers: this.content.producers.filter(p => p.published).length,
-      totalBlogs: this.content.blogs.length,
-      publishedBlogs: this.content.blogs.filter(b => b.published).length
-    };
-  }
-
-  // Search content
-  searchContent(query) {
-    const allContent = [...this.content.services, ...this.content.producers, ...this.content.blogs];
-    const lowercaseQuery = query.toLowerCase();
-    
-    return allContent.filter(item => 
-      item.title?.toLowerCase().includes(lowercaseQuery) ||
-      item.description?.toLowerCase().includes(lowercaseQuery) ||
-      item.blogContent?.toLowerCase().includes(lowercaseQuery)
-    );
+  // Clear all content
+  clearAllContent() {
+    try {
+      localStorage.removeItem(this.servicesKey);
+      localStorage.removeItem(this.producersKey);
+    } catch (error) {
+      console.error('Error clearing content:', error);
+    }
   }
 }
 
-// Create singleton instance
-const contentService = new ContentService();
-
-export default contentService;
+export default new ContentService();
