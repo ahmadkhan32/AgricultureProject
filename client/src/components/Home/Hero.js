@@ -33,7 +33,7 @@ const Hero = () => {
                 to="/register"
                 className="bg-white text-orange-700 hover:bg-orange-100 font-medium py-2 sm:py-2.5 md:py-3 px-3 sm:px-4 md:px-6 lg:px-8 rounded-lg transition flex items-center justify-center text-xs sm:text-sm md:text-base shadow-lg hover:shadow-xl"
               >
-                Join Our Community
+                Rejoignez notre communauté
                 <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1 sm:ml-1.5 md:ml-2" />
               </Link>
 
@@ -41,7 +41,7 @@ const Hero = () => {
                 to="/about"
                 className="border-2 border-white text-white hover:bg-white hover:text-orange-700 font-medium py-2 sm:py-2.5 md:py-3 px-3 sm:px-4 md:px-6 lg:px-8 rounded-lg transition flex items-center justify-center text-xs sm:text-sm md:text-base shadow-lg hover:shadow-xl"
               >
-                Learn More
+                Rejoignez notre communauté
                 <Play className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1 sm:ml-1.5 md:ml-2" />
               </Link>
             </div>
