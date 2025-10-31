@@ -1,33 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { Plus, Save, Eye, Trash2, RefreshCw, Bot, FileText, Users } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Plus, Eye, Trash2, RefreshCw, Bot, FileText, Users, Upload, Image, Check } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import chatgptService from '../services/chatgptService';
-import contentService from '../services/contentService';
+import enhancedContentService from '../services/enhancedCrudService';
 
 const ContentDashboard = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('service');
   const [prompt, setPrompt] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedContent, setGeneratedContent] = useState(null);
   const [savedContent, setSavedContent] = useState([]);
   const [selectedImage, setSelectedImage] = useState('');
+  const [selectedImageFile, setSelectedImageFile] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('idle'); // 'idle', 'loading', 'success', 'error'
+
+  const loadSavedContent = useCallback(async () => {
+    try {
+      if (activeTab === 'service') {
+        const services = await enhancedContentService.getAllServices();
+        setSavedContent(services);
+      } else {
+        const producers = await enhancedContentService.getAllProducers();
+        setSavedContent(producers);
+      }
+    } catch (error) {
+      console.error('Error loading content:', error);
+      // Fallback to local storage
+      if (activeTab === 'service') {
+        setSavedContent(enhancedContentService.getLocalServices());
+      } else {
+        setSavedContent(enhancedContentService.getLocalProducers());
+      }
+    }
+  }, [activeTab]);
 
   // Load saved content on component mount
   useEffect(() => {
     loadSavedContent();
-  }, [activeTab]);
-
-  const loadSavedContent = () => {
-    if (activeTab === 'service') {
-      setSavedContent(contentService.getServices());
-    } else {
-      setSavedContent(contentService.getProducers());
-    }
-  };
+  }, [loadSavedContent]);
 
   const handleGenerate = async () => {
     if (!prompt.trim()) return;
 
     setIsGenerating(true);
+    setSubmitStatus('idle'); // Reset submit status when generating new content
     try {
       const content = await chatgptService.generateContent(prompt, activeTab);
       const imageSuggestion = chatgptService.generateImageSuggestions(content);
@@ -45,40 +63,89 @@ const ContentDashboard = () => {
     }
   };
 
-  const handleSave = () => {
+  const handleSubmit = async () => {
+    // Save and navigate to view
     if (!generatedContent) return;
 
-    const contentToSave = {
-      ...generatedContent,
-      image: selectedImage
-    };
+    setIsUploading(true);
+    setSubmitStatus('loading');
+    
+    try {
+      const contentToSave = {
+        ...generatedContent,
+        image: selectedImage
+      };
 
-    let saved;
-    if (activeTab === 'service') {
-      saved = contentService.saveService(contentToSave);
-    } else {
-      saved = contentService.saveProducer(contentToSave);
-    }
+      let saved;
+      if (activeTab === 'service') {
+        try {
+          saved = await enhancedContentService.saveServiceToDatabase(contentToSave, selectedImageFile);
+        } catch (dbError) {
+          console.warn('Database save failed, falling back to local storage:', dbError);
+          saved = enhancedContentService.saveService(contentToSave);
+        }
+      } else {
+        try {
+          saved = await enhancedContentService.saveProducerToDatabase(contentToSave, selectedImageFile);
+        } catch (dbError) {
+          console.warn('Database save failed, falling back to local storage:', dbError);
+          saved = enhancedContentService.saveProducer(contentToSave);
+        }
+      }
 
-    if (saved) {
-      alert('Contenu sauvegardé avec succès!');
-      setGeneratedContent(null);
-      setPrompt('');
-      loadSavedContent();
-    } else {
-      alert('Erreur lors de la sauvegarde');
+      if (saved) {
+        setSubmitStatus('success');
+        setGeneratedContent(null);
+        setPrompt('');
+        setSelectedImage('');
+        setSelectedImageFile(null);
+        loadSavedContent();
+        
+        // Show success state for 2 seconds, then navigate
+        setTimeout(() => {
+          if (activeTab === 'service') {
+            navigate('/services');
+          } else {
+            navigate('/producers');
+          }
+        }, 2000);
+      } else {
+        setSubmitStatus('error');
+        setTimeout(() => setSubmitStatus('idle'), 3000);
+      }
+    } catch (error) {
+      console.error('Error saving content:', error);
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 3000);
+    } finally {
+      setIsUploading(false);
     }
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer ce contenu?')) {
-      contentService.deleteContent(id, activeTab);
-      loadSavedContent();
+      try {
+        // Delete with type information
+        const type = activeTab === 'service' ? 'service' : 'producer';
+        await enhancedContentService.delete(id, type);
+        loadSavedContent();
+      } catch (error) {
+        console.error('Error deleting content:', error);
+        alert('Erreur lors de la suppression');
+      }
     }
   };
 
   const handlePreview = (content) => {
     setGeneratedContent(content);
+  };
+
+  const handleImageFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedImageFile(file);
+      setSelectedImage(file.name);
+    }
   };
 
   return (
@@ -146,32 +213,107 @@ const ContentDashboard = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Image (optionnel)
                 </label>
-                <input
-                  type="text"
-                  value={selectedImage}
-                  onChange={(e) => setSelectedImage(e.target.value)}
-                  placeholder="Nom du fichier image..."
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                />
+                <div className="flex space-x-2">
+                  <input
+                    type="text"
+                    value={selectedImage}
+                    onChange={(e) => setSelectedImage(e.target.value)}
+                    placeholder="Nom du fichier image ou URL..."
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageFileChange}
+                    className="hidden"
+                    id="image-upload"
+                  />
+                  <label
+                    htmlFor="image-upload"
+                    className="px-3 py-2 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 cursor-pointer flex items-center"
+                  >
+                    <Upload className="w-4 h-4 mr-1" />
+                    Upload
+                  </label>
+                </div>
+                {selectedImageFile && (
+                  <p className="text-sm text-green-600 mt-1">
+                    <Image className="w-4 h-4 inline mr-1" />
+                    Fichier sélectionné: {selectedImageFile.name}
+                  </p>
+                )}
               </div>
 
-              <button
-                onClick={handleGenerate}
-                disabled={isGenerating || !prompt.trim()}
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-              >
-                {isGenerating ? (
-                  <>
-                    <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
-                    Génération...
-                  </>
-                ) : (
-                  <>
-                    <Plus className="w-4 h-4 mr-2" />
-                    Générer le Contenu
-                  </>
-                )}
-              </button>
+              <div className="flex space-x-3">
+                <button
+                  onClick={handleGenerate}
+                  disabled={isGenerating || !prompt.trim()}
+                  className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                >
+                  {isGenerating ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                      Génération...
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-4 h-4 mr-2" />
+                      Générer
+                    </>
+                  )}
+                </button>
+
+                <button
+                  onClick={handleSubmit}
+                  disabled={isUploading || !generatedContent || submitStatus === 'success'}
+                  className={`
+                    flex-1 py-2 px-4 rounded-md font-semibold
+                    flex items-center justify-center transition-all duration-500
+                    disabled:cursor-not-allowed disabled:opacity-90
+                    ${
+                      submitStatus === 'success'
+                        ? 'bg-green-500 text-white scale-105'
+                        : submitStatus === 'error'
+                        ? 'bg-red-600 text-white'
+                        : submitStatus === 'loading'
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-green-600 text-white hover:bg-green-700 hover:scale-105'
+                    }
+                  `}
+                >
+                  {submitStatus === 'loading' && (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Envoi en cours...
+                    </>
+                  )}
+                  {submitStatus === 'success' && (
+                    <span className="flex items-center animate-bounce">
+                      <svg className="mr-2 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                      Soumis avec succès !
+                    </span>
+                  )}
+                  {submitStatus === 'error' && (
+                    <>
+                      <svg className="mr-2 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                      Erreur lors de l'envoi
+                    </>
+                  )}
+                  {submitStatus === 'idle' && (
+                    <>
+                      <Check className="w-4 h-4 mr-2" />
+                      Soumettre
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
 
             {/* Generated Content Preview */}
@@ -188,14 +330,6 @@ const ContentDashboard = () => {
                     <p><strong>Localisation:</strong> {generatedContent.location}</p>
                   )}
                 </div>
-                
-                <button
-                  onClick={handleSave}
-                  className="mt-4 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 flex items-center"
-                >
-                  <Save className="w-4 h-4 mr-2" />
-                  Sauvegarder
-                </button>
               </div>
             )}
           </div>

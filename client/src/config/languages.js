@@ -1,5 +1,13 @@
 // Language configuration for Comorian context
 export const LANGUAGES = {
+  EN: {
+    code: 'en',
+    name: 'English',
+    nativeName: 'English',
+    flag: '🇺🇸',
+    direction: 'ltr',
+    rtl: false,
+  },
   FR: {
     code: 'fr',
     name: 'Français',
@@ -26,7 +34,7 @@ export const LANGUAGES = {
   },
 };
 
-export const DEFAULT_LANGUAGE = LANGUAGES.FR.code;
+export const DEFAULT_LANGUAGE = LANGUAGES.EN.code;
 
 export const SUPPORTED_LANGUAGES = Object.values(LANGUAGES);
 
@@ -37,9 +45,10 @@ export const detectBrowserLanguage = () => {
   
   // Map browser language to supported languages
   const languageMap = {
+    'en': LANGUAGES.EN.code,
     'fr': LANGUAGES.FR.code,
     'ar': LANGUAGES.AR.code,
-    'en': LANGUAGES.FR.code, // Default English to French for Comorian context
+    'com': LANGUAGES.COM.code,
   };
   
   return languageMap[langCode] || DEFAULT_LANGUAGE;

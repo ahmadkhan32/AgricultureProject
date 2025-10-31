@@ -38,9 +38,12 @@ CREATE TABLE services (
     description TEXT NOT NULL,
     content TEXT,
     icon TEXT,
-    image_url TEXT,
-    category TEXT CHECK (category IN ('support', 'training', 'assistance', 'project')) DEFAULT 'support',
-    status TEXT CHECK (status IN ('active', 'inactive')) DEFAULT 'active',
+    image TEXT,  -- Changed from image_url to image for consistency
+    category TEXT CHECK (category IN ('support', 'training', 'assistance', 'project', 'Soutien aux producteurs', 'Programmes de formation', 'Programmes d\'assistance', 'Projets')) DEFAULT 'support',
+    status TEXT CHECK (status IN ('draft', 'published', 'active', 'inactive')) DEFAULT 'published',
+    tags TEXT[],  -- Added for storing tags array
+    is_ai_generated BOOLEAN DEFAULT false,  -- Added to mark AI-generated content
+    created_by TEXT DEFAULT 'system',  -- Added to track creator
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
@@ -49,6 +52,7 @@ CREATE TABLE services (
 CREATE TABLE producers (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
     user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
+    name TEXT NOT NULL,  -- Added name field for AI-generated producers
     business_name TEXT NOT NULL,
     business_type TEXT CHECK (business_type IN ('agriculture', 'livestock', 'fisheries', 'mixed')) NOT NULL,
     description TEXT,
@@ -63,7 +67,10 @@ CREATE TABLE producers (
     website TEXT,
     social_media JSONB,
     images TEXT[],
-    status TEXT CHECK (status IN ('pending', 'approved', 'rejected')) DEFAULT 'pending',
+    image TEXT,  -- Added single image field for consistency
+    status TEXT CHECK (status IN ('pending', 'approved', 'rejected')) DEFAULT 'approved',
+    is_ai_generated BOOLEAN DEFAULT false,  -- Added to mark AI-generated content
+    created_by TEXT DEFAULT 'system',  -- Added to track creator
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

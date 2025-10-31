@@ -6,27 +6,27 @@ const ServicesSection = () => {
   const services = [
     {
       icon: Users,
-      title: 'Producer Support',
-      description: 'Comprehensive assistance for farmers, breeders, and fishers',
-      features: ['Technical guidance', 'Market access', 'Quality standards'],
+      title: 'Soutien aux Producteurs',
+      description: 'Assistance complète pour les agriculteurs, éleveurs et pêcheurs',
+      features: ['Conseil technique', 'Accès au marché', 'Normes de qualité'],
     },
     {
       icon: BookOpen,
-      title: 'Training Programs',
-      description: 'Educational initiatives to enhance agricultural skills',
-      features: ['Workshops', 'Certification courses', 'Best practices'],
+      title: 'Programmes de Formation',
+      description: 'Initiatives éducatives pour améliorer les compétences agricoles',
+      features: ['Ateliers', 'Cours de certification', 'Bonnes pratiques'],
     },
     {
       icon: Users2,
-      title: 'Partnership Development',
-      description: 'Connecting producers with local and international partners',
-      features: ['Business networking', 'Investment opportunities', 'Collaboration'],
+      title: 'Développement de Partenariats',
+      description: 'Connecter les producteurs avec des partenaires locaux et internationaux',
+      features: ['Réseautage commercial', 'Opportunités d\'investissement', 'Collaboration'],
     },
     {
       icon: TrendingUp,
-      title: 'Market Development',
-      description: 'Supporting growth and expansion of agricultural markets',
-      features: ['Market research', 'Export assistance', 'Value chain development'],
+      title: 'Développement du Marché',
+      description: 'Soutenir la croissance et l\'expansion des marchés agricoles',
+      features: ['Recherche de marché', 'Assistance à l\'exportation', 'Développement de la chaîne de valeur'],
     },
   ];
 
@@ -34,9 +34,9 @@ const ServicesSection = () => {
     <section className="py-16 bg-blue-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="section-title">Our Services</h2>
+          <h2 className="section-title">Nos Services</h2>
           <p className="section-subtitle text-white">
-            Comprehensive support for the agricultural, livestock, and fisheries sectors
+            Soutien complet pour les secteurs agricole, d'élevage et de pêche
           </p>
         </div>
 
@@ -62,7 +62,7 @@ const ServicesSection = () => {
                   to="/services"
                   className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
                 >
-                  Learn More
+                  En savoir plus
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Link>
               </div>
@@ -75,7 +75,7 @@ const ServicesSection = () => {
             to="/services"
             className="btn-primary"
           >
-            Explore All Services
+            Explorer Tous les Services
           </Link>
         </div>
       </div>

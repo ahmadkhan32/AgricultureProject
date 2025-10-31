@@ -14,8 +14,10 @@ import crudService from '../../services/crudService';
 import StatsCard from './StatsCard';
 import RecentActivity from './RecentActivity';
 import ProducerStats from './ProducerStats';
+import { useTranslation } from '../withTranslation';
 
 const DashboardOverview = () => {
+  const { t } = useTranslation();
   const { data: stats, isLoading } = useQuery(
     'dashboard-stats',
     async () => {
@@ -152,7 +154,7 @@ const DashboardOverview = () => {
     <div className="space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard Overview</h1>
+        <h1 className="text-2xl font-bold text-gray-900">{t('admin.dashboard.overview')}</h1>
         <p className="text-gray-600">Welcome back! Here's what's happening with UCAEP today.</p>
       </div>
 
@@ -174,36 +176,36 @@ const DashboardOverview = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Producer Statistics */}
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Producer Statistics</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('admin.dashboard.producer_statistics')}</h3>
           <ProducerStats stats={stats?.statistics} />
         </div>
 
         {/* Recent Activity */}
         <div className="card">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('admin.dashboard.recent_activity')}</h3>
           <RecentActivity activity={stats?.recentActivity} />
         </div>
       </div>
 
       {/* Quick Actions */}
       <div className="card">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('admin.dashboard.quick_actions')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <button className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
             <Newspaper className="w-6 h-6 text-primary-600" />
-            <span className="font-medium">Create News</span>
+            <span className="font-medium">{t('admin.management.create')} {t('admin.news')}</span>
           </button>
           <button className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
             <UserCheck className="w-6 h-6 text-primary-600" />
-            <span className="font-medium">Approve Producers</span>
+            <span className="font-medium">{t('admin.management.approve')} {t('admin.producers')}</span>
           </button>
           <button className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
             <MessageSquare className="w-6 h-6 text-primary-600" />
-            <span className="font-medium">View Messages</span>
+            <span className="font-medium">{t('admin.management.view')} {t('admin.messages')}</span>
           </button>
           <button className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
             <Settings className="w-6 h-6 text-primary-600" />
-            <span className="font-medium">Manage Services</span>
+            <span className="font-medium">{t('admin.management.manage')} {t('admin.services')}</span>
           </button>
         </div>
       </div>

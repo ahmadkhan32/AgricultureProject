@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { LANGUAGES, DEFAULT_LANGUAGE, detectBrowserLanguage } from '../config/languages';
 
 // Import translation files
+import enTranslations from '../locales/en.json';
 import frTranslations from '../locales/fr.json';
 import arTranslations from '../locales/ar.json';
 import comTranslations from '../locales/com.json';
@@ -18,11 +19,12 @@ export const useLanguage = () => {
 
 export const LanguageProvider = ({ children }) => {
   const [currentLanguage, setCurrentLanguage] = useState(DEFAULT_LANGUAGE);
-  const [translations, setTranslations] = useState(frTranslations);
+  const [translations, setTranslations] = useState(enTranslations);
   const [isRTL, setIsRTL] = useState(false);
 
   // Translation files mapping
   const translationFiles = {
+    en: enTranslations,
     fr: frTranslations,
     ar: arTranslations,
     com: comTranslations,

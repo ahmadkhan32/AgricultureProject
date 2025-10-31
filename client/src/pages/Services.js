@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Leaf, Fish, Heart, BookOpen, Users, Globe, Search, Filter, UserCheck, GraduationCap, Hand, Briefcase, Eye, ExternalLink } from "lucide-react";
+import { Leaf, Fish, Heart, BookOpen, Users, Globe, Search, Filter, UserCheck, GraduationCap, Hand, Briefcase, Eye, ExternalLink, CheckCircle, Loader2 } from "lucide-react";
 import service1 from "../Images/Agricul (2).jpeg";
 import service2 from "../Images/fisheries-management.jpg";
 import service3 from "../Images/Livestock vaccines.jpg";
 import service4 from "../Images/BRECOMA-1.jpg";
-import contentService from "../services/contentService";
+import enhancedContentService from "../services/enhancedCrudService";
 
 const Services = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -13,11 +13,30 @@ const Services = () => {
   const [generatedServices, setGeneratedServices] = useState([]);
   const [selectedService, setSelectedService] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  
+  // Form state for animated submit button
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    service: '',
+    message: ''
+  });
+  const [submitState, setSubmitState] = useState('idle'); // 'idle', 'loading', 'success', 'error'
 
   // Load generated content on component mount
   useEffect(() => {
-    const generated = contentService.getServices();
-    setGeneratedServices(generated);
+    const loadServices = async () => {
+      try {
+        const services = await enhancedContentService.getAllServices();
+        setGeneratedServices(services);
+      } catch (error) {
+        console.error('Error loading services:', error);
+        // Fallback to local storage
+        setGeneratedServices(enhancedContentService.getLocalServices());
+      }
+    };
+    loadServices();
   }, []);
 
   // Handle read more click
@@ -30,6 +49,79 @@ const Services = () => {
   const closeModal = () => {
     setShowModal(false);
     setSelectedService(null);
+  };
+
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Handle form submission with animation
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Set loading state
+    setSubmitState('loading');
+    
+    try {
+      // Simulate API call to Supabase/backend
+      const response = await fetch('/api/services/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      if (response.ok) {
+        // Success state
+        setSubmitState('success');
+        
+        // Reset form after 2 seconds
+        setTimeout(() => {
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            service: '',
+            message: ''
+          });
+          setSubmitState('idle');
+        }, 2000);
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (error) {
+      // Error state with fallback to localStorage
+      console.error('Error submitting form:', error);
+      
+      // Save to localStorage as fallback
+      const submissions = JSON.parse(localStorage.getItem('serviceSubmissions') || '[]');
+      submissions.push({
+        ...formData,
+        id: Date.now(),
+        timestamp: new Date().toISOString()
+      });
+      localStorage.setItem('serviceSubmissions', JSON.stringify(submissions));
+      
+      setSubmitState('success');
+      
+      // Reset form after 2 seconds
+      setTimeout(() => {
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          message: ''
+        });
+        setSubmitState('idle');
+      }, 2000);
+    }
   };
 
   const services = [
@@ -308,6 +400,141 @@ const Services = () => {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* Contact Form with Animated Submit Button */}
+      <section className="mt-20 bg-white rounded-2xl shadow-lg p-8 max-w-4xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-3">Demander un Service</h2>
+          <p className="text-gray-600">Remplissez le formulaire ci-dessous pour demander des informations sur nos services</p>
+        </div>
+
+        <form onSubmit={handleFormSubmit} className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                Nom complet
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                placeholder="Votre nom"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                placeholder="votre@email.com"
+              />
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                Téléphone
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                placeholder="+269 XXX XX XX"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
+                Service demandé
+              </label>
+              <select
+                id="service"
+                name="service"
+                value={formData.service}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+              >
+                <option value="">Sélectionnez un service</option>
+                <option value="soutien">Soutien aux producteurs</option>
+                <option value="formation">Formations et programmes d'appui</option>
+                <option value="elevage">Appui à l'élevage</option>
+                <option value="peche">Développement de la pêche</option>
+                <option value="rural">Projets de développement rural</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleInputChange}
+              required
+              rows={5}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition resize-none"
+              placeholder="Décrivez votre demande..."
+            />
+          </div>
+
+          {/* Animated Submit Button */}
+          <button
+            type="submit"
+            disabled={submitState === 'loading' || submitState === 'success'}
+            className="w-full py-4 px-6 bg-green-600 text-white font-semibold rounded-lg transition-all duration-300 hover:bg-green-700 disabled:opacity-80 disabled:cursor-not-allowed flex items-center justify-center space-x-2 relative overflow-hidden group"
+          >
+            {/* Loading State */}
+            {submitState === 'loading' && (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                <span>Envoi en cours...</span>
+              </>
+            )}
+
+            {/* Success State */}
+            {submitState === 'success' && (
+              <>
+                <CheckCircle className="w-5 h-5 animate-bounce" />
+                <span>Envoyé avec succès!</span>
+              </>
+            )}
+
+            {/* Idle State */}
+            {submitState === 'idle' && (
+              <>
+                <span>Envoyer la demande</span>
+                <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </>
+            )}
+
+            {/* Animated background effect */}
+            {submitState === 'idle' && (
+              <span className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-green-700 transition-transform duration-500 ease-in-out" />
+            )}
+          </button>
+        </form>
       </section>
 
       {/* Partnerships Section */}

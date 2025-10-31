@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.6fafec25.css",
-    "main.js": "/static/js/main.ffb55ee2.js",
+    "main.css": "/static/css/main.6cf3716c.css",
+    "main.js": "/static/js/main.2170aed2.js",
     "static/media/BRECOMA-1.jpg": "/static/media/BRECOMA-1.c335e15c066a557bb964.jpg",
+    "static/media/Agricul (2).jpeg": "/static/media/Agricul (2).a1747a6a981a89a08cf3.jpeg",
     "static/media/fisheries-management.jpg": "/static/media/fisheries-management.c3cdfccd4260d3f8dde5.jpg",
     "static/media/Livestock vaccines.jpg": "/static/media/Livestock vaccines.01c5bfd8ce12a3e953f0.jpg",
     "static/media/Ahmed_Photo.jpg": "/static/media/Ahmed_Photo.cf0765c3d7ed356aa729.jpg",
@@ -15,11 +16,11 @@
     "static/media/Ahmed_Said_gamaouu.jpeg": "/static/media/Ahmed_Said_gamaouu.3d4f9da2f475b26eff4c.jpeg",
     "static/media/fao.webp": "/static/media/fao.be8d771f65e1b9e966eb.webp",
     "index.html": "/index.html",
-    "main.6fafec25.css.map": "/static/css/main.6fafec25.css.map",
-    "main.ffb55ee2.js.map": "/static/js/main.ffb55ee2.js.map"
+    "main.6cf3716c.css.map": "/static/css/main.6cf3716c.css.map",
+    "main.2170aed2.js.map": "/static/js/main.2170aed2.js.map"
   },
   "entrypoints": [
-    "static/css/main.6fafec25.css",
-    "static/js/main.ffb55ee2.js"
+    "static/css/main.6cf3716c.css",
+    "static/js/main.2170aed2.js"
   ]
 }

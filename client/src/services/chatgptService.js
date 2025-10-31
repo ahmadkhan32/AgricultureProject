@@ -140,4 +140,5 @@ class ChatGPTService {
   }
 }
 
-export default new ChatGPTService();
+const chatgptService = new ChatGPTService();
+export default chatgptService;

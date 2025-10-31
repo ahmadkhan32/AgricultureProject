@@ -3,7 +3,7 @@ import { MapPin, Search, Leaf, Fish, PawPrint, Eye, ExternalLink } from "lucide-
 import producer1 from "../Images/Ahmed_Photo.jpg";
 import producer2 from "../Images/Ahmed_Said_gamaou.jpg";
 import producer3 from "../Images/Ali_Mouignidah.jpg";
-import contentService from "../services/contentService";
+import enhancedContentService from "../services/enhancedCrudService";
 
 const Producers = () => {
   const [search, setSearch] = useState("");
@@ -15,8 +15,17 @@ const Producers = () => {
 
   // Load generated content on component mount
   useEffect(() => {
-    const generated = contentService.getProducers();
-    setGeneratedProducers(generated);
+    const loadProducers = async () => {
+      try {
+        const producers = await enhancedContentService.getAllProducers();
+        setGeneratedProducers(producers);
+      } catch (error) {
+        console.error('Error loading producers:', error);
+        // Fallback to local storage
+        setGeneratedProducers(enhancedContentService.getLocalProducers());
+      }
+    };
+    loadProducers();
   }, []);
 
   // Handle read more click

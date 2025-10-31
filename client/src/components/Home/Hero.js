@@ -52,7 +52,7 @@ const Hero = () => {
             <div className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 border border-white/20 w-full max-w-md">
               <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
                 {[
-                  { number: '500+', label: 'Active Producers' },
+                  { number: '1000', label: 'Active Producers' },
                   { number: '4', label: 'Regions' },
                   { number: '25+', label: 'Partners' },
                   { number: '15+', label: 'Years' },

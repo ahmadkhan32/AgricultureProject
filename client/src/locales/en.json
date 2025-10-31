@@ -1,0 +1,447 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "create": "Create",
+    "update": "Update",
+    "search": "Search",
+    "filter": "Filter",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "open": "Open",
+    "view": "View",
+    "download": "Download",
+    "upload": "Upload",
+    "yes": "Yes",
+    "no": "No",
+    "confirm": "Confirm",
+    "required": "Required",
+    "optional": "Optional",
+    "all": "All",
+    "none": "None",
+    "select": "Select",
+    "clear": "Clear",
+    "reset": "Reset",
+    "apply": "Apply",
+    "refresh": "Refresh",
+    "copy": "Copy",
+    "share": "Share",
+    "print": "Print",
+    "export": "Export",
+    "import": "Import"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "news": "News",
+    "services": "Services",
+    "producers": "Producers",
+    "partnerships": "Partnerships",
+    "resources": "Resources",
+    "contact": "Contact",
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "admin": "Admin",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "home": {
+    "title": "Union of Chambers of Agriculture, Livestock and Fisheries of Comoros",
+    "subtitle": "Promoting and developing agriculture, livestock and fisheries in Comoros",
+    "hero": {
+      "title": "Welcome to UCAEP",
+      "subtitle": "Your partner for agricultural development in Comoros",
+      "description": "The Union of Chambers of Agriculture, Livestock and Fisheries of Comoros (UCAEP) works for the sustainable development of the agricultural, livestock and fisheries sector in our archipelago.",
+      "cta": "Discover our services"
+    },
+    "features": {
+      "producer_network": {
+        "title": "Producer Network",
+        "description": "Connect with local farmers, livestock breeders and fishermen across Comoros"
+      },
+      "latest_news": {
+        "title": "Latest News",
+        "description": "Stay informed about the latest news in the agricultural sector and policies"
+      },
+      "services": {
+        "title": "Services",
+        "description": "Access our training, consulting and technical assistance services"
+      },
+      "partnerships": {
+        "title": "Partnerships",
+        "description": "Discover our local and international collaborations"
+      },
+      "interactive_map": {
+        "title": "Interactive Map",
+        "description": "Discover producers and agricultural activities by region"
+      }
+    },
+    "stats": {
+      "producers": "Producers",
+      "services": "Services",
+      "partnerships": "Partnerships",
+      "resources": "Resources"
+    }
+  },
+  "about": {
+    "title": "About UCAEP",
+    "mission": {
+      "title": "Our Mission",
+      "description": "Promote and develop agriculture, livestock and fisheries in Comoros by providing quality services to sector professionals."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To become the reference for sustainable agricultural development in Comoros and contribute to our nation's food security."
+    },
+    "values": {
+      "title": "Our Values",
+      "sustainability": "Sustainable development",
+      "collaboration": "Collaboration",
+      "innovation": "Innovation",
+      "excellence": "Excellence"
+    }
+  },
+  "news": {
+    "title": "News",
+    "latest": "Latest news",
+    "categories": {
+      "all": "All",
+      "agriculture": "Agriculture",
+      "livestock": "Livestock",
+      "fisheries": "Fisheries",
+      "policy": "Policy",
+      "events": "Events"
+    },
+    "read_more": "Read more",
+    "published_on": "Published on",
+    "by": "by",
+    "share": "Share",
+    "no_news": "No news available",
+    "search_placeholder": "Search news..."
+  },
+  "services": {
+    "title": "Services",
+    "description": "Discover our services for agriculture, livestock and fisheries professionals",
+    "categories": {
+      "all": "All",
+      "training": "Training",
+      "consulting": "Consulting",
+      "technical": "Technical assistance",
+      "financial": "Financing",
+      "marketing": "Marketing"
+    },
+    "view_details": "View details",
+    "contact_service": "Contact service",
+    "no_services": "No services available",
+    "search_placeholder": "Search services..."
+  },
+  "producers": {
+    "title": "Producers",
+    "description": "Discover our network of local producers",
+    "map_view": "Map view",
+    "list_view": "List view",
+    "regions": {
+      "all": "All regions",
+      "grande_comore": "Grande Comore",
+      "anjouan": "Anjouan",
+      "moheli": "Mohéli",
+      "mayotte": "Mayotte"
+    },
+    "types": {
+      "all": "All types",
+      "agriculture": "Agriculture",
+      "livestock": "Livestock",
+      "fisheries": "Fisheries",
+      "mixed": "Mixed"
+    },
+    "view_profile": "View profile",
+    "contact_producer": "Contact producer",
+    "no_producers": "No producers available",
+    "search_placeholder": "Search producers...",
+    "register": "Register as producer",
+    "profile": "My producer profile"
+  },
+  "partnerships": {
+    "title": "Partnerships",
+    "description": "Our local and international collaborations",
+    "types": {
+      "all": "All",
+      "local": "Local",
+      "national": "National",
+      "international": "International",
+      "ngo": "NGO",
+      "government": "Government"
+    },
+    "view_partnership": "View partnership",
+    "contact_partner": "Contact partner",
+    "no_partnerships": "No partnerships available",
+    "search_placeholder": "Search partnerships..."
+  },
+  "resources": {
+    "title": "Resources",
+    "description": "Documents, guides and useful resources",
+    "categories": {
+      "all": "All",
+      "guide": "Guide",
+      "manual": "Manual",
+      "report": "Report",
+      "form": "Form",
+      "regulation": "Regulation",
+      "statistics": "Statistics"
+    },
+    "download": "Download",
+    "file_size": "File size",
+    "download_count": "Downloads",
+    "published_on": "Published on",
+    "no_resources": "No resources available",
+    "search_placeholder": "Search resources..."
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Contact us for more information",
+    "form": {
+      "name": "Full name",
+      "email": "Email address",
+      "phone": "Phone number",
+      "subject": "Subject",
+      "message": "Message",
+      "send": "Send message",
+      "sending": "Sending...",
+      "sent": "Message sent successfully",
+      "error": "Error sending message"
+    },
+    "info": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Business hours"
+    },
+    "visit_us": "Visit us",
+    "call_us": "Call us",
+    "email_us": "Email us",
+    "opening_hours": "Opening hours"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "email": "Email address",
+      "password": "Password",
+      "remember": "Remember me",
+      "forgot_password": "Forgot password?",
+      "login_button": "Login",
+      "no_account": "Don't have an account?",
+      "register_link": "Register here"
+    },
+    "register": {
+      "title": "Create account",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "email": "Email address",
+      "phone": "Phone number",
+      "password": "Password",
+      "confirm_password": "Confirm password",
+      "role": "Role",
+      "roles": {
+        "producer": "Producer",
+        "viewer": "Viewer"
+      },
+      "register_button": "Register",
+      "has_account": "Already have an account?",
+      "login_link": "Login here"
+    },
+    "admin_register": {
+      "title": "Admin Registration",
+      "description": "Create an administrator account for UCAEP"
+    },
+    "logout": "Logout",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome",
+    "overview": "Overview",
+    "recent_activity": "Recent activity",
+    "quick_actions": "Quick actions",
+    "stats": {
+      "profile_status": "Profile status",
+      "pending_approval": "Pending approval",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    }
+  },
+  "admin": {
+    "title": "Administration",
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "news": "News",
+    "producers": "Producers",
+    "services": "Services",
+    "partnerships": "Partnerships",
+    "resources": "Resources",
+    "messages": "Messages",
+    "events": "Events",
+    "security": "Security",
+    "analytics": "Analytics",
+    "settings": "Settings",
+    "header": {
+      "title": "Admin Dashboard",
+      "search_placeholder": "Search...",
+      "admin_user": "Admin User",
+      "admin_email": "admin@ucaeep.km"
+    },
+    "sidebar": {
+      "title": "UCAEP Admin",
+      "dashboard": "Dashboard",
+      "news": "News",
+      "producers": "Producers",
+      "services": "Services",
+      "partnerships": "Partnerships",
+      "resources": "Resources",
+      "users": "Users",
+      "messages": "Messages",
+      "events": "Events",
+      "security": "Security",
+      "data_populator": "Data Populator",
+      "sign_out": "Sign Out"
+    },
+    "dashboard": {
+      "overview": "Dashboard Overview",
+      "recent_activity": "Recent Activity",
+      "quick_stats": "Quick Statistics",
+      "total_users": "Total Users",
+      "total_producers": "Total Producers",
+      "total_news": "Total News",
+      "total_services": "Total Services",
+      "producer_statistics": "Producer Statistics",
+      "quick_actions": "Quick Actions"
+    },
+    "management": {
+      "create": "Create",
+      "edit": "Edit",
+      "delete": "Delete",
+      "view": "View",
+      "approve": "Approve",
+      "reject": "Reject",
+      "manage": "Manage",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "active": "Active",
+      "inactive": "Inactive",
+      "search": "Search",
+      "filter": "Filter",
+      "export": "Export",
+      "import": "Import",
+      "bulk_actions": "Bulk Actions",
+      "select_all": "Select All",
+      "clear_selection": "Clear Selection"
+    },
+    "forms": {
+      "title": "Title",
+      "description": "Description",
+      "content": "Content",
+      "category": "Category",
+      "status": "Status",
+      "published": "Published",
+      "draft": "Draft",
+      "featured": "Featured",
+      "image": "Image",
+      "file": "File",
+      "upload": "Upload",
+      "save": "Save",
+      "cancel": "Cancel",
+      "submit": "Submit",
+      "update": "Update",
+      "create": "Create"
+    },
+    "notifications": {
+      "success": "Operation completed successfully",
+      "error": "An error occurred",
+      "warning": "Warning",
+      "info": "Information",
+      "confirm_delete": "Are you sure you want to delete this item?",
+      "confirm_action": "Are you sure you want to perform this action?"
+    }
+  },
+  "producer_profile": {
+    "title": "Producer Profile",
+    "create_title": "Create producer profile",
+    "edit_title": "Edit producer profile",
+    "basic_info": "Basic information",
+    "business_name": "Business name",
+    "business_type": "Business type",
+    "business_types": {
+      "agriculture": "Agriculture",
+      "livestock": "Livestock",
+      "fisheries": "Fisheries",
+      "mixed": "Mixed"
+    },
+    "description": "Business description",
+    "location_info": "Location information",
+    "region": "Region",
+    "regions": {
+      "grande_comore": "Grande Comore",
+      "anjouan": "Anjouan",
+      "moheli": "Mohéli",
+      "mayotte": "Mayotte"
+    },
+    "location": "Location",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "contact_info": "Contact information",
+    "contact_email": "Contact email",
+    "contact_phone": "Contact phone",
+    "website": "Website",
+    "products": "Products and services",
+    "products_placeholder": "List your products, one per line...",
+    "certifications": "Certifications",
+    "certifications_placeholder": "List your certifications, one per line...",
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "status_messages": {
+      "pending": "Your profile is under review",
+      "approved": "Your profile is online and visible to the public",
+      "rejected": "Please update your profile and resubmit it"
+    }
+  },
+  "errors": {
+    "page_not_found": "Page not found",
+    "unauthorized": "Unauthorized access",
+    "forbidden": "Access forbidden",
+    "server_error": "Server error",
+    "network_error": "Network error",
+    "validation_error": "Validation error",
+    "generic_error": "An error occurred"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Invalid email address",
+    "phone": "Invalid phone number",
+    "password": "Password must contain at least 8 characters",
+    "password_match": "Passwords do not match",
+    "min_length": "Minimum {min} characters required",
+    "max_length": "Maximum {max} characters allowed"
+  },
+  "success": {
+    "profile_created": "Profile created successfully",
+    "profile_updated": "Profile updated successfully",
+    "message_sent": "Message sent successfully",
+    "data_saved": "Data saved successfully",
+    "login_success": "Login successful",
+    "logout_success": "Logout successful"
+  }
+}

@@ -98,7 +98,7 @@ const Home = () => {
   ];
 
   const stats = [
-    { label: 'Producteurs actifs', value: '500+', icon: Users },
+    { label: 'Producteurs actifs', value: '1000', icon: Users },
     { label: 'Régions soutenues', value: '4', icon: MapPin },
     { label: 'Années de service', value: '15+', icon: Award },
     { label: 'Partenaires internationaux', value: '25+', icon: Globe },
