@@ -174,8 +174,8 @@ CREATE POLICY "Admins can manage all news" ON news
     );
 
 -- Services policies
-CREATE POLICY "Anyone can view active services" ON services
-    FOR SELECT USING (status = 'active');
+CREATE POLICY "Anyone can view published or active services" ON services
+    FOR SELECT USING (status IN ('published', 'active'));
 
 CREATE POLICY "Admins can manage all services" ON services
     FOR ALL USING (
