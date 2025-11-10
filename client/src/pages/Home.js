@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Users, MapPin, Award, Globe, CheckCircle } from 'lucide-react';
 import crudService from '../services/crudService';
-import { useTranslation } from '../components/withTranslation';
 import Hero from '../components/Home/Hero';
 import StatsSection from '../components/Home/StatsSection';
 import NewsSection from '../components/Home/NewsSection';
@@ -13,7 +12,6 @@ import ThematicsSection from '../components/Home/ThematicsSection';
 import PartnersSection from '../components/Home/PartnersSection';
 
 const Home = () => {
-  const { t } = useTranslation();
 
   const { data: newsData, isLoading: newsLoading } = useQuery('home-news', async () => {
     try {
