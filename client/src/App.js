@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { SecurityProvider } from './contexts/SecurityContext';
 import { LanguageProvider } from './contexts/LanguageContext';
+import ErrorBoundary from './components/ErrorBoundary';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import Home from './pages/Home';
@@ -32,13 +33,14 @@ import {
 
 function App() {
   return (
-    <LanguageProvider>
-      <AuthProvider>
-        <SecurityProvider>
-          <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-            <div className="min-h-screen flex flex-col">
-              <Navbar />
-              <main className="flex-grow">
+    <ErrorBoundary>
+      <LanguageProvider>
+        <AuthProvider>
+          <SecurityProvider>
+            <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+              <div className="min-h-screen flex flex-col">
+                <Navbar />
+                <main className="flex-grow">
                 <Routes>
                   {/* Public Routes */}
                   <Route path="/" element={<Home />} />
@@ -93,6 +95,7 @@ function App() {
         </SecurityProvider>
       </AuthProvider>
     </LanguageProvider>
+    </ErrorBoundary>
   );
 }
 

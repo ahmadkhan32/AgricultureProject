@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
   const signUp = async (email, password, userData) => {
     try {
       // Use backend API for registration
-      const API_URL = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api');
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
       
       // Check if backend is available before attempting registration
       const isBackendAvailable = await checkBackendHealth(API_URL);
@@ -172,7 +172,7 @@ export const AuthProvider = ({ children }) => {
   const signIn = async (email, password) => {
     try {
       // Use backend API for authentication
-      const API_URL = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api');
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
       
       const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',

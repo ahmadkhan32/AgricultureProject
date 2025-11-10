@@ -24,12 +24,14 @@ class SocketService {
    */
   connect() {
     if (this.socket?.connected) {
-      console.log('Socket.io already connected');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Socket.io already connected');
+      }
       return;
     }
 
-    // In production, REACT_APP_SOCKET_URL should be set in Vercel environment variables
-    const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || (process.env.NODE_ENV === 'production' ? window.location.origin : 'http://localhost:5000');
+    const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || 
+      (process.env.NODE_ENV === 'production' ? window.location.origin : 'http://localhost:5000');
 
     this.socket = io(SOCKET_URL, {
       transports: ['websocket', 'polling'],
@@ -41,7 +43,9 @@ class SocketService {
 
     // Connection event handlers
     this.socket.on('connect', () => {
-      console.log('✅ Socket.io connected:', this.socket.id);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('✅ Socket.io connected:', this.socket.id);
+      }
       this.isConnected = true;
       this.reconnectAttempts = 0;
       
@@ -50,21 +54,29 @@ class SocketService {
     });
 
     this.socket.on('disconnect', (reason) => {
-      console.log('❌ Socket.io disconnected:', reason);
+      if (process.env.NODE_ENV === 'development') {
+        console.log('❌ Socket.io disconnected:', reason);
+      }
       this.isConnected = false;
     });
 
     this.socket.on('connect_error', (error) => {
-      console.error('❌ Socket.io connection error:', error.message);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('❌ Socket.io connection error:', error.message);
+      }
       this.reconnectAttempts++;
       
       if (this.reconnectAttempts >= this.maxReconnectAttempts) {
-        console.error('Max reconnection attempts reached. Please check server connection.');
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Max reconnection attempts reached. Please check server connection.');
+        }
       }
     });
 
     this.socket.on('reconnect', (attemptNumber) => {
-      console.log(`✅ Socket.io reconnected after ${attemptNumber} attempts`);
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`✅ Socket.io reconnected after ${attemptNumber} attempts`);
+      }
       this.isConnected = true;
       this.reconnectAttempts = 0;
       
@@ -82,7 +94,9 @@ class SocketService {
       this.socket.disconnect();
       this.socket = null;
       this.isConnected = false;
-      console.log('Socket.io disconnected');
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Socket.io disconnected');
+      }
     }
   }
 
@@ -94,7 +108,9 @@ class SocketService {
    */
   on(eventName, callback) {
     if (!this.socket) {
-      console.warn('Socket.io not connected. Call connect() first.');
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Socket.io not connected. Call connect() first.');
+      }
       return () => {};
     }
 
@@ -135,7 +151,9 @@ class SocketService {
     if (this.socket && this.isConnected) {
       this.socket.emit(eventName, data);
     } else {
-      console.warn('Socket.io not connected. Cannot emit event:', eventName);
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('Socket.io not connected. Cannot emit event:', eventName);
+      }
     }
   }
 

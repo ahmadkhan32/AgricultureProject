@@ -1,7 +1,6 @@
 // Constants for the UCAEP website
 
 // API Configuration
-// In production, REACT_APP_API_URL should be set in Vercel environment variables
 export const API_CONFIG = {
   BASE_URL: process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api'),
   TIMEOUT: 10000,

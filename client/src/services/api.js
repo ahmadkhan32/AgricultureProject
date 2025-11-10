@@ -1,7 +1,7 @@
 // API service for UCAEP website
 import axios from 'axios';
 
-// In production, REACT_APP_API_URL should be set in Vercel environment variables
+// Use environment variable or default to production-ready fallback
 const API_BASE_URL = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api');
 
 // Create axios instance
