@@ -18,7 +18,7 @@ const ProducerProfile = () => {
       
       try {
         const allProducers = await crudService.producers.fetchAll();
-        const userProducer = allProducers.find(p => p.user_id === user.id);
+        const userProducer = allProducers.find(p => p.userId === user.id);
         return userProducer || null;
       } catch (error) {
         console.error('Error fetching user producer profile:', error);
@@ -104,14 +104,22 @@ const ProducerProfile = () => {
       return;
     }
 
-    // Process form data
+    // Process form data - convert snake_case to camelCase for API
     const formData = {
-      ...data,
-      user_id: user.id,
-      products: Array.isArray(data.products) ? data.products.filter(p => p && p.trim() !== '') : [],
-      certifications: Array.isArray(data.certifications) ? data.certifications.filter(c => c && c.trim() !== '') : [],
+      businessName: data.business_name,
+      businessType: data.business_type,
+      description: data.description,
+      location: data.location,
       latitude: data.latitude ? parseFloat(data.latitude) : null,
       longitude: data.longitude ? parseFloat(data.longitude) : null,
+      region: data.region,
+      products: Array.isArray(data.products) ? data.products.filter(p => p && p.trim() !== '') : [],
+      certifications: Array.isArray(data.certifications) ? data.certifications.filter(c => c && c.trim() !== '') : [],
+      contactEmail: data.contact_email,
+      contactPhone: data.contact_phone,
+      website: data.website,
+      socialMedia: data.social_media || {},
+      images: data.images || [],
     };
 
     if (producerProfile) {
@@ -124,8 +132,8 @@ const ProducerProfile = () => {
   const handleEdit = () => {
     if (producerProfile) {
       reset({
-        business_name: producerProfile.business_name || '',
-        business_type: producerProfile.business_type || 'agriculture',
+        business_name: producerProfile.businessName || '',
+        business_type: producerProfile.businessType || 'agriculture',
         description: producerProfile.description || '',
         location: producerProfile.location || '',
         latitude: producerProfile.latitude || '',
@@ -133,10 +141,10 @@ const ProducerProfile = () => {
         region: producerProfile.region || '',
         products: producerProfile.products || [],
         certifications: producerProfile.certifications || [],
-        contact_email: producerProfile.contact_email || '',
-        contact_phone: producerProfile.contact_phone || '',
+        contact_email: producerProfile.contactEmail || '',
+        contact_phone: producerProfile.contactPhone || '',
         website: producerProfile.website || '',
-        social_media: producerProfile.social_media || {},
+        social_media: producerProfile.socialMedia || {},
         images: producerProfile.images || [],
       });
     }
@@ -147,8 +155,8 @@ const ProducerProfile = () => {
     setIsEditing(false);
     if (producerProfile) {
       reset({
-        business_name: producerProfile.business_name || '',
-        business_type: producerProfile.business_type || 'agriculture',
+        business_name: producerProfile.businessName || '',
+        business_type: producerProfile.businessType || 'agriculture',
         description: producerProfile.description || '',
         location: producerProfile.location || '',
         latitude: producerProfile.latitude || '',
@@ -156,10 +164,10 @@ const ProducerProfile = () => {
         region: producerProfile.region || '',
         products: producerProfile.products || [],
         certifications: producerProfile.certifications || [],
-        contact_email: producerProfile.contact_email || '',
-        contact_phone: producerProfile.contact_phone || '',
+        contact_email: producerProfile.contactEmail || '',
+        contact_phone: producerProfile.contactPhone || '',
         website: producerProfile.website || '',
-        social_media: producerProfile.social_media || {},
+        social_media: producerProfile.socialMedia || {},
         images: producerProfile.images || [],
       });
     }

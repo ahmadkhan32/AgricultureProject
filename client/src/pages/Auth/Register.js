@@ -20,12 +20,20 @@ const Register = () => {
   const password = watch('password');
 
   const onSubmit = async (data) => {
+    // Prevent multiple submissions
+    if (isLoading) {
+      return;
+    }
+    
     setIsLoading(true);
     try {
+      // Normalize phone: convert empty strings to null/undefined (will be handled by AuthContext)
+      const phone = data.phone && data.phone.trim() ? data.phone.trim() : null;
+      
       const { error } = await signUp(data.email, data.password, {
         firstName: data.firstName,
         lastName: data.lastName,
-        phone: data.phone,
+        phone: phone,
         role: data.role,
       });
       if (!error) {
@@ -33,6 +41,7 @@ const Register = () => {
       }
     } catch (error) {
       console.error('Registration error:', error);
+      // Error is already handled in signUp function
     } finally {
       setIsLoading(false);
     }
@@ -60,7 +69,7 @@ const Register = () => {
             </Link>
           </p>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>

@@ -1,0 +1,101 @@
+═══════════════════════════════════════════════════════════════
+  MySQL COMMANDS FOR WINDOWS CMD - QUICK REFERENCE
+═══════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────┐
+│ STEP 1: Open Command Prompt                                 │
+│ Press Win+R, type: cmd                                      │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ STEP 2: Navigate to MySQL                                   │
+│ cd C:\xampp\mysql\bin                                       │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ STEP 3: Connect to MySQL                                    │
+│ mysql -u root -p ucaep_db                                   │
+│ (Enter password when prompted, or just press Enter if none) │
+└─────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════
+  ESSENTIAL COMMANDS
+═══════════════════════════════════════════════════════════════
+
+► Connect to MySQL:
+  cd C:\xampp\mysql\bin
+  mysql -u root -p ucaep_db
+
+► Use Database (after connecting):
+  USE ucaep_db;
+
+► View All Published News:
+  SELECT * FROM news WHERE status = 'published' ORDER BY published_at DESC;
+
+► Insert News Article:
+  INSERT INTO news (title, content, excerpt, category, status, published_at, author_id) 
+  VALUES ('Title', 'Content...', 'Excerpt', 'news', 'published', NOW(), 1);
+
+► Update News:
+  UPDATE news SET title = 'New Title' WHERE id = 1;
+
+► Delete News:
+  DELETE FROM news WHERE id = 1;
+
+► Exit MySQL:
+  EXIT;
+
+═══════════════════════════════════════════════════════════════
+  RUN SQL FILE FROM CMD
+═══════════════════════════════════════════════════════════════
+
+cd "D:\New folder\Agriculturee website\database"
+C:\xampp\mysql\bin\mysql.exe -u root -p ucaep_db < setup_database.sql
+
+═══════════════════════════════════════════════════════════════
+  ONE-LINE COMMANDS (No MySQL prompt needed)
+═══════════════════════════════════════════════════════════════
+
+► View News:
+  mysql -u root -p ucaep_db -e "SELECT * FROM news WHERE status = 'published';"
+
+► Insert Article:
+  mysql -u root -p ucaep_db -e "INSERT INTO news (title, content, excerpt, category, status, published_at, author_id) VALUES ('Title', 'Content...', 'Excerpt', 'news', 'published', NOW(), 1);"
+
+► Update Article:
+  mysql -u root -p ucaep_db -e "UPDATE news SET title = 'New Title' WHERE id = 1;"
+
+► Count Articles:
+  mysql -u root -p ucaep_db -e "SELECT COUNT(*) FROM news WHERE status = 'published';"
+
+═══════════════════════════════════════════════════════════════
+  QUICK SETUP (Copy-Paste All)
+═══════════════════════════════════════════════════════════════
+
+cd "D:\New folder\Agriculturee website\database"
+C:\xampp\mysql\bin\mysql.exe -u root -p -e "CREATE DATABASE IF NOT EXISTS ucaep_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+C:\xampp\mysql\bin\mysql.exe -u root -p ucaep_db < setup_database.sql
+C:\xampp\mysql\bin\mysql.exe -u root -p ucaep_db < insert_sample_news.sql
+
+═══════════════════════════════════════════════════════════════
+  TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════
+
+Problem: "mysql is not recognized"
+Solution: Use full path: C:\xampp\mysql\bin\mysql.exe
+
+Problem: "Access Denied"
+Solution: Add -p flag: mysql -u root -p
+
+Problem: "Database doesn't exist"
+Solution: Run: mysql -u root -p -e "CREATE DATABASE ucaep_db;"
+
+═══════════════════════════════════════════════════════════════
+  BATCH FILES (Double-click to run)
+═══════════════════════════════════════════════════════════════
+
+► run_mysql.bat        - Connect to MySQL
+► setup_from_cmd.bat   - Setup database automatically
+
+═══════════════════════════════════════════════════════════════
+

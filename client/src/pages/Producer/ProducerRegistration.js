@@ -146,9 +146,8 @@ const ProducerRegistration = () => {
     setIsLoading(true);
     try {
       const producerData = {
-        user_id: user.id,
-        business_name: data.business_name,
-        business_type: data.business_type,
+        businessName: data.business_name,
+        businessType: data.business_type,
         description: data.description,
         location: data.location,
         latitude: selectedLocation.lat,
@@ -156,10 +155,10 @@ const ProducerRegistration = () => {
         region: data.region,
         products: selectedProducts,
         certifications: selectedCertifications,
-        contact_email: data.contact_email,
-        contact_phone: data.contact_phone,
+        contactEmail: data.contact_email,
+        contactPhone: data.contact_phone,
         website: data.website,
-        social_media: {
+        socialMedia: {
           facebook: data.facebook,
           twitter: data.twitter,
           instagram: data.instagram,

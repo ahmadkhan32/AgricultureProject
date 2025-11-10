@@ -120,21 +120,21 @@ const NewsManagement = () => {
 
   const getStatusColor = (status) => {
     const colors = {
-      draft: 'bg-gray-100 text-gray-800',
-      published: 'bg-green-100 text-green-800',
-      archived: 'bg-red-100 text-red-800',
+      draft: 'bg-gray-100 text-gray-800 border border-gray-200',
+      published: 'bg-emerald-100 text-emerald-800 border border-emerald-200',
+      archived: 'bg-red-100 text-red-800 border border-red-200',
     };
-    return colors[status] || 'bg-gray-100 text-gray-800';
+    return colors[status] || 'bg-gray-100 text-gray-800 border border-gray-200';
   };
 
   const getCategoryColor = (category) => {
     const colors = {
-      news: 'bg-blue-100 text-blue-800',
-      press_release: 'bg-purple-100 text-purple-800',
-      event: 'bg-orange-100 text-orange-800',
-      announcement: 'bg-yellow-100 text-yellow-800',
+      news: 'bg-blue-100 text-blue-800 border border-blue-200',
+      press_release: 'bg-purple-100 text-purple-800 border border-purple-200',
+      event: 'bg-orange-100 text-orange-800 border border-orange-200',
+      announcement: 'bg-yellow-100 text-yellow-800 border border-yellow-200',
     };
-    return colors[category] || 'bg-gray-100 text-gray-800';
+    return colors[category] || 'bg-gray-100 text-gray-800 border border-gray-200';
   };
 
   if (showForm) {
@@ -154,22 +154,25 @@ const NewsManagement = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">News Management</h1>
-          <p className="text-gray-600">Manage news articles, press releases, and announcements</p>
+      <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px] opacity-30"></div>
+        <div className="relative z-10 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold mb-2 tracking-tight">News Management</h1>
+            <p className="text-blue-100 font-medium">Manage news articles, press releases, and announcements</p>
+          </div>
+          <button
+            onClick={handleCreate}
+            className="bg-white text-indigo-700 hover:bg-indigo-50 font-bold py-3 px-6 rounded-2xl flex items-center shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+          >
+            <Plus className="w-5 h-5 mr-2" />
+            Create News
+          </button>
         </div>
-        <button
-          onClick={handleCreate}
-          className="btn-primary flex items-center"
-        >
-          <Plus className="w-4 h-4 mr-2" />
-          Create News
-        </button>
       </div>
 
       {/* Filters */}
-      <div className="card">
+      <div className="bg-gradient-to-br from-white to-indigo-50/30 rounded-2xl shadow-xl p-6 border-2 border-indigo-100">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
             <div className="relative">
@@ -212,7 +215,7 @@ const NewsManagement = () => {
       </div>
 
       {/* News Table */}
-      <div className="card">
+      <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
         {isLoading ? (
           <div className="space-y-4">
             {[1, 2, 3, 4, 5].map((i) => (
@@ -225,7 +228,7 @@ const NewsManagement = () => {
         ) : newsData?.news?.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+              <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Title
@@ -272,18 +275,20 @@ const NewsManagement = () => {
                       {news.published_at ? new Date(news.published_at).toLocaleDateString() : 'Not published'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-3">
                         <button
                           onClick={() => handleEdit(news)}
-                          className="text-primary-600 hover:text-primary-900"
+                          className="p-2 text-emerald-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-lg transition-all duration-200"
+                          title="Edit"
                         >
-                          <Edit className="w-4 h-4" />
+                          <Edit className="w-5 h-5" />
                         </button>
                         <button
                           onClick={() => handleDelete(news.id)}
-                          className="text-red-600 hover:text-red-900"
+                          className="p-2 text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-all duration-200"
+                          title="Delete"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-5 h-5" />
                         </button>
                       </div>
                     </td>
@@ -305,7 +310,7 @@ const NewsManagement = () => {
               <button
                 onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                 disabled={currentPage === 1}
-                className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 text-sm font-semibold text-gray-600 bg-white border border-gray-200 rounded-lg hover:bg-emerald-50 hover:border-emerald-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
               >
                 Previous
               </button>
@@ -316,10 +321,10 @@ const NewsManagement = () => {
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={`px-3 py-2 text-sm font-medium rounded-md ${
+                    className={`px-4 py-2 text-sm font-semibold rounded-lg transition-all duration-200 ${
                       currentPage === page
-                        ? 'bg-primary-600 text-white'
-                        : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
+                        ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg'
+                        : 'text-gray-600 bg-white border border-gray-200 hover:bg-emerald-50 hover:border-emerald-300'
                     }`}
                   >
                     {page}
@@ -330,7 +335,7 @@ const NewsManagement = () => {
               <button
                 onClick={() => setCurrentPage(Math.min(newsData.pagination.pages, currentPage + 1))}
                 disabled={currentPage === newsData.pagination.pages}
-                className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 text-sm font-semibold text-gray-600 bg-white border border-gray-200 rounded-lg hover:bg-emerald-50 hover:border-emerald-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
               >
                 Next
               </button>

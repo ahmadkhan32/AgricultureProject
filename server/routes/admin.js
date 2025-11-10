@@ -12,19 +12,8 @@ router.use(requireAdmin);
 router.get('/dashboard/stats', async (req, res) => {
   try {
     // Get counts for different entities
-    const [
-      { count: totalUsers },
-      { count: totalProducers },
-      { count: approvedProducers },
-      { count: pendingProducers },
-      { count: totalNews },
-      { count: publishedNews },
-      { count: totalServices },
-      { count: totalPartnerships },
-      { count: totalResources },
-      { count: totalEvents },
-      { count: newContactMessages }
-    ] = await Promise.all([
+    // Using Promise.allSettled to handle errors gracefully
+    const results = await Promise.allSettled([
       supabase.from('profiles').select('*', { count: 'exact', head: true }),
       supabase.from('producers').select('*', { count: 'exact', head: true }),
       supabase.from('producers').select('*', { count: 'exact', head: true }).eq('status', 'approved'),
@@ -38,12 +27,46 @@ router.get('/dashboard/stats', async (req, res) => {
       supabase.from('contact_messages').select('*', { count: 'exact', head: true }).eq('status', 'new')
     ]);
 
+    // Extract counts, handling errors gracefully
+    const getCount = (result, index) => {
+      if (result.status === 'fulfilled' && !result.value.error) {
+        return result.value.count || 0;
+      } else {
+        const error = result.status === 'fulfilled' ? result.value.error : result.reason;
+        console.error(`Error fetching count at index ${index}:`, error);
+        // If it's a status column error, provide helpful message
+        if (error && error.message && error.message.includes('status')) {
+          console.error('⚠️  Status column missing from news table. Please run database/fix_news_status.sql');
+        }
+        return 0;
+      }
+    };
+
+    const totalUsers = getCount(results[0], 0);
+    const totalProducers = getCount(results[1], 1);
+    const approvedProducers = getCount(results[2], 2);
+    const pendingProducers = getCount(results[3], 3);
+    const totalNews = getCount(results[4], 4);
+    const publishedNews = getCount(results[5], 5);
+    const totalServices = getCount(results[6], 6);
+    const totalPartnerships = getCount(results[7], 7);
+    const totalResources = getCount(results[8], 8);
+    const totalEvents = getCount(results[9], 9);
+    const newContactMessages = getCount(results[10], 10);
+
     // Get recent activity
-    const { data: recentNews } = await supabase
+    const { data: recentNews, error: recentNewsError } = await supabase
       .from('news')
       .select('title, created_at, status')
       .order('created_at', { ascending: false })
       .limit(5);
+    
+    if (recentNewsError) {
+      console.error('Error fetching recent news:', recentNewsError);
+      if (recentNewsError.message && (recentNewsError.message.includes('status') || recentNewsError.message.includes('schema cache'))) {
+        console.error('⚠️  Status column missing from news table. Please run database/fix_news_status.sql');
+      }
+    }
 
     const { data: recentProducers } = await supabase
       .from('producers')

@@ -13,12 +13,28 @@ const api = axios.create({
 
 // Add auth token to requests
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('supabase.auth.token');
+  const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
+}, (error) => {
+  return Promise.reject(error);
 });
+
+// Handle response errors
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.message === 'Network Error' || error.code === 'ECONNREFUSED') {
+      console.error('❌ Cannot connect to backend. Make sure server is running on port 5000');
+      error.message = 'Cannot connect to server. Please check if backend is running.';
+    } else if (!error.response) {
+      error.message = 'Network error. Please check your connection.';
+    }
+    return Promise.reject(error);
+  }
+);
 
 // News API
 export const fetchNews = async (params = {}) => {
@@ -28,6 +44,26 @@ export const fetchNews = async (params = {}) => {
 
 export const fetchNewsById = async (id) => {
   const response = await api.get(`/news/${id}`);
+  return response.data;
+};
+
+export const createNews = async (data) => {
+  const response = await api.post('/news', data);
+  return response.data;
+};
+
+export const updateNews = async (id, data) => {
+  const response = await api.put(`/news/${id}`, data);
+  return response.data;
+};
+
+export const deleteNews = async (id) => {
+  const response = await api.delete(`/news/${id}`);
+  return response.data;
+};
+
+export const fetchAdminNews = async (params = {}) => {
+  const response = await api.get('/news/admin/all', { params });
   return response.data;
 };
 
@@ -73,6 +109,26 @@ export const fetchServiceById = async (id) => {
   return response.data;
 };
 
+export const createService = async (data) => {
+  const response = await api.post('/services', data);
+  return response.data;
+};
+
+export const updateService = async (id, data) => {
+  const response = await api.put(`/services/${id}`, data);
+  return response.data;
+};
+
+export const deleteService = async (id) => {
+  const response = await api.delete(`/services/${id}`);
+  return response.data;
+};
+
+export const fetchAdminServices = async (params = {}) => {
+  const response = await api.get('/services/admin/all', { params });
+  return response.data;
+};
+
 // Partnerships API
 export const fetchPartnerships = async (params = {}) => {
   const response = await api.get('/partnerships', { params });
@@ -92,6 +148,26 @@ export const fetchResources = async (params = {}) => {
 
 export const fetchResourceById = async (id) => {
   const response = await api.get(`/resources/${id}`);
+  return response.data;
+};
+
+export const createResource = async (data) => {
+  const response = await api.post('/resources', data);
+  return response.data;
+};
+
+export const updateResource = async (id, data) => {
+  const response = await api.put(`/resources/${id}`, data);
+  return response.data;
+};
+
+export const deleteResource = async (id) => {
+  const response = await api.delete(`/resources/${id}`);
+  return response.data;
+};
+
+export const fetchAdminResources = async (params = {}) => {
+  const response = await api.get('/resources/admin/all', { params });
   return response.data;
 };
 
@@ -144,9 +220,10 @@ export const submitContactForm = async (formData) => {
 export const uploadFile = async (file, type) => {
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('type', type);
+  // Add type as query parameter for better compatibility
+  const uploadUrl = `/upload?type=${type || 'file'}`;
   
-  const response = await api.post('/upload', formData, {
+  const response = await api.post(uploadUrl, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

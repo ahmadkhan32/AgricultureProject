@@ -43,7 +43,7 @@ export const useSecurity = () => {
 };
 
 export const SecurityProvider = ({ children }) => {
-  const { user, getUserProfile } = useAuth();
+  const { user } = useAuth();
   const [userRole, setUserRole] = useState(null);
   const [userPermissions, setUserPermissions] = useState([]);
   const [securityLoading, setSecurityLoading] = useState(true);
@@ -85,8 +85,8 @@ export const SecurityProvider = ({ children }) => {
       setSecurityLoading(true);
       try {
         if (user) {
-          const profile = await getUserProfile();
-          const role = profile?.role || ROLES.VIEWER;
+          // Get role directly from user object (set by API on login)
+          const role = user.role || ROLES.VIEWER;
           setUserRole(role);
           
           // Get permissions based on role
@@ -104,15 +104,17 @@ export const SecurityProvider = ({ children }) => {
         }
       } catch (error) {
         console.error('Error loading user security context:', error);
-        setUserRole(ROLES.VIEWER);
-        setUserPermissions(getRolePermissions(ROLES.VIEWER));
+        // On error, try to get role from user object
+        const role = user?.role || ROLES.VIEWER;
+        setUserRole(role);
+        setUserPermissions(getRolePermissions(role));
       } finally {
         setSecurityLoading(false);
       }
     };
 
     loadUserSecurity();
-  }, [user, getUserProfile, logAuditEvent]);
+  }, [user, logAuditEvent]);
 
   // Get permissions for a role
   const getRolePermissions = (role) => {
@@ -191,7 +193,9 @@ export const SecurityProvider = ({ children }) => {
       [ROLES.ADMIN]: 4,
     };
     
-    const userLevel = roleLevels[userRole] || 0;
+    // Get user level - check both userRole state and user object
+    const currentRole = userRole || user?.role || ROLES.VIEWER;
+    const userLevel = roleLevels[currentRole] || 0;
     const required = roleLevels[requiredLevel] || 0;
     
     return userLevel >= required;
@@ -201,6 +205,9 @@ export const SecurityProvider = ({ children }) => {
   const checkRouteAccess = (path) => {
     const requiredLevel = ROUTE_SECURITY[path];
     if (!requiredLevel) return true; // Public route
+    
+    // Get current role - check both state and user object
+    const currentRole = userRole || user?.role || null;
     
     switch (requiredLevel) {
       case SECURITY_LEVELS.PUBLIC:
@@ -212,7 +219,8 @@ export const SecurityProvider = ({ children }) => {
       case SECURITY_LEVELS.MODERATOR:
         return checkRoleLevel(ROLES.MODERATOR);
       case SECURITY_LEVELS.ADMIN:
-        return checkRoleLevel(ROLES.ADMIN);
+        // For admin routes, check if user role is exactly 'admin'
+        return currentRole === 'admin' || checkRoleLevel(ROLES.ADMIN);
       default:
         return false;
     }

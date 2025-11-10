@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import { Search, Filter, Globe, Users2, ArrowRight, Building, Users } from 'lucide-react';
+import { Search, Filter, Globe, Users2, ArrowRight, Building, Users, TrendingUp, Award, DollarSign } from 'lucide-react';
 import crudService from '../services/crudService';
 import { ensurePartnershipsData } from '../utils/populateNewsData';
 
@@ -89,17 +89,78 @@ const Partnerships = () => {
     );
   }
 
+  // Static data for opportunities and featured partners
+  const opportunities = [
+    {
+      title: "Programme de Financement Agricole 2025",
+      organization: "Union Européenne",
+      budget: "2M€",
+      deadline: "31 Décembre 2025",
+      type: "Subvention",
+      description: "Financement pour projets d'agriculture durable et d'agroforesterie"
+    },
+    {
+      title: "Bourse de Formation en Aquaculture",
+      organization: "FAO",
+      budget: "Formation complète",
+      deadline: "15 Novembre 2025",
+      type: "Formation",
+      description: "Programme de formation de 6 mois en techniques modernes d'aquaculture"
+    },
+    {
+      title: "Crédit pour Équipement de Pêche",
+      organization: "Banques Locales",
+      budget: "Jusqu'à 5M FC",
+      deadline: "En continu",
+      type: "Crédit",
+      description: "Financement à taux préférentiel pour l'acquisition d'équipements de pêche"
+    },
+    {
+      title: "Certification Agriculture Biologique",
+      organization: "COMESA",
+      budget: "Gratuit",
+      deadline: "30 Novembre 2025",
+      type: "Certification",
+      description: "Programme d'accompagnement pour l'obtention de la certification bio"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <section className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Nos Partenariats</h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Construire des relations solides avec les organisations locales et internationales 
-              pour faire progresser le développement agricole aux Comores.
-            </p>
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-primary-700 to-ocean-700 text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">Partenariats</h1>
+          <p className="text-xl text-primary-50 max-w-3xl">
+            L'UCAEP collabore avec des partenaires locaux et internationaux pour soutenir le développement du secteur agricole, pastoral et halieutique des Comores.
+          </p>
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="bg-white py-12 -mt-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="text-center p-6 rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 shadow-md">
+              <Globe className="h-10 w-10 text-primary-600 mx-auto mb-2" />
+              <div className="text-3xl font-bold text-primary-600 mb-1">30+</div>
+              <div className="text-gray-700 font-medium">Partenaires</div>
+            </div>
+            <div className="text-center p-6 rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 shadow-md">
+              <DollarSign className="h-10 w-10 text-ocean-600 mx-auto mb-2" />
+              <div className="text-3xl font-bold text-ocean-600 mb-1">10M€</div>
+              <div className="text-gray-700 font-medium">Financements</div>
+            </div>
+            <div className="text-center p-6 rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 shadow-md">
+              <Award className="h-10 w-10 text-primary-600 mx-auto mb-2" />
+              <div className="text-3xl font-bold text-primary-600 mb-1">250+</div>
+              <div className="text-gray-700 font-medium">Projets</div>
+            </div>
+            <div className="text-center p-6 rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 shadow-md">
+              <TrendingUp className="h-10 w-10 text-ocean-600 mx-auto mb-2" />
+              <div className="text-3xl font-bold text-ocean-600 mb-1">15K</div>
+              <div className="text-gray-700 font-medium">Bénéficiaires</div>
+            </div>
           </div>
         </div>
       </section>
@@ -299,21 +360,80 @@ const Partnerships = () => {
         </div>
       </section>
 
-      {/* Partnership Opportunities */}
-      <section className="py-16 bg-primary-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Intéressé par un Partenariat avec Nous ?
+      {/* Opportunities Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="section-title">Opportunités de Financement</h2>
+            <p className="section-subtitle">
+              Programmes et appels à projets disponibles pour les producteurs
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {opportunities.map((opportunity, index) => (
+              <div key={index} className="card p-8 hover:shadow-lg transition-shadow">
+                <div className="flex items-start justify-between mb-4">
+                  <h3 className="text-2xl font-bold text-gray-900 flex-1">{opportunity.title}</h3>
+                  <span className={`px-3 py-1 text-xs font-semibold rounded-full whitespace-nowrap ml-4 ${
+                    opportunity.type === 'Subvention'
+                      ? 'bg-green-100 text-green-700'
+                      : opportunity.type === 'Formation'
+                      ? 'bg-blue-100 text-blue-700'
+                      : opportunity.type === 'Crédit'
+                      ? 'bg-purple-100 text-purple-700'
+                      : 'bg-orange-100 text-orange-700'
+                  }`}>
+                    {opportunity.type}
+                  </span>
+                </div>
+
+                <div className="mb-4 text-sm text-gray-600">
+                  <strong>Organisation:</strong> {opportunity.organization}
+                </div>
+
+                <p className="text-gray-700 mb-4">{opportunity.description}</p>
+
+                <div className="grid grid-cols-2 gap-4 mb-6 pt-4 border-t border-gray-200">
+                  <div>
+                    <div className="text-xs text-gray-500 mb-1">Budget</div>
+                    <div className="font-bold text-primary-600">{opportunity.budget}</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-gray-500 mb-1">Date limite</div>
+                    <div className="font-bold text-ocean-600">{opportunity.deadline}</div>
+                  </div>
+                </div>
+
+                <button className="w-full btn-primary">
+                  Postuler Maintenant
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Become a Partner CTA */}
+      <section className="py-20 bg-gradient-to-r from-primary-700 to-ocean-700 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto">
+            <Users className="h-16 w-16 mx-auto mb-6" />
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Devenez Partenaire de l'UCAEP
           </h2>
-          <p className="text-xl text-primary-100 mb-8">
-            Rejoignez notre réseau de partenaires et aidez-nous à faire progresser le développement agricole aux Comores
-          </p>
-          <Link
-            to="/contact"
-            className="bg-white text-primary-600 hover:bg-gray-100 font-medium py-3 px-8 rounded-lg transition-colors duration-200"
-          >
+            <p className="text-xl text-primary-50 mb-8">
+              Vous êtes une organisation, une institution ou une entreprise souhaitant contribuer au développement agricole des Comores ? Rejoignez notre réseau de partenaires.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/contact" className="bg-white text-primary-700 px-8 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-colors duration-200 shadow-lg inline-flex items-center justify-center">
             Nous Contacter
           </Link>
+              <Link to="/resources" className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-700 transition-colors duration-200 inline-flex items-center justify-center">
+                Télécharger le Dossier
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>

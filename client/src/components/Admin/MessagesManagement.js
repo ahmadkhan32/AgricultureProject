@@ -98,17 +98,25 @@ const MessagesManagement = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900 flex items-center">
-          <MessageSquare className="w-7 h-7 mr-3 text-primary-600" /> Messages Management
-        </h1>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px] opacity-30"></div>
+        <div className="relative z-10">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-white/20 to-white/10 rounded-2xl flex items-center justify-center mr-3 backdrop-blur-lg">
+                <MessageSquare className="w-7 h-7" />
+              </div>
+              <h1 className="text-3xl font-bold tracking-tight">Messages Management</h1>
+            </div>
+          </div>
+          <p className="text-blue-100 font-medium">Manage contact form submissions and inquiries from website visitors.</p>
+        </div>
       </div>
 
-      <p className="text-gray-600">Manage contact form submissions and inquiries from website visitors.</p>
-
       {/* Search and Filter */}
-      <div className="bg-white p-4 rounded-lg shadow-sm flex flex-col sm:flex-row gap-4">
+      <div className="bg-gradient-to-br from-white to-indigo-50/30 p-6 rounded-2xl shadow-xl border-2 border-indigo-100 flex flex-col sm:flex-row gap-4">
         <div className="relative flex-grow">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           <input
@@ -134,9 +142,9 @@ const MessagesManagement = () => {
       </div>
 
       {/* Messages List */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-gradient-to-br from-white to-indigo-50/30 rounded-2xl shadow-xl border-2 border-indigo-100 overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+          <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
             <tr>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Contact

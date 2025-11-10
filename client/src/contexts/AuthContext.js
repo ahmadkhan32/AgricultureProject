@@ -20,14 +20,37 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const initializeAuth = async () => {
       try {
-        if (isDevMode) {
-          // Use mock authentication
-          const { data } = await mockAuth.getSession();
-          setUser(data.session?.user ?? null);
+        // Check for stored token and user
+        const token = localStorage.getItem('token');
+        const storedUser = localStorage.getItem('user');
+
+        if (token && storedUser) {
+          try {
+            // Verify token is still valid
+            const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+            const response = await fetch(`${API_URL}/auth/me`, {
+              headers: {
+                'Authorization': `Bearer ${token}`,
+              },
+            });
+
+            if (response.ok) {
+              const data = await response.json();
+              setUser(data.user);
+            } else {
+              // Token invalid, clear storage
+              localStorage.removeItem('token');
+              localStorage.removeItem('user');
+              setUser(null);
+            }
+          } catch (error) {
+            console.error('Token verification error:', error);
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            setUser(null);
+          }
         } else {
-          // Use real Supabase authentication
-          const { data: { session } } = await supabase.auth.getSession();
-          setUser(session?.user ?? null);
+          setUser(null);
         }
       } catch (error) {
         console.error('Auth initialization error:', error);
@@ -38,102 +61,161 @@ export const AuthProvider = ({ children }) => {
     };
 
     initializeAuth();
-
-    if (!isDevMode) {
-      // Listen for auth changes (only for real Supabase)
-      const {
-        data: { subscription },
-      } = supabase.auth.onAuthStateChange((_event, session) => {
-        setUser(session?.user ?? null);
-        setLoading(false);
-      });
-
-      return () => subscription.unsubscribe();
-    }
   }, []);
+
+  // Check if backend server is available
+  const checkBackendHealth = async (apiUrl) => {
+    try {
+      const healthUrl = apiUrl.replace('/api', '/api/health');
+      
+      // Create a timeout promise
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Timeout')), 3000)
+      );
+      
+      // Race between fetch and timeout
+      const response = await Promise.race([
+        fetch(healthUrl, { method: 'GET' }),
+        timeoutPromise
+      ]);
+      
+      return response.ok;
+    } catch {
+      return false;
+    }
+  };
 
   const signUp = async (email, password, userData) => {
     try {
-      if (isDevMode) {
-        // Use mock authentication
-        const { data, error } = await mockAuth.signUp(email, password, userData);
-        if (error) throw error;
-        
-        toast.success('Registration successful! You can now log in.');
-        return { data, error: null };
-      } else {
-        // Use real Supabase authentication
-        const { data, error } = await supabase.auth.signUp({
+      // Use backend API for registration
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+      
+      // Check if backend is available before attempting registration
+      const isBackendAvailable = await checkBackendHealth(API_URL);
+      if (!isBackendAvailable) {
+        throw new Error(
+          `Backend server is not running at ${API_URL}. ` +
+          `Please start the backend server: Open terminal and run "npm run server" or "cd server && npm run dev". ` +
+          `Wait for "🚀 UCAEP Server running on port 5000" message before trying again.`
+        );
+      }
+      
+      // Normalize phone: convert empty strings, undefined, or null to null
+      const phone = userData.phone && typeof userData.phone === 'string' && userData.phone.trim() ? userData.phone.trim() : null;
+      
+      console.log(`📡 Attempting registration to: ${API_URL}/auth/register`);
+      
+      const response = await fetch(`${API_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           email,
           password,
-        });
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          phone: phone,
+          role: userData.role || 'producer'
+        }),
+      }).catch((fetchError) => {
+        // Network error (server not running, CORS, etc.)
+        console.error('❌ Network error:', fetchError);
+        throw new Error(
+          `Cannot connect to server at ${API_URL}. ` +
+          `Please make sure the backend server is running. ` +
+          `Error: ${fetchError.message}`
+        );
+      });
 
-        if (error) throw error;
-
-        // Create profile
-        if (data.user) {
-          const { error: profileError } = await supabase
-            .from('profiles')
-            .insert({
-              id: data.user.id,
-              email,
-              first_name: userData.firstName,
-              last_name: userData.lastName,
-              phone: userData.phone,
-              role: userData.role || 'producer',
-            });
-
-          if (profileError) throw profileError;
-        }
-
-        toast.success('Registration successful! Please check your email to confirm your account.');
-        return { data, error: null };
+      // Try to parse JSON response
+      let data;
+      try {
+        data = await response.json();
+      } catch (parseError) {
+        console.error('❌ Failed to parse response:', parseError);
+        throw new Error(
+          `Server returned an invalid response. ` +
+          `Status: ${response.status}. ` +
+          `Please check if the backend server is running correctly.`
+        );
       }
+
+      if (!response.ok) {
+        throw new Error(data.message || `Registration failed (${response.status})`);
+      }
+
+      toast.success('Registration successful! You can now log in.');
+      return { data, error: null };
     } catch (error) {
-      toast.error(error.message);
-      return { data: null, error };
+      console.error('Registration error:', error);
+      // Dismiss all previous toasts before showing new one
+      toast.dismiss();
+      
+      // Provide helpful error message
+      let errorMessage = error.message || 'Registration failed. Please try again.';
+      
+      // Provide specific guidance for common errors
+      if (error.message && (error.message.includes('Failed to fetch') || error.message.includes('Cannot connect'))) {
+        errorMessage = error.message + 
+          ' If you\'re running locally, make sure the backend server is started with "npm run dev" or "cd server && npm start".';
+      }
+      
+      toast.error(errorMessage, {
+        id: 'registration-error', // Use ID to prevent duplicates
+        duration: 8000 // Longer duration for connection errors
+      });
+      return { data: null, error: { message: errorMessage } };
     }
   };
 
   const signIn = async (email, password) => {
     try {
-      if (isDevMode) {
-        // Use mock authentication
-        const { data, error } = await mockAuth.signIn(email, password);
-        if (error) throw error;
-        
-        setUser(data.user);
-        toast.success('Login successful!');
-        return { data, error: null };
-      } else {
-        // Use real Supabase authentication
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
+      // Use backend API for authentication
+      const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+      
+      const response = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-        if (error) throw error;
+      const data = await response.json();
 
-        toast.success('Login successful!');
-        return { data, error: null };
+      if (!response.ok) {
+        throw new Error(data.message || 'Invalid email or password');
       }
+
+      // Store token
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+      }
+
+      // Set user state
+      setUser(data.user);
+      toast.dismiss(); // Clear any previous toasts
+      toast.success('Login successful!');
+      return { data, error: null };
     } catch (error) {
-      toast.error(error.message);
-      return { data: null, error };
+      console.error('Login error:', error);
+      toast.dismiss(); // Clear any previous toasts
+      toast.error(error.message || 'Login failed. Please check your credentials.', {
+        id: 'login-error', // Use ID to prevent duplicates
+        duration: 5000
+      });
+      return { data: null, error: { message: error.message } };
     }
   };
 
   const signOut = async () => {
     try {
-      if (isDevMode) {
-        // Use mock authentication
-        await mockAuth.signOut();
-        setUser(null);
-      } else {
-        // Use real Supabase authentication
-        const { error } = await supabase.auth.signOut();
-        if (error) throw error;
-      }
+      // Clear local storage
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      setUser(null);
       
       toast.success('Logged out successfully');
     } catch (error) {

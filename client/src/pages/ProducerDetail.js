@@ -93,6 +93,20 @@ const ProducerDetail = () => {
       {/* Producer Profile */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+          {/* Main Image */}
+          {producer.image && (
+            <div className="w-full h-64 md:h-96 bg-gray-100">
+              <img
+                src={producer.image}
+                alt={producer.business_name}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
+              />
+            </div>
+          )}
+
           {/* Header Section */}
           <div className="p-8 border-b border-gray-200">
             <div className="flex items-start justify-between mb-4">
@@ -130,21 +144,45 @@ const ProducerDetail = () => {
           </div>
 
           {/* Images Gallery */}
-          {producer.images && producer.images.length > 0 && (
-            <div className="p-8 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Gallery</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {producer.images.map((image, index) => (
-                  <img
-                    key={index}
-                    src={image}
-                    alt={`${producer.business_name} - ${index + 1}`}
-                    className="w-full h-48 object-cover rounded-lg"
-                  />
-                ))}
+          {(() => {
+            // Handle images - could be array, string, or single image field
+            let images = [];
+            if (producer.images) {
+              if (Array.isArray(producer.images)) {
+                images = producer.images;
+              } else if (typeof producer.images === 'string') {
+                try {
+                  images = JSON.parse(producer.images);
+                  if (!Array.isArray(images)) images = [];
+                } catch {
+                  images = [];
+                }
+              }
+            }
+            // If no images array but has single image field, use that
+            if (images.length === 0 && producer.image) {
+              images = [producer.image];
+            }
+            
+            return images.length > 0 && (
+              <div className="p-8 border-b border-gray-200">
+                <h2 className="text-xl font-semibold text-gray-900 mb-4">Gallery</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {images.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image}
+                      alt={`${producer.business_name} - ${index + 1}`}
+                      className="w-full h-48 object-cover rounded-lg"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* Business Information */}
           <div className="p-8 border-b border-gray-200">
@@ -178,39 +216,73 @@ const ProducerDetail = () => {
           </div>
 
           {/* Products */}
-          {producer.products && producer.products.length > 0 && (
-            <div className="p-8 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Products & Services</h2>
-              <div className="flex flex-wrap gap-2">
-                {producer.products.map((product, index) => (
-                  <span
-                    key={index}
-                    className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-primary-100 text-primary-800"
-                  >
-                    {product}
-                  </span>
-                ))}
+          {(() => {
+            // Handle products - could be array or JSON string
+            let products = [];
+            if (producer.products) {
+              if (Array.isArray(producer.products)) {
+                products = producer.products;
+              } else if (typeof producer.products === 'string') {
+                try {
+                  products = JSON.parse(producer.products);
+                  if (!Array.isArray(products)) products = [];
+                } catch {
+                  products = [];
+                }
+              }
+            }
+            
+            return products.length > 0 && (
+              <div className="p-8 border-b border-gray-200">
+                <h2 className="text-xl font-semibold text-gray-900 mb-4">Products & Services</h2>
+                <div className="flex flex-wrap gap-2">
+                  {products.map((product, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-primary-100 text-primary-800"
+                    >
+                      {product}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* Certifications */}
-          {producer.certifications && producer.certifications.length > 0 && (
-            <div className="p-8 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Certifications</h2>
-              <div className="flex flex-wrap gap-2">
-                {producer.certifications.map((certification, index) => (
-                  <span
-                    key={index}
-                    className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-100 text-green-800"
-                  >
-                    <Award className="w-4 h-4 mr-1" />
-                    {certification}
-                  </span>
-                ))}
+          {(() => {
+            // Handle certifications - could be array or JSON string
+            let certifications = [];
+            if (producer.certifications) {
+              if (Array.isArray(producer.certifications)) {
+                certifications = producer.certifications;
+              } else if (typeof producer.certifications === 'string') {
+                try {
+                  certifications = JSON.parse(producer.certifications);
+                  if (!Array.isArray(certifications)) certifications = [];
+                } catch {
+                  certifications = [];
+                }
+              }
+            }
+            
+            return certifications.length > 0 && (
+              <div className="p-8 border-b border-gray-200">
+                <h2 className="text-xl font-semibold text-gray-900 mb-4">Certifications</h2>
+                <div className="flex flex-wrap gap-2">
+                  {certifications.map((certification, index) => (
+                    <span
+                      key={index}
+                      className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-green-100 text-green-800"
+                    >
+                      <Award className="w-4 h-4 mr-1" />
+                      {certification}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* Contact Information */}
           <div className="p-8">

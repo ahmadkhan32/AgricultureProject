@@ -13,7 +13,7 @@ const NewsForm = ({ news, onSubmit, onCancel, isLoading }) => {
       title: '',
       content: '',
       excerpt: '',
-      image_url: '',
+      imageUrl: '',
       category: 'news',
       status: 'draft',
     },
@@ -25,7 +25,7 @@ const NewsForm = ({ news, onSubmit, onCancel, isLoading }) => {
         title: news.title || '',
         content: news.content || '',
         excerpt: news.excerpt || '',
-        image_url: news.image_url || '',
+        imageUrl: news.imageUrl || news.image_url || '',
         category: news.category || 'news',
         status: news.status || 'draft',
       });
@@ -111,14 +111,14 @@ const NewsForm = ({ news, onSubmit, onCancel, isLoading }) => {
             </div>
 
             <div>
-              <label htmlFor="image_url" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 mb-2">
                 Image URL
               </label>
               <input
-                {...register('image_url')}
+                {...register('imageUrl')}
                 type="url"
                 className="input-field"
-                placeholder="https://example.com/image.jpg"
+                placeholder="https://example.com/image.jpg or /uploads/images/file.jpg"
               />
             </div>
 

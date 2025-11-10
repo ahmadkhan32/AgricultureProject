@@ -78,17 +78,39 @@ const EnhancedProtectedRoute = ({
   }
 
   // Check role level requirement
-  if (requiredSecurityLevel && !checkRoleLevel(requiredSecurityLevel)) {
-    if (showToast) {
-      toast.error('You do not have sufficient privileges to access this page');
+  // Get current role from both sources
+  const currentRole = userRole || user?.role;
+  
+  if (requiredSecurityLevel) {
+    // For admin routes, check direct role match first
+    if (requiredSecurityLevel === SECURITY_LEVELS.ADMIN) {
+      if (currentRole === 'admin') {
+        // User is admin, allow access - continue
+      } else {
+        if (showToast) {
+          toast.error('Admin access required. Your current role: ' + (currentRole || 'none') + '. Please contact administrator.');
+        }
+        logAuditEvent(AUDIT_ACTIONS.VIEW, 'unauthorized_access', {
+          path: location.pathname,
+          reason: 'insufficient_role_level',
+          userRole: currentRole,
+          requiredSecurityLevel,
+        });
+        return <Navigate to="/unauthorized" replace />;
+      }
+    } else if (!checkRoleLevel(requiredSecurityLevel)) {
+      // For non-admin routes, use standard role level check
+      if (showToast) {
+        toast.error('You do not have sufficient privileges to access this page');
+      }
+      logAuditEvent(AUDIT_ACTIONS.VIEW, 'unauthorized_access', {
+        path: location.pathname,
+        reason: 'insufficient_role_level',
+        userRole: currentRole,
+        requiredSecurityLevel,
+      });
+      return <Navigate to="/unauthorized" replace />;
     }
-    logAuditEvent(AUDIT_ACTIONS.VIEW, 'unauthorized_access', {
-      path: location.pathname,
-      reason: 'insufficient_role_level',
-      userRole,
-      requiredSecurityLevel,
-    });
-    return <Navigate to="/unauthorized" replace />;
   }
 
   // Check specific permissions

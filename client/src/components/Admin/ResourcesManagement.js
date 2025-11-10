@@ -15,42 +15,114 @@ import {
   Video
 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import crudService from '../../services/crudService';
+import { fetchAdminResources, deleteResource } from '../../services/api';
 
 const ResourcesManagement = () => {
   const queryClient = useQueryClient();
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
 
-  const { data: resources, isLoading, error } = useQuery(
+  const { data: resourcesData, isLoading, error } = useQuery(
     ['resources', { searchTerm, filterCategory }],
     async () => {
-      let filters = {};
-      if (filterCategory !== 'all') filters.category = filterCategory;
+      try {
+        let filters = {};
+        if (filterCategory !== 'all') {
+          // Map frontend categories to backend categories
+          const categoryMap = {
+            'reports': 'reports',
+            'guidelines': 'guidelines',
+            'forms': 'forms',
+            'documents': 'documents',
+            'other': 'others'
+          };
+          filters.category = categoryMap[filterCategory] || filterCategory;
+        }
+        if (searchTerm) {
+          filters.search = searchTerm;
+        }
 
-      const allResources = await crudService.resources.fetchAll(filters);
-      if (searchTerm) {
-        return allResources.filter(resource =>
-          resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          resource.description.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        const response = await fetchAdminResources(filters);
+        const allResources = response.resources || [];
+        
+        // Client-side filtering for search term if needed
+        if (searchTerm && !filters.search) {
+          return allResources.filter(resource =>
+            resource.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            resource.description?.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        }
+        return allResources;
+      } catch (err) {
+        console.error('❌ Error fetching admin resources:', err);
+        console.error('❌ Error response:', err.response);
+        console.error('❌ Error response data:', err.response?.data);
+        console.error('❌ Error message:', err.message);
+        console.error('❌ Error status:', err.response?.status);
+        
+        // Extract detailed error information
+        const errorData = err.response?.data || {};
+        const errorMessage = errorData.message || err.message || 'Unknown error';
+        const originalError = errorData.originalError || errorData.error || '';
+        
+        console.error('📋 Admin Resources Error Details:', {
+          message: errorMessage,
+          type: errorData.errorType || 'Unknown',
+          originalError: originalError,
+          status: err.response?.status,
+          hint: errorData.hint
+        });
+        
+        // Check if it's a table-not-found error
+        if (errorMessage.includes('does not exist') || errorMessage.includes('table') || originalError.includes('doesn\'t exist')) {
+          console.error('⚠️ Resources table not found in database. Please run the SQL migration script.');
+          console.error('📄 Check: database/resources-table-setup.sql or database/COMPLETE_RESOURCES_TABLE_SETUP.sql');
+          console.error('💡 Solution: Run the SQL script in phpMyAdmin to create/update the resources table');
+          toast.error('Resources table not found. Please check the database setup.');
+        }
+        
+        // Check if it's a missing status column error
+        if (errorMessage.includes('status column') || originalError.includes('status') || originalError.includes('Unknown column \'status\'')) {
+          console.error('⚠️ Resources table is missing the status column.');
+          console.error('📄 Check: database/resources-table-setup.sql or database/COMPLETE_RESOURCES_TABLE_SETUP.sql');
+          console.error('💡 Solution: Run the SQL script to add the status column');
+          toast.error('Resources table is missing the status column. Please run the database migration.');
+        }
+        
+        // Check if it's a database connection error
+        if (errorMessage.includes('connection') || errorMessage.includes('Connection')) {
+          console.error('⚠️ Database connection failed. Please check:');
+          console.error('  1. Is MySQL/XAMPP running?');
+          console.error('  2. Are database credentials correct in .env?');
+          console.error('  3. Is the backend server running on port 5000?');
+          toast.error('Database connection failed. Please check your backend server.');
+        }
+        
+        throw err;
       }
-      return allResources;
     },
     {
       staleTime: 60 * 1000, // 1 minute
     }
   );
 
+  const resources = resourcesData || [];
+
   const deleteMutation = useMutation(
-    (id) => crudService.resources.remove(id),
+    async (id) => {
+      await deleteResource(id);
+    },
     {
       onSuccess: () => {
+        // Invalidate all resource-related queries for real-time sync
         queryClient.invalidateQueries('resources');
+        queryClient.invalidateQueries(['resources']);
+        queryClient.invalidateQueries(['resource']);
         toast.success('Resource deleted successfully!');
       },
       onError: (err) => {
-        toast.error(`Error deleting resource: ${err.message}`);
+        const errorMessage = err.response?.data?.message || err.message || 'Failed to delete resource';
+        toast.error(`Error deleting resource: ${errorMessage}`);
       },
     }
   );
@@ -69,13 +141,13 @@ const ResourcesManagement = () => {
 
   const getCategoryColor = (category) => {
     const colors = {
-      'document': 'bg-blue-100 text-blue-800',
-      'form': 'bg-green-100 text-green-800',
-      'report': 'bg-purple-100 text-purple-800',
-      'guide': 'bg-yellow-100 text-yellow-800',
-      'other': 'bg-gray-100 text-gray-800',
+      'reports': 'bg-purple-100 text-purple-800 border border-purple-200',
+      'guidelines': 'bg-indigo-100 text-indigo-800 border border-indigo-200',
+      'forms': 'bg-green-100 text-green-800 border border-green-200',
+      'documents': 'bg-blue-100 text-blue-800 border border-blue-200',
+      'others': 'bg-gray-100 text-gray-800 border border-gray-200',
     };
-    return colors[category] || colors.other;
+    return colors[category] || colors.others;
   };
 
   if (isLoading) {
@@ -87,20 +159,31 @@ const ResourcesManagement = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900 flex items-center">
-          <FileText className="w-7 h-7 mr-3 text-primary-600" /> Resources Management
-        </h1>
-        <Link to="/admin/resources/new" className="btn-primary flex items-center">
-          <PlusCircle className="w-5 h-5 mr-2" /> Add New Resource
-        </Link>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px] opacity-30"></div>
+        <div className="relative z-10">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-white/20 to-white/10 rounded-2xl flex items-center justify-center mr-3 backdrop-blur-lg">
+                <FileText className="w-7 h-7" />
+              </div>
+              <h1 className="text-3xl font-bold tracking-tight">Resources Management</h1>
+            </div>
+            <Link 
+              to="/admin/resources/new" 
+              className="bg-white text-indigo-700 hover:bg-indigo-50 font-bold py-3 px-6 rounded-2xl flex items-center shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            >
+              <PlusCircle className="w-5 h-5 mr-2" /> Add New Resource
+            </Link>
+          </div>
+          <p className="text-blue-100 font-medium">Manage downloadable resources, documents, and forms for UCAEP.</p>
+        </div>
       </div>
 
-      <p className="text-gray-600">Manage downloadable resources, documents, and forms for UCAEP.</p>
-
       {/* Search and Filter */}
-      <div className="bg-white p-4 rounded-lg shadow-sm flex flex-col sm:flex-row gap-4">
+      <div className="bg-gradient-to-br from-white to-indigo-50/30 p-6 rounded-2xl shadow-xl border-2 border-indigo-100 flex flex-col sm:flex-row gap-4">
         <div className="relative flex-grow">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           <input
@@ -119,19 +202,19 @@ const ResourcesManagement = () => {
             onChange={(e) => setFilterCategory(e.target.value)}
           >
             <option value="all">All Categories</option>
-            <option value="document">Documents</option>
-            <option value="form">Forms</option>
-            <option value="report">Reports</option>
-            <option value="guide">Guides</option>
-            <option value="other">Other</option>
+            <option value="reports">Reports</option>
+            <option value="guidelines">Guidelines</option>
+            <option value="forms">Forms</option>
+            <option value="documents">Documents</option>
+            <option value="other">Others</option>
           </select>
         </div>
       </div>
 
       {/* Resources List */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+          <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
             <tr>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Resource
@@ -144,6 +227,9 @@ const ResourcesManagement = () => {
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 File Type
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
               </th>
               <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Actions
@@ -175,20 +261,31 @@ const ResourcesManagement = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${categoryColor}`}>
-                        {resource.category}
+                        {resource.category === 'reports' ? 'Reports' :
+                         resource.category === 'guidelines' ? 'Guidelines' :
+                         resource.category === 'forms' ? 'Forms' :
+                         resource.category === 'documents' ? 'Documents' :
+                         resource.category === 'others' ? 'Others' : resource.category}
                       </span>
                     </td>
                     <td className="px-6 py-4">
                       <div className="text-sm text-gray-900 line-clamp-2">{resource.description}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {resource.file_type || 'Unknown'}
+                      {resource.fileType || resource.file_type || 'Unknown'}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                        resource.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                      }`}>
+                        {resource.status === 'active' ? 'Active' : 'Inactive'}
+                      </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end space-x-2">
-                        {resource.file_url && (
+                        {(resource.fileUrl || resource.file_url) && (
                           <a 
-                            href={resource.file_url} 
+                            href={resource.fileUrl || resource.file_url} 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-gray-600 hover:text-gray-900" 
@@ -213,7 +310,7 @@ const ResourcesManagement = () => {
               })
             ) : (
               <tr>
-                <td colSpan="5" className="px-6 py-4 text-center text-gray-500">
+                <td colSpan="6" className="px-6 py-4 text-center text-gray-500">
                   No resources found.
                 </td>
               </tr>

@@ -34,6 +34,21 @@ const Dashboard = () => {
     }
   );
 
+  // Helper function to normalize products to array
+  const normalizeProducts = (products) => {
+    if (!products) return [];
+    if (Array.isArray(products)) return products;
+    if (typeof products === 'string') {
+      try {
+        const parsed = JSON.parse(products);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [];
+      }
+    }
+    return [];
+  };
+
   const stats = [
     {
       title: 'Profile Status',
@@ -155,7 +170,7 @@ const Dashboard = () => {
         {/* Header */}
         <div className="mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-            Welcome back, {user?.user_metadata?.first_name || 'User'}!
+            Welcome back, {user?.firstName || user?.email?.split('@')[0] || 'User'}!
           </h1>
           <p className="text-sm sm:text-base text-gray-600 mt-2">
             Manage your producer profile and stay updated with UCAEP activities.
@@ -170,12 +185,15 @@ const Dashboard = () => {
           'bg-blue-50 border-blue-200'
         }`}>
           <div className="flex items-start sm:items-center">
-            <statusMessage.icon className={`w-4 h-4 sm:w-5 sm:h-5 mr-3 mt-1 sm:mt-0 flex-shrink-0 ${
-              statusMessage.type === 'success' ? 'text-green-600' :
-              statusMessage.type === 'warning' ? 'text-yellow-600' :
-              statusMessage.type === 'error' ? 'text-red-600' :
-              'text-blue-600'
-            }`} />
+            {(() => {
+              const StatusIcon = statusMessage.icon;
+              return <StatusIcon className={`w-4 h-4 sm:w-5 sm:h-5 mr-3 mt-1 sm:mt-0 flex-shrink-0 ${
+                statusMessage.type === 'success' ? 'text-green-600' :
+                statusMessage.type === 'warning' ? 'text-yellow-600' :
+                statusMessage.type === 'error' ? 'text-red-600' :
+                'text-blue-600'
+              }`} />;
+            })()}
             <p className={`text-xs sm:text-sm leading-relaxed ${
               statusMessage.type === 'success' ? 'text-green-800' :
               statusMessage.type === 'warning' ? 'text-yellow-800' :
@@ -239,40 +257,43 @@ const Dashboard = () => {
           {/* Profile Overview */}
           <div className="card">
             <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">Profile Overview</h2>
-            {producerProfile ? (
-              <div className="space-y-3 sm:space-y-4">
-                <div>
-                  <h3 className="font-medium text-gray-900 text-sm sm:text-base truncate">{producerProfile.business_name}</h3>
-                  <p className="text-xs sm:text-sm text-gray-600 truncate">{producerProfile.business_type} • {producerProfile.region}</p>
-                </div>
-                {producerProfile.description && (
-                  <p className="text-xs sm:text-sm text-gray-600 line-clamp-3 leading-relaxed">
-                    {producerProfile.description}
-                  </p>
-                )}
-                <div className="flex flex-wrap gap-1 sm:gap-2">
-                  {producerProfile.products?.slice(0, 3).map((product, index) => (
-                    <span
-                      key={index}
-                      className="inline-flex items-center px-2 py-1 rounded text-xs bg-primary-100 text-primary-800 truncate"
-                    >
-                      {product}
-                    </span>
-                  ))}
-                  {producerProfile.products?.length > 3 && (
-                    <span className="text-xs text-gray-500">
-                      +{producerProfile.products.length - 3} more
-                    </span>
+            {producerProfile ? (() => {
+              const productsArray = normalizeProducts(producerProfile.products);
+              return (
+                <div className="space-y-3 sm:space-y-4">
+                  <div>
+                    <h3 className="font-medium text-gray-900 text-sm sm:text-base truncate">{producerProfile.business_name}</h3>
+                    <p className="text-xs sm:text-sm text-gray-600 truncate">{producerProfile.business_type} • {producerProfile.region}</p>
+                  </div>
+                  {producerProfile.description && (
+                    <p className="text-xs sm:text-sm text-gray-600 line-clamp-3 leading-relaxed">
+                      {producerProfile.description}
+                    </p>
                   )}
+                  <div className="flex flex-wrap gap-1 sm:gap-2">
+                    {productsArray.slice(0, 3).map((product, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center px-2 py-1 rounded text-xs bg-primary-100 text-primary-800 truncate"
+                      >
+                        {product}
+                      </span>
+                    ))}
+                    {productsArray.length > 3 && (
+                      <span className="text-xs text-gray-500">
+                        +{productsArray.length - 3} more
+                      </span>
+                    )}
+                  </div>
+                  <Link
+                    to="/producer/profile"
+                    className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium text-xs sm:text-sm"
+                  >
+                    View Full Profile →
+                  </Link>
                 </div>
-                <Link
-                  to="/producer/profile"
-                  className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium text-xs sm:text-sm"
-                >
-                  View Full Profile →
-                </Link>
-              </div>
-            ) : (
+              );
+            })() : (
               <div className="text-center py-6 sm:py-8">
                 <User className="w-10 h-10 sm:w-12 sm:h-12 text-gray-400 mx-auto mb-3 sm:mb-4" />
                 <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">You haven't created a producer profile yet.</p>

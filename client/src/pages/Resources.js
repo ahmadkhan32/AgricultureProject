@@ -1,123 +1,163 @@
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
-import { Search, Filter, Download, FileText, File, BookOpen, BarChart, Scale } from 'lucide-react';
-import crudService from '../services/crudService';
-import { ensureResourcesData } from '../utils/populateNewsData';
+import React, { useState, useEffect } from 'react';
+import { Search, Filter, Download, FileText, File, BookOpen, BarChart } from 'lucide-react';
+import { fetchResources } from '../services/api';
 
 const Resources = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [resources, setResources] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const { data: resourcesData, isLoading, error } = useQuery(
-    ['resources', { search: searchTerm, category: selectedCategory, page: currentPage }],
-    async () => {
+  // Load resources from backend API
+  useEffect(() => {
+    const loadResources = async () => {
       try {
-        // Ensure resources data exists
-        await ensureResourcesData();
-        
-        const allResources = await crudService.resources.fetchAll();
-        
-        // Filter resources based on search term and category
-        let filteredResources = allResources;
-        
+        setIsLoading(true);
+        // Fetch from MySQL backend API
+        const params = { limit: 100 };
+        if (selectedCategory !== 'all') {
+          params.category = selectedCategory;
+        }
         if (searchTerm) {
-          filteredResources = filteredResources.filter(resource => 
-            resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            (resource.description && resource.description.toLowerCase().includes(searchTerm.toLowerCase())) ||
-            (resource.tags && resource.tags.some(tag => 
-              tag.toLowerCase().includes(searchTerm.toLowerCase())
-            ))
-          );
+          params.search = searchTerm;
+        }
+
+        const response = await fetchResources(params);
+        const backendResources = response.resources || [];
+        
+        // Transform backend resources to match frontend format
+        const transformedResources = backendResources.map(resource => {
+          // Map backend categories to display names
+          const categoryMap = {
+            'reports': 'Reports',
+            'guidelines': 'Guidelines',
+            'forms': 'Forms',
+            'documents': 'Documents',
+            'others': 'Others'
+          };
+          
+          return {
+            id: resource.id,
+            title: resource.title,
+            description: resource.description,
+            category: categoryMap[resource.category] || resource.category,
+            backendCategory: resource.category, // Keep original for filtering
+            fileUrl: resource.fileUrl || resource.file_url,
+            fileType: resource.fileType || resource.file_type,
+            fileSize: resource.fileSize || resource.file_size,
+            downloadCount: resource.downloadCount || resource.download_count || 0,
+            createdAt: resource.createdAt || resource.created_at,
+            status: resource.status,
+            isGenerated: true
+          };
+        });
+        
+        setResources(transformedResources);
+        setError(null);
+      } catch (err) {
+        console.error('❌ Error loading resources from backend:', err);
+        console.error('❌ Error response:', err.response);
+        console.error('❌ Error response data:', err.response?.data);
+        const errorData = err.response?.data || {};
+        const errorMessage = errorData.message || err.message || 'Failed to load resources';
+        const originalError = errorData.originalError || errorData.error || '';
+        
+        console.error('📋 Error Details:', {
+          message: errorMessage,
+          type: errorData.errorType || 'Unknown',
+          originalError: originalError,
+          status: err.response?.status,
+          hint: errorData.hint
+        });
+        
+        // Check if it's a table-not-found error
+        if (errorMessage.includes('does not exist') || errorMessage.includes('table') || originalError.includes('doesn\'t exist')) {
+          console.error('⚠️ Resources table not found in database. Please run the SQL migration script.');
+          console.error('📄 Check: database/resources-table-setup.sql');
+          console.error('💡 Solution: Run the SQL script in phpMyAdmin to create/update the resources table');
         }
         
-        if (selectedCategory) {
-          filteredResources = filteredResources.filter(resource => resource.category === selectedCategory);
+        // Check if it's a missing status column error
+        if (errorMessage.includes('status column') || originalError.includes('status')) {
+          console.error('⚠️ Resources table is missing the status column.');
+          console.error('📄 Check: database/resources-table-setup.sql');
+          console.error('💡 Solution: Run the SQL script to add the status column');
         }
         
-        // Sort by download_count (most downloaded first)
-        filteredResources.sort((a, b) => (b.download_count || 0) - (a.download_count || 0));
+        // Check if it's a database connection error
+        if (errorMessage.includes('connection') || errorMessage.includes('Connection')) {
+          console.error('⚠️ Database connection failed. Please check:');
+          console.error('  1. Is MySQL/XAMPP running?');
+          console.error('  2. Are database credentials correct in .env?');
+          console.error('  3. Is the backend server running on port 5000?');
+        }
         
-        // Pagination
-        const limit = 12;
-        const startIndex = (currentPage - 1) * limit;
-        const endIndex = startIndex + limit;
-        const paginatedResources = filteredResources.slice(startIndex, endIndex);
-        
-        return {
-          resources: paginatedResources || [],
-          pagination: {
-            currentPage,
-            pages: Math.ceil((filteredResources.length || 0) / limit),
-            total: filteredResources.length || 0
-          }
-        };
-      } catch (error) {
-        console.error('Error fetching resources:', error);
-        throw error;
+        setError(errorMessage);
+        setResources([]);
+      } finally {
+        setIsLoading(false);
       }
-    },
-    {
-      keepPreviousData: true,
-    }
-  );
+    };
+    
+    loadResources();
+  }, [selectedCategory, searchTerm]); // Reload when category or search term changes
+
+  // Filter resources based on search term (client-side)
+  const filteredResources = resources.filter((resource) => {
+    if (!searchTerm) return true;
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      resource.title.toLowerCase().includes(searchLower) ||
+      resource.description?.toLowerCase().includes(searchLower)
+    );
+  });
 
   const categories = [
-    { value: '', label: 'Toutes les Ressources' },
-    { value: 'document', label: 'Documents' },
-    { value: 'form', label: 'Formulaires' },
-    { value: 'report', label: 'Rapports' },
-    { value: 'law', label: 'Lois et Règlements' },
-    { value: 'statistics', label: 'Statistiques' },
-    { value: 'guide', label: 'Guides' },
+    { value: 'all', label: 'All Categories' },
+    { value: 'reports', label: 'Reports' },
+    { value: 'guidelines', label: 'Guidelines' },
+    { value: 'forms', label: 'Forms' },
+    { value: 'documents', label: 'Documents' },
+    { value: 'others', label: 'Others' },
   ];
 
   const categoryIcons = {
-    document: FileText,
-    form: File,
-    report: BarChart,
-    law: Scale,
-    statistics: BarChart,
-    guide: BookOpen,
+    reports: BarChart,
+    guidelines: BookOpen,
+    forms: File,
+    documents: FileText,
+    others: FileText,
   };
 
   const categoryColors = {
-    document: 'bg-blue-100 text-blue-600',
-    form: 'bg-green-100 text-green-600',
-    report: 'bg-purple-100 text-purple-600',
-    law: 'bg-red-100 text-red-600',
-    statistics: 'bg-yellow-100 text-yellow-600',
-    guide: 'bg-indigo-100 text-indigo-600',
+    reports: 'bg-purple-100 text-purple-800',
+    guidelines: 'bg-indigo-100 text-indigo-800',
+    forms: 'bg-green-100 text-green-800',
+    documents: 'bg-blue-100 text-blue-800',
+    others: 'bg-gray-100 text-gray-800',
   };
 
   const formatFileSize = (bytes) => {
-    if (bytes === 0) return '0 Bytes';
+    if (!bytes) return 'N/A';
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setCurrentPage(1);
-  };
-
-  const handleDownload = async (resource) => {
-    try {
-      // In a real application, this would trigger the download
-      window.open(resource.file_url, '_blank');
-    } catch (error) {
-      console.error('Download error:', error);
+  const handleDownload = (resource) => {
+    if (resource.fileUrl) {
+      window.open(resource.fileUrl, '_blank');
     }
   };
 
-  if (error) {
+  if (error && !resources.length) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Error Loading Resources</h2>
-          <p className="text-gray-600">Please try again later.</p>
+          <p className="text-gray-600">{error}</p>
         </div>
       </div>
     );
@@ -129,10 +169,10 @@ const Resources = () => {
       <section className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Ressources</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Resources</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Accédez aux documents, formulaires, rapports et autres ressources pour soutenir vos 
-              activités agricoles, d'élevage et de pêche.
+              Access documents, forms, reports, and other resources to support your agricultural, 
+              livestock, and fishing activities.
             </p>
           </div>
         </div>
@@ -143,20 +183,20 @@ const Resources = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center justify-between">
             {/* Search */}
-            <form onSubmit={handleSearch} className="flex-1 w-full sm:max-w-md">
+            <div className="flex-1 w-full sm:max-w-md">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Search className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                 </div>
                 <input
                   type="text"
-                  placeholder="Rechercher des ressources..."
+                  placeholder="Search resources..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="input-field pl-9 sm:pl-10 text-sm sm:text-base"
+                  className="w-full pl-9 sm:pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm sm:text-base"
                 />
               </div>
-            </form>
+            </div>
 
             {/* Category Filter */}
             <div className="flex items-center space-x-2 w-full sm:w-auto">
@@ -164,7 +204,7 @@ const Resources = () => {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="input-field flex-1 sm:flex-none text-sm sm:text-base"
+                className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none text-sm sm:text-base"
               >
                 {categories.map((category) => (
                   <option key={category.value} value={category.value}>
@@ -183,214 +223,73 @@ const Resources = () => {
           {isLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="card animate-pulse">
+                <div key={i} className="bg-white rounded-lg shadow-md p-6 animate-pulse">
                   <div className="h-4 bg-gray-200 rounded mb-2"></div>
                   <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
                   <div className="h-3 bg-gray-200 rounded w-1/2"></div>
                 </div>
               ))}
             </div>
-          ) : resourcesData?.resources?.length > 0 ? (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {resourcesData.resources.map((resource) => {
-                  const Icon = categoryIcons[resource.category] || FileText;
-                  const colorClass = categoryColors[resource.category] || 'bg-gray-100 text-gray-600';
-                  
-                  return (
-                    <div key={resource.id} className="card hover:shadow-lg transition-shadow">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex items-center">
-                          <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
-                            <Icon className="w-5 h-5 text-primary-600" />
-                          </div>
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${colorClass}`}>
-                            {resource.category.replace('_', ' ')}
-                          </span>
+          ) : filteredResources.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredResources.map((resource) => {
+                const Icon = categoryIcons[resource.backendCategory] || FileText;
+                const colorClass = categoryColors[resource.backendCategory] || 'bg-gray-100 text-gray-800';
+                
+                return (
+                  <div key={resource.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center">
+                        <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
+                          <Icon className="w-5 h-5 text-indigo-600" />
                         </div>
-                      </div>
-
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-                        {resource.title}
-                      </h3>
-                      
-                      {resource.description && (
-                        <p className="text-gray-600 mb-4 line-clamp-3 text-sm">
-                          {resource.description}
-                        </p>
-                      )}
-
-                      <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                        <span>{resource.file_type.toUpperCase()}</span>
-                        {resource.file_size && (
-                          <span>{formatFileSize(resource.file_size)}</span>
-                        )}
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-500">
-                          {resource.download_count} téléchargements
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${colorClass}`}>
+                          {resource.category}
                         </span>
-                        <button
-                          onClick={() => handleDownload(resource)}
-                          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
-                        >
-                          <Download className="w-4 h-4 mr-1" />
-                          Télécharger
-                        </button>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
 
-              {/* Pagination */}
-              {resourcesData.pagination && resourcesData.pagination.pages > 1 && (
-                <div className="mt-12 flex justify-center">
-                  <nav className="flex items-center space-x-2">
-                    <button
-                      onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                      disabled={currentPage === 1}
-                      className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      Précédent
-                    </button>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
+                      {resource.title}
+                    </h3>
                     
-                    {Array.from({ length: Math.min(5, resourcesData.pagination.pages) }, (_, i) => {
-                      const page = i + 1;
-                      return (
-                        <button
-                          key={page}
-                          onClick={() => setCurrentPage(page)}
-                          className={`px-3 py-2 text-sm font-medium rounded-md ${
-                            currentPage === page
-                              ? 'bg-primary-600 text-white'
-                              : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'
-                          }`}
-                        >
-                          {page}
-                        </button>
-                      );
-                    })}
-                    
+                    {resource.description && (
+                      <p className="text-gray-600 mb-4 line-clamp-3 text-sm">
+                        {resource.description}
+                      </p>
+                    )}
+
+                    <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                      <span className="font-medium">{resource.fileType || 'Unknown'}</span>
+                      {resource.fileSize && (
+                        <span>{formatFileSize(resource.fileSize)}</span>
+                      )}
+                    </div>
+
                     <button
-                      onClick={() => setCurrentPage(Math.min(resourcesData.pagination.pages, currentPage + 1))}
-                      disabled={currentPage === resourcesData.pagination.pages}
-                      className="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                      onClick={() => handleDownload(resource)}
+                      className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium"
                     >
-                      Suivant
+                      <Download className="w-4 h-4" />
+                      Download
                     </button>
-                  </nav>
-                </div>
-              )}
-            </>
+                  </div>
+                );
+              })}
+            </div>
           ) : (
             <div className="text-center py-12">
-              <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FileText className="w-12 h-12 text-gray-400" />
+              <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Search className="w-8 h-8 text-gray-400" />
               </div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Aucune ressource trouvée</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No resources found</h3>
               <p className="text-gray-500">
-                {searchTerm || selectedCategory 
-                  ? 'Essayez d\'ajuster vos critères de recherche.'
-                  : 'Revenez plus tard pour les ressources disponibles.'
-                }
+                {searchTerm || selectedCategory !== 'all'
+                  ? "Try adjusting your search criteria."
+                  : "No resources available at the moment."}
               </p>
             </div>
           )}
-        </div>
-      </section>
-
-      {/* Resource Categories */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="section-title">Catégories de Ressources</h2>
-            <p className="section-subtitle">
-              Trouvez les informations dont vous avez besoin parmi différents types de ressources
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {Object.entries(categoryIcons).map(([category, Icon]) => (
-              <div key={category} className="text-center">
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Icon className="w-8 h-8 text-primary-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {category.charAt(0).toUpperCase() + category.slice(1).replace('_', ' ')}
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  {category === 'document' && 'Documents officiels et publications'}
-                  {category === 'form' && 'Formulaires de candidature et modèles'}
-                  {category === 'report' && 'Rapports de recherche et études'}
-                  {category === 'law' && 'Lois, règlements et politiques'}
-                  {category === 'statistics' && 'Données et informations statistiques'}
-                  {category === 'guide' && 'Guides pratiques et manuels'}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Popular Resources */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="section-title">Ressources les Plus Téléchargées</h2>
-            <p className="section-subtitle">
-              Documents et ressources populaires de notre communauté
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* This would typically show the most downloaded resources */}
-            <div className="card">
-              <div className="flex items-center mb-3">
-                <FileText className="w-5 h-5 text-primary-600 mr-2" />
-                <span className="text-sm text-gray-500">Document</span>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Guide des Meilleures Pratiques Agricoles</h3>
-              <p className="text-gray-600 text-sm mb-3">Guide complet pour des pratiques agricoles durables</p>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">1,234 téléchargements</span>
-                <button className="text-primary-600 hover:text-primary-700 text-sm font-medium">
-                  Télécharger
-                </button>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="flex items-center mb-3">
-                <File className="w-5 h-5 text-green-600 mr-2" />
-                <span className="text-sm text-gray-500">Formulaire</span>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Formulaire d'Inscription Producteur</h3>
-              <p className="text-gray-600 text-sm mb-3">Formulaire de candidature pour nouveaux membres producteurs</p>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">856 téléchargements</span>
-                <button className="text-primary-600 hover:text-primary-700 text-sm font-medium">
-                  Télécharger
-                </button>
-              </div>
-            </div>
-
-            <div className="card">
-              <div className="flex items-center mb-3">
-                <BarChart className="w-5 h-5 text-purple-600 mr-2" />
-                <span className="text-sm text-gray-500">Rapport</span>
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Rapport Agricole Annuel 2023</h3>
-              <p className="text-gray-600 text-sm mb-3">Aperçu complet des performances du secteur agricole</p>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">642 téléchargements</span>
-                <button className="text-primary-600 hover:text-primary-700 text-sm font-medium">
-                  Télécharger
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </div>

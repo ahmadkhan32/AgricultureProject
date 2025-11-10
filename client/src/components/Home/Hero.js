@@ -5,7 +5,7 @@ import { ArrowRight, Play } from 'lucide-react';
 const Hero = () => {
   return (
     <section
-      className="relative text-white bg-orange-600 min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh]"
+      className="relative text-white bg-primary-500 min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh]"
       style={{
         backgroundImage: `url(/images/pattern-light.svg)`,
         backgroundSize: 'cover',
@@ -13,7 +13,7 @@ const Hero = () => {
       }}
     >
       {/* Overlay for better contrast */}
-      <div className="absolute inset-0 bg-black opacity-30"></div>
+      <div className="absolute inset-0 bg-primary-600 opacity-50"></div>
 
       {/* Content */}
       <div className="relative max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
@@ -23,7 +23,7 @@ const Hero = () => {
             <h1 className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold mb-2 sm:mb-3 md:mb-4 lg:mb-6 leading-tight">
               Union des chambres d'agriculture, d'élevage et de la pêche des Comores
             </h1>
-            <p className="text-xs sm:text-sm md:text-base lg:text-lg text-orange-100 mb-3 sm:mb-4 md:mb-6 lg:mb-8 leading-relaxed max-w-2xl">
+            <p className="text-xs sm:text-sm md:text-base lg:text-lg text-primary-100 mb-3 sm:mb-4 md:mb-6 lg:mb-8 leading-relaxed max-w-2xl">
               C'est une institution nationale comorienne qui regroupe les trois chambres
               insulaires d'agriculture, d'élevage et de la pêche (Ngazidja, Mohéli, Anjouan)...
             </p>
@@ -31,7 +31,7 @@ const Hero = () => {
             <div className="flex flex-col xs:flex-row gap-2 sm:gap-3 md:gap-4">
               <Link
                 to="/register"
-                className="bg-white text-orange-700 hover:bg-orange-100 font-medium py-2 sm:py-2.5 md:py-3 px-3 sm:px-4 md:px-6 lg:px-8 rounded-lg transition flex items-center justify-center text-xs sm:text-sm md:text-base shadow-lg hover:shadow-xl"
+                className="bg-accent-500 text-white hover:bg-accent-600 font-medium py-2 sm:py-2.5 md:py-3 px-3 sm:px-4 md:px-6 lg:px-8 rounded-lg transition flex items-center justify-center text-xs sm:text-sm md:text-base shadow-lg hover:shadow-xl"
               >
                 Rejoignez notre communauté
                 <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1 sm:ml-1.5 md:ml-2" />
@@ -39,9 +39,9 @@ const Hero = () => {
 
               <Link
                 to="/about"
-                className="border-2 border-white text-white hover:bg-white hover:text-orange-700 font-medium py-2 sm:py-2.5 md:py-3 px-3 sm:px-4 md:px-6 lg:px-8 rounded-lg transition flex items-center justify-center text-xs sm:text-sm md:text-base shadow-lg hover:shadow-xl"
+                className="border-2 border-white text-white hover:bg-white hover:text-primary-500 font-medium py-2 sm:py-2.5 md:py-3 px-3 sm:px-4 md:px-6 lg:px-8 rounded-lg transition flex items-center justify-center text-xs sm:text-sm md:text-base shadow-lg hover:shadow-xl"
               >
-                Rejoignez notre communauté
+                Découvrir le réseau
                 <Play className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1 sm:ml-1.5 md:ml-2" />
               </Link>
             </div>
@@ -58,10 +58,10 @@ const Hero = () => {
                   { number: '15+', label: 'Years' },
                 ].map((item, i) => (
                   <div key={i} className="text-center">
-                    <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-orange-300 mb-1 sm:mb-2">
+                    <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-accent-300 mb-1 sm:mb-2">
                       {item.number}
                     </div>
-                    <div className="text-xs sm:text-sm text-orange-100 leading-tight">{item.label}</div>
+                    <div className="text-xs sm:text-sm text-primary-100 leading-tight">{item.label}</div>
                   </div>
                 ))}
               </div>

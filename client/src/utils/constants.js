@@ -135,32 +135,60 @@ export const MAP_CONFIG = {
   },
 };
 
-// Colors
+// Colors - Based on Réseau FAR design scheme
 export const COLORS = {
+  // Primary Navy Blue - Dominant dark blue/navy for headers and navigation
   primary: {
-    50: '#f0f9ff',
-    100: '#e0f2fe',
-    200: '#bae6fd',
-    300: '#7dd3fc',
-    400: '#38bdf8',
-    500: '#0ea5e9',
-    600: '#0284c7',
-    700: '#0369a1',
-    800: '#075985',
-    900: '#0c4a6e',
+    50: '#e6e9f0',
+    100: '#ccd3e1',
+    200: '#99a7c3',
+    300: '#667ba5',
+    400: '#334f87',
+    500: '#0A1F44', // Main navy blue
+    600: '#081932',
+    700: '#061328',
+    800: '#040d1e',
+    900: '#020714',
   },
+  // Accent Orange - For buttons and call-to-action
+  accent: {
+    50: '#fef3e8',
+    100: '#fde7d1',
+    200: '#fbcfa3',
+    300: '#f9b775',
+    400: '#f79f47',
+    500: '#F58C38', // Main orange accent
+    600: '#c4702d',
+    700: '#935422',
+    800: '#623816',
+    900: '#311c0b',
+  },
+  // Secondary Green - For success states and nature themes
   secondary: {
-    50: '#f7fee7',
-    100: '#ecfccb',
-    200: '#d9f99d',
-    300: '#bef264',
-    400: '#a3e635',
-    500: '#84cc16',
-    600: '#65a30d',
-    700: '#4d7c0f',
-    800: '#365314',
-    900: '#1a2e05',
+    50: '#f0fdf4',
+    100: '#dcfce7',
+    200: '#bbf7d0',
+    300: '#86efac',
+    400: '#4ade80',
+    500: '#22c55e',
+    600: '#16a34a',
+    700: '#15803d',
+    800: '#166534',
+    900: '#14532d',
   },
+  // Background colors
+  background: {
+    white: '#FFFFFF',
+    light: '#F5F7FA',
+    gray: '#F9FAFB',
+  },
+  // Text colors
+  text: {
+    dark: '#1F2937',
+    medium: '#4B5563',
+    light: '#6B7280',
+  },
+  // Status colors
   success: '#10B981',
   warning: '#F59E0B',
   error: '#EF4444',

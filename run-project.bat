@@ -1,48 +1,55 @@
 @echo off
-echo ========================================
-echo Starting UCAEP Website Project
-echo ========================================
+title UCAEP - Running Project
+color 0B
+
+echo.
+echo ╔════════════════════════════════════════╗
+echo ║     UCAEP Project - Quick Start       ║
+echo ╚════════════════════════════════════════╝
 echo.
 
-echo Step 1: Checking dependencies...
-if not exist "node_modules" (
-    echo Installing root dependencies...
-    call npm install
+:: Quick check for .env
+if not exist "server\.env" (
+    echo ⚠️  WARNING: .env file missing!
+    echo Creating server\.env file...
+    if exist "server\src\env.example" (
+        copy "server\src\env.example" "server\.env" >nul
+    ) else (
+        (
+            echo DB_HOST=localhost
+            echo DB_PORT=3306
+            echo DB_USER=root
+            echo DB_PASSWORD=
+            echo DB_NAME=ucaep_db
+            echo PORT=5000
+            echo NODE_ENV=development
+            echo JWT_SECRET=your_super_secret_jwt_key_here_make_it_long_and_random
+        ) > "server\.env"
+    )
+    echo ✅ .env file created!
+    echo.
 )
 
-if not exist "client\node_modules" (
-    echo Installing client dependencies...
-    cd client
-    call npm install
-    cd ..
-)
-
-if not exist "server\node_modules" (
-    echo Installing server dependencies...
-    cd server
-    call npm install
-    cd ..
-)
-
+echo 📋 Prerequisites Check:
 echo.
-echo Step 2: Starting servers...
+echo ✓ Node.js installed
+echo ✓ npm installed
 echo.
-echo Client will run on: http://localhost:3000
-echo Server will run on: http://localhost:5000
-echo.
-echo Press CTRL+C to stop both servers
+echo ⚠️  IMPORTANT: Make sure these are running:
+echo    • XAMPP MySQL Service
+echo    • Port 5000 available (server)
+echo    • Port 3000 available (client)
 echo.
 
-start "UCAEP Server" cmd /k "cd server && npm run dev"
-timeout /t 3 /nobreak >nul
-start "UCAEP Client" cmd /k "cd client && npm start"
+timeout /t 2 /nobreak >nul
 
 echo.
-echo ========================================
-echo Both servers are starting in separate windows
-echo ========================================
+echo 🚀 Starting Project...
 echo.
-echo Check the opened windows for status
+echo ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 echo.
+
+:: Use concurrently to run both
+call npm run dev
+
 pause
-

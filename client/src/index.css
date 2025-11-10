@@ -2,21 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+/* Réseau FAR Design Tokens - CSS Variables */
+:root {
+  /* Colors */
+  --color-primary: #0A1F44;
+  --color-accent: #F58C38;
+  --color-bg-white: #FFFFFF;
+  --color-bg-light: #F5F7FA;
+  --color-text-dark: #333333;
+  --color-text-medium: #4B5563;
+  --color-text-light: #666666;
+  
+  /* Typography */
+  --font-heading: 'Poppins', 'Montserrat', sans-serif;
+  --font-body: 'Poppins', 'Montserrat', sans-serif;
+  
+  /* Spacing */
+  --spacing-section: 60px;
+  --spacing-card: 24px;
+  --spacing-button: 12px 24px;
+  
+  /* Border Radius */
+  --radius-button: 6px;
+  --radius-card: 8px;
+  
+  /* Typography Sizes */
+  --text-h1: 2.5rem; /* 40px */
+  --text-h2: 2rem; /* 32px */
+  --text-h3: 1.5rem; /* 24px */
+  --text-body: 1rem; /* 16px */
+}
 
 @layer base {
   html {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Poppins', 'Montserrat', system-ui, sans-serif;
   }
   
   body {
-    @apply bg-gray-50 text-gray-900;
+    @apply bg-white text-text-dark;
+    font-weight: 400;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 text-sm sm:text-base;
+    @apply bg-accent-500 hover:bg-accent-600 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 text-sm sm:text-base;
   }
   
   .btn-secondary {
@@ -24,23 +61,39 @@
   }
   
   .btn-outline {
-    @apply border border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 text-sm sm:text-base;
+    @apply border-2 border-accent-500 text-accent-500 hover:bg-accent-500 hover:text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 text-sm sm:text-base;
+  }
+  
+  .btn-navy {
+    @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 text-sm sm:text-base;
   }
   
   .input-field {
-    @apply w-full px-3 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm sm:text-base;
+    @apply w-full px-3 py-2 sm:py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent text-sm sm:text-base;
   }
   
   .card {
     @apply bg-white rounded-lg shadow-md p-4 sm:p-6;
   }
   
+  .card-alt {
+    @apply bg-bg-light rounded-lg shadow-md p-4 sm:p-6;
+  }
+  
   .section-title {
-    @apply text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6;
+    @apply text-2xl sm:text-3xl font-bold text-primary-500 mb-4 sm:mb-6 uppercase tracking-wide;
   }
   
   .section-subtitle {
-    @apply text-base sm:text-lg text-gray-600 mb-6 sm:mb-8;
+    @apply text-base sm:text-lg text-text-medium mb-6 sm:mb-8;
+  }
+  
+  .nav-link {
+    @apply text-text-dark hover:text-accent-500 transition-colors font-medium text-sm uppercase tracking-wide;
+  }
+  
+  .header-nav {
+    @apply bg-primary-500 text-white shadow-lg;
   }
 
   /* Responsive grid utilities */

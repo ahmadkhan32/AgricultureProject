@@ -1,23 +1,30 @@
 {
   "name": "ucaeep-server",
   "version": "1.0.0",
-  "description": "Backend server for UCAEP website",
-  "main": "index.js",
+  "description": "Backend server for UCAEP website with MySQL",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "db:sync": "node -e \"require('./src/config/db').sequelize.sync({alter: true})\"",
+    "kill-port": "node kill-port.js 5000",
+    "free-port": "node kill-port.js",
+    "list-users": "node src/scripts/listUsers.js",
+    "clear-users": "node src/scripts/clearAllUsers.js",
+    "create-admin": "node src/scripts/createAdminDirect.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "@supabase/supabase-js": "^2.38.4",
-    "multer": "^1.4.5-lts.1",
-    "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^9.0.2",
-    "helmet": "^7.1.0",
+    "express": "^4.18.2",
     "express-rate-limit": "^7.1.5",
-    "joi": "^17.11.0"
+    "helmet": "^7.1.0",
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.15.3",
+    "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"

@@ -121,22 +121,27 @@ const NewsDetail = () => {
             <div className="flex items-center text-sm text-gray-500 space-x-6">
               <div className="flex items-center">
                 <Calendar className="w-4 h-4 mr-1" />
-                {format(new Date(article.published_at), 'MMMM dd, yyyy')}
+                {(() => {
+                  const publishedDate = article.publishedAt || article.published_at || article.createdAt || article.created_at;
+                  const dateObj = publishedDate ? new Date(publishedDate) : null;
+                  const isValidDate = dateObj && !isNaN(dateObj.getTime());
+                  return isValidDate ? format(dateObj, 'MMMM dd, yyyy') : 'Date not available';
+                })()}
               </div>
               {article.author && (
                 <div className="flex items-center">
                   <User className="w-4 h-4 mr-1" />
-                  {article.author.first_name} {article.author.last_name}
+                  {article.author.firstName || article.author.first_name} {article.author.lastName || article.author.last_name}
                 </div>
               )}
             </div>
           </div>
 
           {/* Article Image */}
-          {article.image_url && (
+          {(article.imageUrl || article.image_url) && (
             <div className="aspect-w-16 aspect-h-9">
               <img
-                src={article.image_url}
+                src={article.imageUrl || article.image_url}
                 alt={article.title}
                 className="w-full h-64 lg:h-96 object-cover"
               />

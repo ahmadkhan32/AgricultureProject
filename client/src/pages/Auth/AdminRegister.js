@@ -22,6 +22,11 @@ const AdminRegister = () => {
   const password = watch('password');
 
   const onSubmit = async (data) => {
+    // Prevent multiple submissions
+    if (isLoading) {
+      return;
+    }
+    
     setIsLoading(true);
     try {
       const { error } = await signUp(data.email, data.password, {
@@ -37,6 +42,7 @@ const AdminRegister = () => {
       }
     } catch (error) {
       console.error('Registration error:', error);
+      // Error is already handled in signUp function
     } finally {
       setIsLoading(false);
     }

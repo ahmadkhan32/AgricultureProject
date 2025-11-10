@@ -31,13 +31,13 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50 border-b border-gray-200">
+    <nav className="bg-primary-500 shadow-lg sticky top-0 z-50 border-b border-primary-600">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <img src={logo} alt="UCAEP Logo" className="w-10 h-10 object-contain rounded-full" />
-            <span className="font-bold text-xl text-green-600">UCAEP</span>
+            <span className="font-bold text-xl text-white uppercase tracking-wide">UCAEP</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -46,7 +46,7 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className="text-gray-700 hover:text-green-600 transition font-medium text-sm"
+                className="text-white hover:text-accent-300 transition font-medium text-sm uppercase tracking-wide"
               >
                 {item.name}
               </Link>
@@ -60,7 +60,7 @@ const Navbar = () => {
               <div className="relative">
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                  className="flex items-center gap-2 text-gray-700 hover:text-green-600 transition"
+                  className="flex items-center gap-2 text-white hover:text-accent-300 transition"
                 >
                   <User className="w-5 h-5" />
                   <span className="text-sm">{t('navigation.profile')}</span>
@@ -70,23 +70,23 @@ const Navbar = () => {
                   <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border border-gray-100 overflow-hidden z-50">
                     <Link
                       to="/dashboard"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      className="flex items-center px-4 py-2 text-sm text-text-dark hover:bg-bg-light"
                       onClick={() => setIsUserMenuOpen(false)}
                     >
-                      <Settings className="w-4 h-4 mr-2 text-green-600" />
+                      <Settings className="w-4 h-4 mr-2 text-accent-500" />
                       {t('navigation.dashboard')}
                     </Link>
                     <Link
                       to="/producer/profile"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      className="flex items-center px-4 py-2 text-sm text-text-dark hover:bg-bg-light"
                       onClick={() => setIsUserMenuOpen(false)}
                     >
-                      <User className="w-4 h-4 mr-2 text-green-600" />
+                      <User className="w-4 h-4 mr-2 text-accent-500" />
                       {t('producer_profile.title')}
                     </Link>
                     <button
                       onClick={handleSignOut}
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      className="flex items-center w-full px-4 py-2 text-sm text-text-dark hover:bg-bg-light"
                     >
                       <LogOut className="w-4 h-4 mr-2 text-red-500" />
                       {t('navigation.logout')}
@@ -98,13 +98,13 @@ const Navbar = () => {
               <div className="flex items-center gap-3">
                 <Link
                   to="/login"
-                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition"
+                  className="text-white hover:text-accent-300 text-sm font-medium transition"
                 >
                   {t('navigation.login')}
                 </Link>
                 <Link
                   to="/register"
-                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full text-sm font-medium transition"
+                  className="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-md"
                 >
                   {t('navigation.register')}
                 </Link>
@@ -116,7 +116,7 @@ const Navbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-green-600 focus:outline-none"
+              className="text-white hover:text-accent-300 focus:outline-none"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -126,13 +126,13 @@ const Navbar = () => {
 
       {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200">
+        <div className="md:hidden bg-primary-500 border-t border-primary-600">
           <div className="px-4 pt-3 pb-4 space-y-2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className="block text-gray-700 hover:text-green-600 text-base font-medium py-2 border-b border-gray-100"
+                className="block text-white hover:text-accent-300 text-base font-medium py-2 border-b border-primary-400 uppercase tracking-wide"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
@@ -144,40 +144,40 @@ const Navbar = () => {
             </div>
 
             {user ? (
-              <div className="pt-3 border-t border-gray-200 space-y-2">
+              <div className="pt-3 border-t border-primary-400 space-y-2">
                 <Link
                   to="/dashboard"
-                  className="block text-gray-700 hover:text-green-600 py-2"
+                  className="block text-white hover:text-accent-300 py-2"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('navigation.dashboard')}
                 </Link>
                 <Link
                   to="/producer/profile"
-                  className="block text-gray-700 hover:text-green-600 py-2"
+                  className="block text-white hover:text-accent-300 py-2"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('producer_profile.title')}
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="w-full text-left text-gray-700 hover:text-red-500 py-2 font-medium"
+                  className="w-full text-left text-white hover:text-red-300 py-2 font-medium"
                 >
                   {t('navigation.logout')}
                 </button>
               </div>
             ) : (
-              <div className="pt-3 border-t border-gray-200 space-y-2">
+              <div className="pt-3 border-t border-primary-400 space-y-2">
                 <Link
                   to="/login"
-                  className="block text-gray-700 hover:text-green-600 py-2"
+                  className="block text-white hover:text-accent-300 py-2"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('navigation.login')}
                 </Link>
                 <Link
                   to="/register"
-                  className="block bg-green-600 hover:bg-green-700 text-white text-center py-2 rounded-full font-medium transition"
+                  className="block bg-accent-500 hover:bg-accent-600 text-white text-center py-2 rounded-lg font-medium transition shadow-md"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('navigation.register')}

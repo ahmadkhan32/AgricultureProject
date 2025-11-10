@@ -16,12 +16,15 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import crudService from '../../services/crudService';
+import ProducerForm from './ProducerForm';
 
 const ProducersManagement = () => {
   const queryClient = useQueryClient();
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all'); // 'all', 'pending', 'approved', 'rejected'
   const [filterRegion, setFilterRegion] = useState('all');
+  const [showForm, setShowForm] = useState(false);
+  const [editingProducer, setEditingProducer] = useState(null);
 
   const { data: producers, isLoading, error } = useQuery(
     ['producers', { searchTerm, filterStatus, filterRegion }],
@@ -58,6 +61,40 @@ const ProducersManagement = () => {
     }
   );
 
+  const createMutation = useMutation(
+    (data) => crudService.producers.create(data),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('producers');
+        setShowForm(false);
+        toast.success('Producer created successfully!');
+      },
+      onError: (err) => {
+        // Show detailed error message
+        const errorMessage = err.response?.data?.message || err.message || 'Failed to create producer';
+        console.error('Create producer error:', err.response?.data || err);
+        toast.error(`Error: ${errorMessage}`);
+      },
+    }
+  );
+
+  const updateMutation = useMutation(
+    ({ id, data }) => crudService.producers.update(id, data),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('producers');
+        setShowForm(false);
+        setEditingProducer(null);
+        toast.success('Producer updated successfully!');
+      },
+      onError: (err) => {
+        const errorMessage = err.response?.data?.message || err.message || 'Failed to update producer';
+        console.error('Update producer error:', err.response?.data || err);
+        toast.error(`Error: ${errorMessage}`);
+      },
+    }
+  );
+
   const deleteMutation = useMutation(
     (id) => crudService.producers.remove(id),
     {
@@ -75,26 +112,59 @@ const ProducersManagement = () => {
     updateStatusMutation.mutate({ id, status: newStatus });
   };
 
+  const handleCreate = () => {
+    setEditingProducer(null);
+    setShowForm(true);
+  };
+
+  const handleEdit = (producer) => {
+    setEditingProducer(producer);
+    setShowForm(true);
+  };
+
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this producer?')) {
       deleteMutation.mutate(id);
     }
   };
 
+  const handleFormSubmit = (data) => {
+    if (editingProducer) {
+      updateMutation.mutate({ id: editingProducer.id, data });
+    } else {
+      createMutation.mutate(data);
+    }
+  };
+
+  // Helper function to normalize products (handle both array and JSON string)
+  const normalizeProducts = (products) => {
+    if (!products) return [];
+    if (Array.isArray(products)) return products;
+    if (typeof products === 'string') {
+      try {
+        const parsed = JSON.parse(products);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [];
+      }
+    }
+    return [];
+  };
+
   const getStatusBadge = (status) => {
     const statusConfig = {
-      pending: { color: 'bg-yellow-100 text-yellow-800', icon: Clock },
-      approved: { color: 'bg-green-100 text-green-800', icon: CheckCircle },
-      rejected: { color: 'bg-red-100 text-red-800', icon: XCircle },
+      pending: { color: 'bg-amber-100 text-amber-800 border border-amber-200', icon: Clock },
+      approved: { color: 'bg-emerald-100 text-emerald-800 border border-emerald-200', icon: CheckCircle },
+      rejected: { color: 'bg-red-100 text-red-800 border border-red-200', icon: XCircle },
     };
     
     const config = statusConfig[status] || statusConfig.pending;
     const Icon = config.icon;
     
     return (
-      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${config.color}`}>
-        <Icon className="w-3 h-3 mr-1" />
-        {status}
+      <span className={`inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold ${config.color} shadow-sm`}>
+        <Icon className="w-3.5 h-3.5 mr-1.5" />
+        {status.charAt(0).toUpperCase() + status.slice(1)}
       </span>
     );
   };
@@ -108,20 +178,31 @@ const ProducersManagement = () => {
   }
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900 flex items-center">
-          <Users className="w-7 h-7 mr-3 text-primary-600" /> Producers Management
-        </h1>
-        <Link to="/admin/producers/new" className="btn-primary flex items-center">
-          <PlusCircle className="w-5 h-5 mr-2" /> Add New Producer
-        </Link>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-700 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px] opacity-30"></div>
+        <div className="relative z-10">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-white/20 to-white/10 rounded-2xl flex items-center justify-center mr-3 backdrop-blur-lg">
+                <Users className="w-7 h-7" />
+              </div>
+              <h1 className="text-3xl font-bold tracking-tight">Producers Management</h1>
+            </div>
+            <button
+              onClick={handleCreate}
+              className="bg-white text-indigo-700 hover:bg-indigo-50 font-bold py-3 px-6 rounded-2xl flex items-center shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            >
+              <PlusCircle className="w-5 h-5 mr-2" /> Add New Producer
+            </button>
+          </div>
+          <p className="text-blue-100 font-medium">Manage producer registrations and approvals for the UCAEP network.</p>
+        </div>
       </div>
 
-      <p className="text-gray-600">Manage producer registrations and approvals for the UCAEP network.</p>
-
       {/* Search and Filter */}
-      <div className="bg-white p-4 rounded-lg shadow-sm flex flex-col sm:flex-row gap-4">
+      <div className="bg-gradient-to-br from-white to-indigo-50/30 p-6 rounded-2xl shadow-xl border-2 border-indigo-100 flex flex-col sm:flex-row gap-4">
         <div className="relative flex-grow">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
           <input
@@ -161,7 +242,7 @@ const ProducersManagement = () => {
       </div>
 
       {/* Producers List */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="bg-gradient-to-br from-white to-indigo-50/30 rounded-2xl shadow-xl overflow-hidden border-2 border-indigo-100">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -205,17 +286,29 @@ const ProducersManagement = () => {
                     {getStatusBadge(producer.status)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {producer.products?.slice(0, 2).join(', ')}
-                    {producer.products?.length > 2 && '...'}
+                    {(() => {
+                      const productsArray = normalizeProducts(producer.products);
+                      const displayProducts = productsArray.slice(0, 2);
+                      return (
+                        <>
+                          {displayProducts.length > 0 ? displayProducts.join(', ') : 'No products'}
+                          {productsArray.length > 2 && '...'}
+                        </>
+                      );
+                    })()}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex justify-end space-x-2">
                       <Link to={`/admin/producers/${producer.id}`} className="text-gray-600 hover:text-gray-900" title="View">
                         <Eye className="w-5 h-5" />
                       </Link>
-                      <Link to={`/admin/producers/edit/${producer.id}`} className="text-indigo-600 hover:text-indigo-900" title="Edit">
+                      <button
+                        onClick={() => handleEdit(producer)}
+                        className="text-indigo-600 hover:text-indigo-900"
+                        title="Edit"
+                      >
                         <Edit className="w-5 h-5" />
-                      </Link>
+                      </button>
                       {producer.status === 'pending' && (
                         <button 
                           onClick={() => handleStatusChange(producer.id, 'approved')} 
@@ -251,6 +344,19 @@ const ProducersManagement = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Producer Form Modal */}
+      {showForm && (
+        <ProducerForm
+          producer={editingProducer}
+          onSubmit={handleFormSubmit}
+          onCancel={() => {
+            setShowForm(false);
+            setEditingProducer(null);
+          }}
+          isLoading={createMutation.isLoading || updateMutation.isLoading}
+        />
+      )}
     </div>
   );
 };

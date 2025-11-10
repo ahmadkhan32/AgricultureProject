@@ -6,6 +6,7 @@ import service2 from "../Images/fisheries-management.jpg";
 import service3 from "../Images/Livestock vaccines.jpg";
 import service4 from "../Images/BRECOMA-1.jpg";
 import enhancedContentService from "../services/enhancedCrudService";
+import { fetchServices } from "../services/api";
 
 const Services = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,16 +25,88 @@ const Services = () => {
   });
   const [submitState, setSubmitState] = useState('idle'); // 'idle', 'loading', 'success', 'error'
 
-  // Load generated content on component mount
+  // Load services from backend API
   useEffect(() => {
     const loadServices = async () => {
       try {
-        const services = await enhancedContentService.getAllServices();
-        setGeneratedServices(services);
+        // Fetch from MySQL backend API
+        const response = await fetchServices({ limit: 100 });
+        const backendServices = response.services || [];
+        
+        // Transform backend services to match frontend format
+        // Only show active services
+        const transformedServices = backendServices
+          .filter(service => service.status === 'active') // Only active services
+          .map(service => {
+            // Map backend categories to French display names
+            const categoryMap = {
+              'support': 'Soutien aux producteurs',
+              'training': 'Programmes de formation',
+              'assistance': 'Programmes d\'assistance',
+              'project': 'Projets'
+            };
+            
+            return {
+              id: service.id,
+              title: service.title,
+              description: service.description,
+              category: categoryMap[service.category] || 'Programmes de formation',
+              backendCategory: service.category, // Keep original for filtering
+              content: service.content || service.description,
+              blogContent: service.content,
+              tags: service.tags ? (Array.isArray(service.tags) ? service.tags : JSON.parse(service.tags || '[]')) : [],
+              image: service.imageUrl || service.image_url,
+              createdAt: service.createdAt || service.created_at,
+              status: service.status,
+              isGenerated: true
+            };
+          });
+        
+        setGeneratedServices(transformedServices);
       } catch (error) {
-        console.error('Error loading services:', error);
+        console.error('❌ Error loading services from backend:', error);
+        console.error('❌ Error response:', error.response);
+        console.error('❌ Error response data:', error.response?.data);
+        console.error('❌ Error message:', error.message);
+        console.error('❌ Error status:', error.response?.status);
+        
+        // Extract detailed error information
+        const errorData = error.response?.data || {};
+        const errorMessage = errorData.message || error.message || 'Unknown error';
+        const errorType = errorData.errorType || 'Unknown';
+        const originalError = errorData.originalError || errorData.error || '';
+        
+        console.error('📋 Error Details:', {
+          message: errorMessage,
+          type: errorType,
+          originalError: originalError,
+          status: error.response?.status,
+          hint: errorData.hint
+        });
+        
+        // Check if it's a table-not-found error
+        if (errorMessage.includes('does not exist') || errorMessage.includes('table') || originalError.includes('doesn\'t exist')) {
+          console.error('⚠️ Services table not found in database. Please run the SQL migration script.');
+          console.error('📄 Check: database/services-table-xampp.sql');
+          console.error('💡 Solution: Run the SQL script in phpMyAdmin to create the services table');
+        }
+        
+        // Check if it's a database connection error
+        if (errorMessage.includes('connection') || errorMessage.includes('Connection')) {
+          console.error('⚠️ Database connection failed. Please check:');
+          console.error('  1. Is MySQL/XAMPP running?');
+          console.error('  2. Are database credentials correct in .env?');
+          console.error('  3. Is the backend server running on port 5000?');
+        }
+        
         // Fallback to local storage
-        setGeneratedServices(enhancedContentService.getLocalServices());
+        try {
+          const localServices = enhancedContentService.getLocalServices();
+          setGeneratedServices(localServices);
+        } catch (localError) {
+          console.error('Error loading local services:', localError);
+          setGeneratedServices([]);
+        }
       }
     };
     loadServices();

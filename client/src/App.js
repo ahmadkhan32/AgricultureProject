@@ -27,7 +27,6 @@ import ProducerRegistration from './pages/Producer/ProducerRegistration';
 import Unauthorized from './pages/Unauthorized';
 import { 
   AdminRoute as EnhancedAdminRoute,
-  ProducerRoute,
   AuthenticatedRoute 
 } from './components/Auth/EnhancedProtectedRoute';
 
@@ -70,9 +69,9 @@ function App() {
                     </AuthenticatedRoute>
                   } />
                   <Route path="/producer/profile" element={
-                    <ProducerRoute>
+                    <AuthenticatedRoute>
                       <ProducerProfile />
-                    </ProducerRoute>
+                    </AuthenticatedRoute>
                   } />
                   <Route path="/producer/register" element={
                     <AuthenticatedRoute>

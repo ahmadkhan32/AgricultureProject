@@ -59,42 +59,93 @@ const AdminNewsManagement = () => {
 
   const handleCreateNews = async (data) => {
     try {
+      // Prepare news data with proper status
       const newsData = {
-        ...data,
-        author_id: user.id,
-        status: 'draft',
-        created_at: new Date().toISOString()
+        title: data.title,
+        content: data.content,
+        excerpt: data.excerpt || '',
+        image_url: data.image_url || '',
+        category: data.category || 'news',
+        status: data.status || 'draft', // Use status from form, default to 'draft'
       };
+
+      // Remove empty fields
+      Object.keys(newsData).forEach(key => {
+        if (newsData[key] === '' || newsData[key] === null) {
+          delete newsData[key];
+        }
+      });
 
       const { error } = await enhancedNewsService.create(newsData);
       if (!error) {
-        toast.success('News article created successfully');
+        toast.success('News article created successfully!');
         setShowCreateModal(false);
         reset();
         fetchNews();
       } else {
-        toast.error('Failed to create news article');
+        // Show detailed error message
+        const errorMsg = error || 'Failed to create news article';
+        toast.error(errorMsg);
+        console.error('Create news error:', errorMsg);
+        
+        // If it's a status column error, show helpful message
+        if (errorMsg.includes('status') || errorMsg.includes('schema cache')) {
+          toast.error('Database error: Please add status column to news table. Check COMPLETE_FIX_NEWS_STATUS_XAMPP_MYSQL.md for instructions.', { duration: 8000 });
+        }
       }
     } catch (error) {
       console.error('Error creating news:', error);
-      toast.error('Error creating news article');
+      const errorMsg = error.response?.data?.message || error.message || 'Error creating news article';
+      toast.error(errorMsg);
+      
+      if (errorMsg.includes('status') || errorMsg.includes('schema cache')) {
+        toast.error('Database error: Please add status column to news table. See COMPLETE_FIX_NEWS_STATUS_XAMPP_MYSQL.md', { duration: 8000 });
+      }
     }
   };
 
   const handleUpdateNews = async (data) => {
     try {
-      const { error } = await enhancedNewsService.update(editingNews.id, data);
+      // Prepare update data with proper status
+      const updateData = {
+        title: data.title,
+        content: data.content,
+        excerpt: data.excerpt || '',
+        image_url: data.image_url || '',
+        category: data.category || 'news',
+        status: data.status || 'draft',
+      };
+
+      // Remove empty fields
+      Object.keys(updateData).forEach(key => {
+        if (updateData[key] === '' || updateData[key] === null) {
+          delete updateData[key];
+        }
+      });
+
+      const { error } = await enhancedNewsService.update(editingNews.id, updateData);
       if (!error) {
-        toast.success('News article updated successfully');
+        toast.success('News article updated successfully!');
         setEditingNews(null);
         reset();
         fetchNews();
       } else {
-        toast.error('Failed to update news article');
+        const errorMsg = error || 'Failed to update news article';
+        toast.error(errorMsg);
+        console.error('Update news error:', errorMsg);
+        
+        if (errorMsg.includes('status') || errorMsg.includes('schema cache')) {
+          toast.error('Database error: Please add status column to news table. Check COMPLETE_FIX_NEWS_STATUS_XAMPP_MYSQL.md', { duration: 8000 });
+        }
       }
     } catch (error) {
       console.error('Error updating news:', error);
-      toast.error('Error updating news article');
+      const errorMsg = error.response?.data?.message || error.message || 'Error updating news article';
+      toast.error(errorMsg);
+      
+      if (errorMsg.includes('status') || errorMsg.includes('schema cache')) {
+        toast.error('Database error: Please add status column to news table. See COMPLETE_FIX_NEWS_STATUS_XAMPP_MYSQL.md', { duration: 8000 });
+      }
     }
   };
 
@@ -427,6 +478,24 @@ const AdminNewsManagement = () => {
                     placeholder="https://example.com/image.jpg"
                     defaultValue={editingNews?.image_url}
                   />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Status *
+                  </label>
+                  <select
+                    {...register('status', { required: 'Status is required' })}
+                    className="input-field"
+                    defaultValue={editingNews?.status || 'draft'}
+                  >
+                    <option value="draft">Draft</option>
+                    <option value="published">Published</option>
+                    <option value="archived">Archived</option>
+                  </select>
+                  {errors.status && (
+                    <p className="mt-1 text-sm text-red-600">{errors.status.message}</p>
+                  )}
                 </div>
 
                 <div className="flex justify-end space-x-3 pt-4">
