@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { ArrowRight, Users, FileText, Users2, MapPin, Award, Globe, Star, CheckCircle, TrendingUp, Shield, Heart, Zap } from 'lucide-react';
+import { Users, MapPin, Award, Globe, CheckCircle } from 'lucide-react';
 import crudService from '../services/crudService';
 import { useTranslation } from '../components/withTranslation';
 import Hero from '../components/Home/Hero';
 import StatsSection from '../components/Home/StatsSection';
 import NewsSection from '../components/Home/NewsSection';
 import ServicesSection from '../components/Home/ServicesSection';
-import ProducersSection from '../components/Home/ProducersSection';
 import ActionsSection from '../components/Home/ActionsSection';
 import ThematicsSection from '../components/Home/ThematicsSection';
 import PartnersSection from '../components/Home/PartnersSection';
@@ -25,80 +24,6 @@ const Home = () => {
       return [];
     }
   });
-
-  const features = [
-    {
-      icon: Users,
-      title: t('home.features.producer_network.title'),
-      description: t('home.features.producer_network.description'),
-      link: '/producers',
-      image: '/images/features/producer-network.jpg',
-      color: 'from-blue-500 to-blue-600',
-      bgColor: 'bg-blue-50',
-      iconColor: 'text-blue-600',
-    },
-    {
-      icon: FileText,
-      title: t('home.features.latest_news.title'),
-      description: t('home.features.latest_news.description'),
-      link: '/news',
-      image: '/Images/pattern-light.jpg', // Fallback image
-      color: 'from-green-500 to-green-600',
-      bgColor: 'bg-green-50',
-      iconColor: 'text-green-600',
-    },
-    {
-      icon: Users2,
-      title: t('home.features.partnerships.title'),
-      description: t('home.features.partnerships.description'),
-      link: '/partnerships',
-      image: '/Images/pattern-light.jpg', // Fallback image
-      color: 'from-purple-500 to-purple-600',
-      bgColor: 'bg-purple-50',
-      iconColor: 'text-purple-600',
-    },
-    {
-      icon: MapPin,
-      title: t('home.features.interactive_map.title'),
-      description: t('home.features.interactive_map.description'),
-      link: '/producers/map',
-      image: '/Images/pattern-light.jpg', // Fallback image
-      color: 'from-orange-500 to-orange-600',
-      bgColor: 'bg-orange-50',
-      iconColor: 'text-orange-600',
-    },
-  ];
-
-  const benefits = [
-    {
-      icon: Shield,
-      title: 'Sécurité Alimentaire',
-      description: 'Renforcer la sécurité alimentaire des Comores',
-      color: 'text-green-600',
-      bgColor: 'bg-green-100',
-    },
-    {
-      icon: TrendingUp,
-      title: 'Développement Économique',
-      description: 'Stimuler la croissance économique locale',
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-100',
-    },
-    {
-      icon: Heart,
-      title: 'Communauté Unie',
-      description: 'Créer une communauté agricole solidaire',
-      color: 'text-red-600',
-      bgColor: 'bg-red-100',
-    },
-    {
-      icon: Zap,
-      title: 'Innovation',
-      description: 'Promouvoir les technologies agricoles modernes',
-      color: 'text-yellow-600',
-      bgColor: 'bg-yellow-100',
-    },
-  ];
 
   const stats = [
     { label: 'Producteurs actifs', value: '1000', icon: Users },

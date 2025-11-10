@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Users, BookOpen, FileText, Network, Megaphone } from 'lucide-react';
+import { Users, BookOpen, FileText, Network, Megaphone } from 'lucide-react';
 
 const ActionsSection = () => {
   const actions = [
