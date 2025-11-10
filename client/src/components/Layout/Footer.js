@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Facebook, Twitter, Instagram, Linkedin, Globe, GraduationCap, MapPin as LocationPin, AtSign } from 'lucide-react';
+import UCAEPLogo from '../Logo/UCAEPLogo';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -42,14 +43,14 @@ const Footer = () => {
       <div className="bg-white px-6 md:px-12 py-4 border-b border-gray-200">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           {/* UCAEP Logo */}
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-white font-bold text-xl">U</span>
-            </div>
-            <div>
-              <div className="text-blue-700 font-bold text-xl tracking-tight">UCAEP</div>
-              <div className="text-xs text-gray-600">Réseau UCAEP</div>
-            </div>
+          <div className="flex-shrink-0">
+            <UCAEPLogo 
+              size="small" 
+              showText={true}
+              showFullName={false}
+              variant="default"
+              linkTo="/"
+            />
           </div>
 
           {/* Connecting Line */}
@@ -60,7 +61,7 @@ const Footer = () => {
           </div>
 
           {/* UCAEP Actu Logo */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 flex-shrink-0">
             <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
               <Mail className="w-6 h-6 text-blue-600" />
             </div>
@@ -72,110 +73,117 @@ const Footer = () => {
       {/* Main Footer - Two Panel Layout */}
       <div className="relative flex flex-col md:flex-row">
         {/* Left Panel - Dark Blue */}
-        <div className="bg-[#1e3a5f] text-white flex-[1.3] px-6 md:px-12 py-10 md:py-16 relative">
+        <div className="bg-[#1e3a5f] text-white flex-[1.3] px-6 md:px-12 py-10 md:py-16 relative min-h-full">
           {/* Diagonal separator - creates angled edge */}
           <div className="absolute top-0 right-0 bottom-0 w-32 bg-[#1e3a5f] transform skew-x-[-12deg] origin-right hidden md:block z-0"></div>
           
-          <div className="max-w-2xl mx-auto space-y-8 relative z-10">
+          <div className="h-full relative z-10 flex flex-col">
+            {/* Grid Layout for Content */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 flex-1">
             {/* Company Info */}
             <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">U</span>
+              <div className="flex flex-col items-start">
+                <UCAEPLogo 
+                  size="small" 
+                  showText={true}
+                  showFullName={true}
+                  variant="light"
+                  linkTo="/"
+                  className="items-start"
+                />
+              </div>
+                <p className="text-gray-200 text-sm leading-relaxed">
+                  Chambre d'Agriculture, d'Élevage et de Pêche des Comores. 
+                  Promouvoir des pratiques agricoles durables et soutenir les producteurs locaux.
+                </p>
+                <div className="flex space-x-3">
+                  {socialLinks.map((social) => {
+                    const Icon = social.icon;
+                    return (
+                      <a
+                        key={social.name}
+                        href={social.href}
+                        className="w-10 h-10 bg-[#2a4a6f] rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors"
+                        aria-label={social.name}
+                      >
+                        <Icon className="w-5 h-5 text-white" />
+                      </a>
+                    );
+                  })}
                 </div>
-                <span className="font-bold text-xl uppercase tracking-wide">UCAEP</span>
               </div>
-              <p className="text-gray-200 text-sm leading-relaxed">
-                Chambre d'Agriculture, d'Élevage et de Pêche des Comores. 
-                Promouvoir des pratiques agricoles durables et soutenir les producteurs locaux.
-              </p>
-              <div className="flex space-x-3">
-                {socialLinks.map((social) => {
-                  const Icon = social.icon;
-                  return (
+
+              {/* Quick Links */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold uppercase tracking-wide">Liens rapides</h3>
+                <ul className="space-y-2">
+                  {quickLinks.map((link) => (
+                    <li key={link.name}>
+                      <Link
+                        to={link.href}
+                        className="text-gray-200 hover:text-orange-400 transition-colors text-sm"
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Services */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold uppercase tracking-wide">Nos Services</h3>
+                <ul className="space-y-2">
+                  {services.map((service) => (
+                    <li key={service.name}>
+                      <Link
+                        to={service.href}
+                        className="text-gray-200 hover:text-orange-400 transition-colors text-sm"
+                      >
+                        {service.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Contact Info */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold uppercase tracking-wide">Informations de contact</h3>
+                <div className="space-y-3">
+                  <div className="flex items-start space-x-3">
+                    <MapPin className="w-5 h-5 text-orange-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-gray-200 text-sm">
+                        Route de la Corniche, Moroni Grande Comore.<br />
+                        Union des Comores
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Phone className="w-5 h-5 text-orange-400 flex-shrink-0" />
                     <a
-                      key={social.name}
-                      href={social.href}
-                      className="w-10 h-10 bg-[#2a4a6f] rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors"
-                      aria-label={social.name}
+                      href="tel:+2697332394"
+                      className="text-gray-200 hover:text-orange-400 transition-colors text-sm"
                     >
-                      <Icon className="w-5 h-5 text-white" />
+                      +2697332394
                     </a>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Quick Links */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold uppercase tracking-wide">Liens rapides</h3>
-              <ul className="space-y-2">
-                {quickLinks.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      to={link.href}
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Mail className="w-5 h-5 text-orange-400 flex-shrink-0" />
+                    <a
+                      href="mailto:contactucaepcomores@gmail.com"
                       className="text-gray-200 hover:text-orange-400 transition-colors text-sm"
                     >
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Services */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold uppercase tracking-wide">Nos Services</h3>
-              <ul className="space-y-2">
-                {services.map((service) => (
-                  <li key={service.name}>
-                    <Link
-                      to={service.href}
-                      className="text-gray-200 hover:text-orange-400 transition-colors text-sm"
-                    >
-                      {service.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Contact Info */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold uppercase tracking-wide">Informations de contact</h3>
-              <div className="space-y-3">
-                <div className="flex items-start space-x-3">
-                  <MapPin className="w-5 h-5 text-orange-400 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="text-gray-200 text-sm">
-                      Route de la Corniche, Moroni Grande Comore.<br />
-                      Union des Comores
-                    </p>
+                      contactucaepcomores@gmail.com
+                    </a>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <Phone className="w-5 h-5 text-orange-400 flex-shrink-0" />
-                  <a
-                    href="tel:+2697332394"
-                    className="text-gray-200 hover:text-orange-400 transition-colors text-sm"
-                  >
-                    +2697332394
-                  </a>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Mail className="w-5 h-5 text-orange-400 flex-shrink-0" />
-                  <a
-                    href="mailto:contactucaepcomores@gmail.com"
-                    className="text-gray-200 hover:text-orange-400 transition-colors text-sm"
-                  >
-                    contactucaepcomores@gmail.com
-                  </a>
-                </div>
               </div>
             </div>
 
-            {/* Copyright */}
-            <div className="pt-6 border-t border-gray-600">
+            {/* Copyright - at bottom */}
+            <div className="mt-8 pt-6 border-t border-gray-600">
               <p className="text-xs text-gray-400 text-center">
                 © {currentYear} UCAEP. Tous droits réservés.
               </p>
@@ -198,35 +206,41 @@ const Footer = () => {
         </div>
 
         {/* Right Panel - Green */}
-        <div className="bg-[#2d7a3f] text-white flex-1 px-6 md:px-12 py-10 md:py-16 relative">
+        <div className="bg-[#2d7a3f] text-white flex-1 px-6 md:px-12 py-10 md:py-16 relative min-h-full">
           {/* Diagonal separator - creates angled edge */}
           <div className="absolute top-0 left-0 bottom-0 w-32 bg-[#2d7a3f] transform skew-x-[-12deg] origin-left hidden md:block z-0"></div>
-          <div className="max-w-2xl mx-auto space-y-6 relative z-10">
-            {/* Newsletter Heading */}
-            <h3 className="text-2xl md:text-3xl font-bold text-center">
-              Abonnez-vous à notre newsletter
-            </h3>
-            <p className="text-gray-100 text-sm text-center">
-              Recevez les dernières actualités et informations directement dans votre boîte de réception
-            </p>
+          <div className="h-full flex flex-col justify-center relative z-10">
+            <div className="w-full max-w-lg mx-auto space-y-6">
+              {/* Newsletter Heading */}
+              <div className="text-center space-y-2">
+                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold">
+                  Abonnez-vous à notre newsletter
+                </h3>
+                <p className="text-gray-100 text-sm md:text-base">
+                  Recevez les dernières actualités et informations directement dans votre boîte de réception
+                </p>
+              </div>
 
-            {/* Newsletter Form */}
-            <form onSubmit={handleNewsletterSubmit} className="space-y-4">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Votre adresse email"
-                className="w-full px-4 py-3 rounded-lg bg-white text-gray-900 border-2 border-red-500 focus:outline-none focus:ring-2 focus:ring-orange-400"
-                required
-              />
-              <button
-                type="submit"
-                className="w-full bg-[#1e3a5f] hover:bg-[#2a4a6f] text-white font-semibold px-6 py-3 rounded-lg transition-colors uppercase tracking-wide text-sm"
-              >
-                S'abonner
-              </button>
-            </form>
+              {/* Newsletter Form */}
+              <form onSubmit={handleNewsletterSubmit} className="space-y-5">
+                <div>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Votre adresse email"
+                    className="w-full px-5 py-4 rounded-lg bg-white text-gray-900 border-2 border-red-500 focus:outline-none focus:ring-2 focus:ring-orange-400 text-base"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-[#1e3a5f] hover:bg-[#2a4a6f] text-white font-semibold px-6 py-4 rounded-lg transition-colors uppercase tracking-wide text-sm md:text-base shadow-lg"
+                >
+                  S'abonner
+                </button>
+              </form>
+            </div>
           </div>
 
           {/* Vertical Icon Bar on Right Edge */}

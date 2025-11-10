@@ -5,8 +5,11 @@
   "main": "server/index.js",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev:ports": "concurrently \"npm run server:5001\" \"npm run client:3002\"",
     "server": "cd server && npm run dev",
+    "server:5001": "cd server && set PORT=5001&& set FRONTEND_URL=http://localhost:3002&& set CORS_ORIGIN=http://localhost:3002,http://localhost:3000&& npm run dev",
     "client": "cd client && npm start",
+    "client:3002": "cd client && set PORT=3002&& set REACT_APP_API_URL=http://localhost:5001/api&& npm start",
     "build": "cd client && npm run build",
     "install-all": "npm install && cd server && npm install && cd ../client && npm install",
     "start:server": "cd server && npm run dev",

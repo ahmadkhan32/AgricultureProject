@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from '../../components/withTranslation';
-import { Menu, X, User, LogOut, Settings } from 'lucide-react';
+import { Menu, X, User, LogOut, Settings, Search, ChevronDown } from 'lucide-react';
+import UCAEPLogo from '../Logo/UCAEPLogo';
 import LanguageSwitcher from '../LanguageSwitcher';
-import logo from '../../Images/Logo.jpeg';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,108 +31,166 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-primary-500 shadow-lg sticky top-0 z-50 border-b border-primary-600">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <img src={logo} alt="UCAEP Logo" className="w-10 h-10 object-contain rounded-full" />
-            <span className="font-bold text-xl text-white uppercase tracking-wide">UCAEP</span>
-          </Link>
+    <nav className="sticky top-0 z-50">
+      {/* Header Section with Logo and Title */}
+      <div className="bg-white relative overflow-hidden">
+        {/* Background Pattern - Light Green Wavy Lines */}
+        <div className="absolute inset-0 opacity-10">
+          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="wavy" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                <path d="M0,50 Q25,30 50,50 T100,50" stroke="#2d7a3f" strokeWidth="2" fill="none" />
+                <path d="M0,60 Q25,40 50,60 T100,60" stroke="#2d7a3f" strokeWidth="1.5" fill="none" />
+                <path d="M0,70 Q25,50 50,70 T100,70" stroke="#2d7a3f" strokeWidth="1" fill="none" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#wavy)" />
+          </svg>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-4 relative z-10">
+          <div className="flex items-center space-x-2 md:space-x-4 lg:space-x-6">
+            {/* UCAEP Logo - Compact for navbar */}
+            <div className="flex-shrink-0">
+              <UCAEPLogo 
+                size="small" 
+                showText={true}
+                showFullName={false}
+                variant="default"
+                linkTo="/"
+              />
+            </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-6">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className="text-white hover:text-accent-300 transition font-medium text-sm uppercase tracking-wide"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Right Side Controls */}
-          <div className="hidden md:flex items-center space-x-5">
-            <LanguageSwitcher size="small" showLabel={false} />
-            {user ? (
-              <div className="relative">
-                <button
-                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                  className="flex items-center gap-2 text-white hover:text-accent-300 transition"
-                >
-                  <User className="w-5 h-5" />
-                  <span className="text-sm">{t('navigation.profile')}</span>
-                </button>
-
-                {isUserMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border border-gray-100 overflow-hidden z-50">
-                    <Link
-                      to="/dashboard"
-                      className="flex items-center px-4 py-2 text-sm text-text-dark hover:bg-bg-light"
-                      onClick={() => setIsUserMenuOpen(false)}
-                    >
-                      <Settings className="w-4 h-4 mr-2 text-accent-500" />
-                      {t('navigation.dashboard')}
-                    </Link>
-                    <Link
-                      to="/producer/profile"
-                      className="flex items-center px-4 py-2 text-sm text-text-dark hover:bg-bg-light"
-                      onClick={() => setIsUserMenuOpen(false)}
-                    >
-                      <User className="w-4 h-4 mr-2 text-accent-500" />
-                      {t('producer_profile.title')}
-                    </Link>
-                    <button
-                      onClick={handleSignOut}
-                      className="flex items-center w-full px-4 py-2 text-sm text-text-dark hover:bg-bg-light"
-                    >
-                      <LogOut className="w-4 h-4 mr-2 text-red-500" />
-                      {t('navigation.logout')}
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="flex items-center gap-3">
-                <Link
-                  to="/login"
-                  className="text-white hover:text-accent-300 text-sm font-medium transition"
-                >
-                  {t('navigation.login')}
-                </Link>
-                <Link
-                  to="/register"
-                  className="bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-md"
-                >
-                  {t('navigation.register')}
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-white hover:text-accent-300 focus:outline-none"
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            {/* Main Title */}
+            <div className="hidden md:block flex-1 min-w-0">
+              <h1 className="text-orange-500 text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl italic truncate" style={{ fontFamily: 'cursive, serif' }}>
+                RÉSEAU INTERNATIONAL FORMATION AGRICOLE & RURALE
+              </h1>
+            </div>
           </div>
         </div>
+
+        {/* Green Separator Line */}
+        <div className="h-1 bg-green-600"></div>
+      </div>
+
+      {/* Navigation Bar - Dark Blue */}
+      <div className="bg-[#1e3a5f] shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-14">
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center space-x-6 flex-1">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="text-white hover:text-orange-400 transition font-bold text-xs md:text-sm uppercase tracking-wide flex items-center gap-1 group"
+                >
+                  {item.name}
+                  <ChevronDown className="w-4 h-4 opacity-70 group-hover:opacity-100 transition" />
+                </Link>
+              ))}
+            </div>
+
+            {/* Right Side Controls */}
+            <div className="hidden md:flex items-center space-x-4">
+              {/* Language Selector - Orange Circle */}
+              <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer">
+                <span className="text-white font-bold text-sm uppercase">EN</span>
+              </div>
+              
+              {/* Search Icon */}
+              <button className="text-white hover:text-orange-400 transition">
+                <Search className="w-5 h-5" />
+              </button>
+
+              {/* User Menu */}
+              {user && (
+                <div className="relative">
+                  <button
+                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                    className="flex items-center gap-2 text-white hover:text-orange-400 transition"
+                  >
+                    <User className="w-5 h-5" />
+                  </button>
+
+                  {isUserMenuOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border border-gray-100 overflow-hidden z-50">
+                      <Link
+                        to="/dashboard"
+                        className="flex items-center px-4 py-2 text-sm text-text-dark hover:bg-bg-light"
+                        onClick={() => setIsUserMenuOpen(false)}
+                      >
+                        <Settings className="w-4 h-4 mr-2 text-accent-500" />
+                        {t('navigation.dashboard')}
+                      </Link>
+                      <Link
+                        to="/producer/profile"
+                        className="flex items-center px-4 py-2 text-sm text-text-dark hover:bg-bg-light"
+                        onClick={() => setIsUserMenuOpen(false)}
+                      >
+                        <User className="w-4 h-4 mr-2 text-accent-500" />
+                        {t('producer_profile.title')}
+                      </Link>
+                      <button
+                        onClick={handleSignOut}
+                        className="flex items-center w-full px-4 py-2 text-sm text-text-dark hover:bg-bg-light"
+                      >
+                        <LogOut className="w-4 h-4 mr-2 text-red-500" />
+                        {t('navigation.logout')}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {!user && (
+                <div className="flex items-center gap-3">
+                  <Link
+                    to="/login"
+                    className="text-white hover:text-orange-400 text-sm font-medium transition"
+                  >
+                    {t('navigation.login')}
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-md"
+                  >
+                    {t('navigation.register')}
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center space-x-3">
+              <button className="text-white hover:text-orange-400 transition">
+                <Search className="w-5 h-5" />
+              </button>
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-white hover:text-orange-400 focus:outline-none"
+              >
+                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Separator - Two White Lines */}
+        <div className="h-0.5 bg-white opacity-30"></div>
+        <div className="h-0.5 bg-white opacity-20 mt-0.5"></div>
       </div>
 
       {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="md:hidden bg-primary-500 border-t border-primary-600">
+        <div className="md:hidden bg-[#1e3a5f] border-t border-[#2a4a6f]">
           <div className="px-4 pt-3 pb-4 space-y-2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className="block text-white hover:text-accent-300 text-base font-medium py-2 border-b border-primary-400 uppercase tracking-wide"
+                className="block text-white hover:text-orange-400 text-base font-bold py-2 border-b border-[#2a4a6f] uppercase tracking-wide"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
@@ -144,17 +202,17 @@ const Navbar = () => {
             </div>
 
             {user ? (
-              <div className="pt-3 border-t border-primary-400 space-y-2">
+              <div className="pt-3 border-t border-[#2a4a6f] space-y-2">
                 <Link
                   to="/dashboard"
-                  className="block text-white hover:text-accent-300 py-2"
+                  className="block text-white hover:text-orange-400 py-2"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('navigation.dashboard')}
                 </Link>
                 <Link
                   to="/producer/profile"
-                  className="block text-white hover:text-accent-300 py-2"
+                  className="block text-white hover:text-orange-400 py-2"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('producer_profile.title')}
@@ -167,17 +225,17 @@ const Navbar = () => {
                 </button>
               </div>
             ) : (
-              <div className="pt-3 border-t border-primary-400 space-y-2">
+              <div className="pt-3 border-t border-[#2a4a6f] space-y-2">
                 <Link
                   to="/login"
-                  className="block text-white hover:text-accent-300 py-2"
+                  className="block text-white hover:text-orange-400 py-2"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('navigation.login')}
                 </Link>
                 <Link
                   to="/register"
-                  className="block bg-accent-500 hover:bg-accent-600 text-white text-center py-2 rounded-lg font-medium transition shadow-md"
+                  className="block bg-orange-500 hover:bg-orange-600 text-white text-center py-2 rounded-lg font-medium transition shadow-md"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('navigation.register')}

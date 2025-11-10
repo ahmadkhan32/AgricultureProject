@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from '../withTranslation';
+import UCAEPLogo from '../Logo/UCAEPLogo';
 
 const AdminSidebar = () => {
   const { signOut } = useAuth();
@@ -84,13 +85,16 @@ const AdminSidebar = () => {
     <div className="w-64 bg-gradient-to-b from-indigo-950 via-indigo-900 to-indigo-950 shadow-2xl h-screen sticky top-0 border-r border-indigo-800/50 backdrop-blur-xl">
       <div className="p-6 h-full flex flex-col">
         {/* Logo/Brand */}
-        <div className="flex items-center space-x-3 mb-8 pb-6 border-b border-indigo-800/50">
-          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/30 ring-2 ring-indigo-500/20">
-            <span className="text-white font-bold text-xl">U</span>
-          </div>
-          <div>
-            <span className="font-bold text-xl text-white tracking-tight">{getTranslation('admin.sidebar.title', 'UCAEP')}</span>
-            <p className="text-xs text-indigo-300 font-medium">Admin Panel</p>
+        <div className="mb-8 pb-6 border-b border-indigo-800/50">
+          <div className="flex flex-col items-center">
+            <UCAEPLogo 
+              size="small" 
+              showText={true}
+              showFullName={false}
+              variant="dark"
+              linkTo="/"
+            />
+            <p className="text-xs text-indigo-300 font-medium mt-2">Admin Panel</p>
           </div>
         </div>
 
