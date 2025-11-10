@@ -28,7 +28,8 @@ class SocketService {
       return;
     }
 
-    const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || 'http://localhost:5000';
+    // In production, REACT_APP_SOCKET_URL should be set in Vercel environment variables
+    const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || (process.env.NODE_ENV === 'production' ? window.location.origin : 'http://localhost:5000');
 
     this.socket = io(SOCKET_URL, {
       transports: ['websocket', 'polling'],

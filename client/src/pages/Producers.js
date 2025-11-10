@@ -76,7 +76,7 @@ const Producers = () => {
         const allProducers = await crudService.producers.fetchAll({ status: 'approved' });
         
         // Transform API data to match component format
-        const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+        const API_URL = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api');
         const baseUrl = API_URL.replace('/api', '');
         
         const transformedProducers = allProducers.map(producer => {

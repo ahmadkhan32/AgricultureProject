@@ -1,7 +1,8 @@
 // API service for UCAEP website
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// In production, REACT_APP_API_URL should be set in Vercel environment variables
+const API_BASE_URL = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api');
 
 // Create axios instance
 const api = axios.create({
@@ -27,7 +28,9 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.message === 'Network Error' || error.code === 'ECONNREFUSED') {
-      console.error('❌ Cannot connect to backend. Make sure server is running on port 5000');
+      if (process.env.NODE_ENV === 'development') {
+        console.error('❌ Cannot connect to backend. Make sure server is running on port 5000');
+      }
       error.message = 'Cannot connect to server. Please check if backend is running.';
     } else if (!error.response) {
       error.message = 'Network error. Please check your connection.';

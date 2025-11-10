@@ -104,7 +104,7 @@ const ProducerForm = ({ producer, onSubmit, onCancel, isLoading }) => {
   const uploadImage = async (file) => {
     if (!file) return null;
 
-    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+    const API_URL = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api');
     const token = localStorage.getItem('token');
 
     try {
