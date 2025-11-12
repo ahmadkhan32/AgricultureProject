@@ -32,52 +32,21 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50">
-      {/* Header Section with Logo and Title */}
-      <div className="bg-white relative overflow-hidden">
-        {/* Background Pattern - Light Green Wavy Lines */}
-        <div className="absolute inset-0 opacity-10">
-          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="wavy" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-                <path d="M0,50 Q25,30 50,50 T100,50" stroke="#2d7a3f" strokeWidth="2" fill="none" />
-                <path d="M0,60 Q25,40 50,60 T100,60" stroke="#2d7a3f" strokeWidth="1.5" fill="none" />
-                <path d="M0,70 Q25,50 50,70 T100,70" stroke="#2d7a3f" strokeWidth="1" fill="none" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#wavy)" />
-          </svg>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 md:py-4 relative z-10">
-          <div className="flex items-center space-x-2 md:space-x-4 lg:space-x-6">
-            {/* UCAEP Logo - Compact for navbar */}
-            <div className="flex-shrink-0">
-              <UCAEPLogo 
-                size="small" 
-                showText={true}
-                showFullName={false}
-                variant="default"
-                linkTo="/"
-              />
-            </div>
-
-            {/* Main Title */}
-            <div className="hidden md:block flex-1 min-w-0">
-              <h1 className="text-orange-500 text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl italic truncate" style={{ fontFamily: 'cursive, serif' }}>
-                RÉSEAU INTERNATIONAL FORMATION AGRICOLE & RURALE
-              </h1>
-            </div>
-          </div>
-        </div>
-
-        {/* Green Separator Line */}
-        <div className="h-1 bg-green-600"></div>
-      </div>
-
       {/* Navigation Bar - Dark Blue */}
       <div className="bg-[#1e3a5f] shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-14">
+            {/* Logo */}
+            <div className="flex-shrink-0 mr-4">
+              <UCAEPLogo 
+                size="small" 
+                showText={false}
+                showFullName={false}
+                variant="dark"
+                linkTo="/"
+              />
+            </div>
+            
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-6 flex-1">
               {navigation.map((item) => (
@@ -164,6 +133,16 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center space-x-3">
+              {/* Logo for Mobile */}
+              <div className="flex-shrink-0 mr-2">
+                <UCAEPLogo 
+                  size="small" 
+                  showText={false}
+                  showFullName={false}
+                  variant="dark"
+                  linkTo="/"
+                />
+              </div>
               <button className="text-white hover:text-orange-400 transition">
                 <Search className="w-5 h-5" />
               </button>
