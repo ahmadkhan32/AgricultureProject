@@ -20,31 +20,38 @@ const LanguageSwitcher = ({ className = '', showLabel = true, size = 'default' }
     large: 'text-lg px-4 py-3',
   };
 
+  // Check if we're in a dark navbar context (parent has dark background)
+  const isDarkContext = className.includes('dark') || className.includes('navbar');
+  
   return (
     <div className={`relative ${className}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`
-          flex items-center space-x-2 bg-white border border-gray-300 rounded-lg shadow-sm
-          hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+          flex items-center space-x-2 rounded-lg shadow-sm
+          focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500
           transition-colors duration-200
           ${sizeClasses[size]}
+          ${isDarkContext 
+            ? 'bg-orange-500 hover:bg-orange-600 text-white border-0' 
+            : 'bg-white border border-gray-300 hover:bg-gray-50'
+          }
           ${isOpen ? 'ring-2 ring-primary-500 border-primary-500' : ''}
         `}
         aria-label="Select language"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
       >
-        <Globe className="w-4 h-4 text-gray-600" />
+        <Globe className={`w-4 h-4 ${isDarkContext ? 'text-white' : 'text-gray-600'}`} />
         {showLabel && (
-          <span className="text-gray-700 font-medium">
+          <span className={`font-medium ${isDarkContext ? 'text-white' : 'text-gray-700'}`}>
             {currentLangInfo.flag} {currentLangInfo.nativeName}
           </span>
         )}
         <ChevronDown 
-          className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
-            isOpen ? 'rotate-180' : ''
-          }`} 
+          className={`w-4 h-4 transition-transform duration-200 ${
+            isDarkContext ? 'text-white' : 'text-gray-500'
+          } ${isOpen ? 'rotate-180' : ''}`} 
         />
       </button>
 

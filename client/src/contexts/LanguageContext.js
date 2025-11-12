@@ -39,17 +39,19 @@ export const LanguageProvider = ({ children }) => {
 
   // Set language and update translations
   const setLanguage = (languageCode) => {
-    if (!LANGUAGES[languageCode.toUpperCase()]) {
+    const upperCode = languageCode.toUpperCase();
+    if (!LANGUAGES[upperCode]) {
       console.warn(`Language ${languageCode} not supported, falling back to ${DEFAULT_LANGUAGE}`);
       setCurrentLanguage(DEFAULT_LANGUAGE);
       setTranslations(translationFiles[DEFAULT_LANGUAGE]);
-      setIsRTL(LANGUAGES[DEFAULT_LANGUAGE.toUpperCase()].rtl);
+      const defaultUpper = DEFAULT_LANGUAGE.toUpperCase();
+      setIsRTL(LANGUAGES[defaultUpper]?.rtl || false);
       return;
     }
 
-    const language = LANGUAGES[languageCode.toUpperCase()];
-    setCurrentLanguage(languageCode);
-    setTranslations(translationFiles[languageCode] || translationFiles[DEFAULT_LANGUAGE]);
+    const language = LANGUAGES[upperCode];
+    setCurrentLanguage(languageCode.toLowerCase());
+    setTranslations(translationFiles[languageCode.toLowerCase()] || translationFiles[DEFAULT_LANGUAGE]);
     setIsRTL(language.rtl);
     
     // Save to localStorage
@@ -94,7 +96,8 @@ export const LanguageProvider = ({ children }) => {
 
   // Get current language info
   const getCurrentLanguageInfo = () => {
-    return LANGUAGES[currentLanguage.toUpperCase()] || LANGUAGES[DEFAULT_LANGUAGE.toUpperCase()];
+    const upperCode = currentLanguage.toUpperCase();
+    return LANGUAGES[upperCode] || LANGUAGES[DEFAULT_LANGUAGE.toUpperCase()];
   };
 
   // Get all available languages

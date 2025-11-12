@@ -1,18 +1,27 @@
 // Language configuration for Comorian context
+// Prioritizing French and Comorian for Comoros
 export const LANGUAGES = {
-  EN: {
-    code: 'en',
-    name: 'English',
-    nativeName: 'English',
-    flag: '🇺🇸',
-    direction: 'ltr',
-    rtl: false,
-  },
   FR: {
     code: 'fr',
     name: 'Français',
     nativeName: 'Français',
     flag: '🇫🇷',
+    direction: 'ltr',
+    rtl: false,
+  },
+  COM: {
+    code: 'com',
+    name: 'Comorian',
+    nativeName: 'Shikomori',
+    flag: '🇰🇲',
+    direction: 'ltr',
+    rtl: false,
+  },
+  EN: {
+    code: 'en',
+    name: 'English',
+    nativeName: 'English',
+    flag: '🇺🇸',
     direction: 'ltr',
     rtl: false,
   },
@@ -24,17 +33,10 @@ export const LANGUAGES = {
     direction: 'rtl',
     rtl: true,
   },
-  COM: {
-    code: 'com',
-    name: 'Comorian',
-    nativeName: 'Shikomori',
-    flag: '🇰🇲',
-    direction: 'ltr',
-    rtl: false,
-  },
 };
 
-export const DEFAULT_LANGUAGE = LANGUAGES.EN.code;
+// Default to French for Comoros context
+export const DEFAULT_LANGUAGE = LANGUAGES.FR.code;
 
 export const SUPPORTED_LANGUAGES = Object.values(LANGUAGES);
 
@@ -44,11 +46,12 @@ export const detectBrowserLanguage = () => {
   const langCode = browserLang.split('-')[0].toLowerCase();
   
   // Map browser language to supported languages
+  // Prioritize French and Comorian
   const languageMap = {
-    'en': LANGUAGES.EN.code,
     'fr': LANGUAGES.FR.code,
-    'ar': LANGUAGES.AR.code,
     'com': LANGUAGES.COM.code,
+    'en': LANGUAGES.EN.code,
+    'ar': LANGUAGES.AR.code,
   };
   
   return languageMap[langCode] || DEFAULT_LANGUAGE;

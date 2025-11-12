@@ -63,10 +63,8 @@ const Navbar = () => {
 
             {/* Right Side Controls */}
             <div className="hidden md:flex items-center space-x-4">
-              {/* Language Selector - Orange Circle */}
-              <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors cursor-pointer">
-                <span className="text-white font-bold text-sm uppercase">EN</span>
-              </div>
+              {/* Language Switcher */}
+              <LanguageSwitcher size="default" showLabel={false} className="dark navbar" />
               
               {/* Search Icon */}
               <button className="text-white hover:text-orange-400 transition">
