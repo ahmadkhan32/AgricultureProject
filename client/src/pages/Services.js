@@ -303,10 +303,10 @@ const Services = () => {
   });
 
   return (
-    <section className="bg-gray-50 min-h-screen py-16 px-6 md:px-12">
+    <section className="bg-gray-50 min-h-screen py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-12">
       {/* Header Section */}
       <div className="text-center mb-12">
-        <div className="inline-flex items-center justify-center bg-green-100 text-green-700 px-4 py-2 rounded-full mb-4">
+        <div className="inline-flex items-center justify-center bg-green-100 text-green-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4">
           <Users className="mr-2 w-5 h-5" />
           Nos Services
         </div>
@@ -319,7 +319,7 @@ const Services = () => {
       </div>
 
       {/* Search and Filter Section */}
-      <div className="bg-white shadow-md rounded-2xl p-6 mb-10 flex flex-col md:flex-row gap-4 justify-between items-center">
+      <div className="bg-white shadow-md rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 mb-6 sm:mb-8 md:mb-10 flex flex-col md:flex-row gap-3 sm:gap-4 justify-between items-center">
         <div className="relative w-full md:w-1/3">
           <Search className="absolute left-3 top-3 text-gray-400 w-5 h-5" />
           <input
@@ -348,7 +348,7 @@ const Services = () => {
 
       {/* Services Grid */}
       {filteredServices.length > 0 ? (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 justify-center">
           {filteredServices.map((service) => (
             <div
               key={service.id}
@@ -359,10 +359,10 @@ const Services = () => {
                 alt={service.title}
                 className="w-full h-48 object-contain bg-gray-100"
               />
-              <div className="p-6 flex-1 flex flex-col">
-                <div className="flex items-center justify-between mb-4">
+              <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col">
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
                   <div>{service.icon}</div>
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-green-100 text-green-800">
                     {service.category}
                   </span>
                 </div>

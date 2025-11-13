@@ -30,17 +30,17 @@ const NewsSection = ({ news, loading }) => {
   }
 
   return (
-    <section className="py-16 bg-bg-light">
+    <section className="py-8 sm:py-12 md:py-16 bg-bg-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="section-title">Actualités</h2>
-          <p className="section-subtitle">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-500 mb-3 sm:mb-4 uppercase tracking-wide">Actualités</h2>
+          <p className="text-sm sm:text-base md:text-lg text-text-medium max-w-3xl mx-auto px-4">
             Restez informé des dernières actualités dans le secteur agricole, d'élevage et de pêche
           </p>
         </div>
 
         {news && news.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {news.map((article) => {
               // Safely get date with fallback and validation
               const publishedDate = article.publishedAt || article.published_at || article.createdAt || article.created_at;
@@ -50,7 +50,7 @@ const NewsSection = ({ news, loading }) => {
               return (
                 <article key={article.id} className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-accent-200 hover:-translate-y-1">
                   {(article.imageUrl || article.image_url) && (
-                    <div className="relative h-48 overflow-hidden">
+                    <div className="relative h-40 sm:h-48 md:h-52 overflow-hidden">
                       <img
                         src={article.imageUrl || article.image_url}
                         alt={article.title}
@@ -58,23 +58,23 @@ const NewsSection = ({ news, loading }) => {
                       />
                     </div>
                   )}
-                  <div className="p-6">
-                    <div className="flex items-center text-xs text-text-light mb-3">
-                      <Calendar className="w-4 h-4 mr-1" />
+                  <div className="p-4 sm:p-5 md:p-6">
+                    <div className="flex items-center text-[10px] sm:text-xs text-text-light mb-2 sm:mb-3">
+                      <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
                       {isValidDate ? format(dateObj, 'dd MMM yyyy') : 'Date non disponible'}
                     </div>
-                    <h3 className="text-lg font-bold text-primary-500 mb-3 line-clamp-2 uppercase tracking-wide">
+                    <h3 className="text-base sm:text-lg font-bold text-primary-500 mb-2 sm:mb-3 line-clamp-2 uppercase tracking-wide">
                       {article.title}
                     </h3>
-                    <p className="text-sm text-text-medium mb-4 line-clamp-3 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-text-medium mb-3 sm:mb-4 line-clamp-3 leading-relaxed">
                       {article.excerpt || (article.content ? article.content.substring(0, 150) + '...' : '')}
                     </p>
                     <Link
                       to={`/news/${article.id}`}
-                      className="inline-flex items-center text-accent-500 hover:text-accent-600 font-semibold text-sm uppercase tracking-wide group"
+                      className="inline-flex items-center text-accent-500 hover:text-accent-600 font-semibold text-xs sm:text-sm uppercase tracking-wide group"
                     >
                       Lire la suite
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </article>

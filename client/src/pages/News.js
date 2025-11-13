@@ -163,63 +163,63 @@ const News = () => {
   };
 
   return (
-    <section className="bg-gray-50 py-16 px-6 md:px-12 min-h-screen">
-      {/* Section d’en-tête */}
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center bg-green-100 text-green-700 px-4 py-2 rounded-full mb-4">
-          <Newspaper className="mr-2 w-5 h-5" />
-          Actualités et annonces
+    <section className="bg-gray-50 py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-12 min-h-screen">
+      {/* Section d'en-tête */}
+      <div className="text-center mb-8 sm:mb-10 md:mb-12">
+        <div className="inline-flex items-center bg-green-100 text-green-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4">
+          <Newspaper className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
+          <span className="text-xs sm:text-sm">Actualités et annonces</span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-          Dernières actualités de l’agriculture, de l’élevage et de la pêche
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-3 sm:mb-4 px-4">
+          Dernières actualités de l'agriculture, de l'élevage et de la pêche
         </h1>
-        <p className="text-gray-600 max-w-3xl mx-auto">
-          Restez informé des derniers développements, communiqués officiels et événements à venir dans les secteurs agricoles, de l’élevage et de la pêche aux Comores.
+        <p className="text-sm sm:text-base text-gray-600 max-w-3xl mx-auto px-4">
+          Restez informé des derniers développements, communiqués officiels et événements à venir dans les secteurs agricoles, de l'élevage et de la pêche aux Comores.
         </p>
       </div>
 
       {/* Loading State */}
       {loading && (
-        <div className="text-center py-12">
+        <div className="text-center py-8 sm:py-12">
           <div className="spinner mx-auto mb-4"></div>
-          <p className="text-gray-600">Chargement des actualités...</p>
+          <p className="text-sm sm:text-base text-gray-600">Chargement des actualités...</p>
         </div>
       )}
 
       {/* News Grid */}
       {!loading && (
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {newsData.length > 0 ? (
             newsData.map((news) => (
               <div
                 key={news.id}
-                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+                className="bg-white rounded-xl sm:rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
                 onClick={() => news.apiData && navigate(`/news/${news.id}`)}
               >
                 <img
                   src={news.image}
                   alt={news.title}
-                  className="w-full h-56 object-cover"
+                  className="w-full h-40 sm:h-48 md:h-56 object-cover"
                   onError={(e) => {
                     e.target.src = agricultureNews;
                   }}
                 />
-                <div className="p-6">
-                  <div className="flex items-center justify-between text-sm mb-2">
+                <div className="p-4 sm:p-5 md:p-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 text-xs sm:text-sm mb-2 sm:mb-3">
                     <div className="flex items-center space-x-2">
-                      {categoryIcons[news.category] || <Newspaper className="w-5 h-5 text-gray-600" />}
+                      {categoryIcons[news.category] || <Newspaper className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />}
                       <span className="font-semibold text-gray-700">{news.category}</span>
                     </div>
                     <div className="flex items-center text-gray-500">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {news.date}
+                      <Calendar className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
+                      <span className="text-xs sm:text-sm">{news.date}</span>
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                  <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 mb-2 sm:mb-3 line-clamp-2">
                     {news.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-3">{news.description}</p>
+                  <p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4 line-clamp-3">{news.description}</p>
                   <button 
                     onClick={(e) => {
                       e.stopPropagation();
@@ -227,9 +227,9 @@ const News = () => {
                         navigate(`/news/${news.id}`);
                       }
                     }}
-                    className="inline-flex items-center text-green-700 font-medium hover:underline"
+                    className="inline-flex items-center text-green-700 font-medium hover:underline text-xs sm:text-sm"
                   >
-                    Lire la suite <ArrowRight className="ml-2 w-4 h-4" />
+                    Lire la suite <ArrowRight className="ml-1 sm:ml-2 w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
                 </div>
               </div>

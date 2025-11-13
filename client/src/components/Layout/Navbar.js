@@ -34,10 +34,10 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50">
       {/* Navigation Bar - Dark Blue */}
       <div className="bg-[#1e3a5f] shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-14">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-12 sm:h-14">
             {/* Logo */}
-            <div className="flex-shrink-0 mr-4">
+            <div className="flex-shrink-0 mr-2 sm:mr-4">
               <UCAEPLogo 
                 size="small" 
                 showText={false}
@@ -48,27 +48,27 @@ const Navbar = () => {
             </div>
             
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-6 flex-1">
+            <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 flex-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className="text-white hover:text-orange-400 transition font-bold text-xs md:text-sm uppercase tracking-wide flex items-center gap-1 group"
+                  className="text-white hover:text-orange-400 transition font-bold text-xs xl:text-sm uppercase tracking-wide flex items-center gap-1 group whitespace-nowrap"
                 >
                   {item.name}
-                  <ChevronDown className="w-4 h-4 opacity-70 group-hover:opacity-100 transition" />
+                  <ChevronDown className="w-3 h-3 xl:w-4 xl:h-4 opacity-70 group-hover:opacity-100 transition" />
                 </Link>
               ))}
             </div>
 
             {/* Right Side Controls */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
               {/* Language Switcher */}
-              <LanguageSwitcher size="default" showLabel={false} className="dark navbar" />
+              <LanguageSwitcher size="small" showLabel={false} className="dark navbar" />
               
               {/* Search Icon */}
-              <button className="text-white hover:text-orange-400 transition">
-                <Search className="w-5 h-5" />
+              <button className="text-white hover:text-orange-400 transition p-1.5">
+                <Search className="w-4 h-4 xl:w-5 xl:h-5" />
               </button>
 
               {/* User Menu */}
@@ -129,26 +129,21 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center space-x-3">
-              {/* Logo for Mobile */}
-              <div className="flex-shrink-0 mr-2">
-                <UCAEPLogo 
-                  size="small" 
-                  showText={false}
-                  showFullName={false}
-                  variant="dark"
-                  linkTo="/"
-                />
+            {/* Tablet/Mobile Menu Button */}
+            <div className="lg:hidden flex items-center space-x-2 sm:space-x-3">
+              {/* Language Switcher for Tablet/Mobile */}
+              <div className="hidden sm:block">
+                <LanguageSwitcher size="small" showLabel={false} className="dark navbar" />
               </div>
-              <button className="text-white hover:text-orange-400 transition">
-                <Search className="w-5 h-5" />
+              <button className="text-white hover:text-orange-400 transition p-1.5">
+                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-white hover:text-orange-400 focus:outline-none"
+                className="text-white hover:text-orange-400 focus:outline-none p-1.5"
+                aria-label="Toggle menu"
               >
-                {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {isOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
               </button>
             </div>
           </div>
@@ -159,10 +154,10 @@ const Navbar = () => {
         <div className="h-0.5 bg-white opacity-20 mt-0.5"></div>
       </div>
 
-      {/* Mobile Dropdown */}
+      {/* Mobile/Tablet Dropdown */}
       {isOpen && (
-        <div className="md:hidden bg-[#1e3a5f] border-t border-[#2a4a6f]">
-          <div className="px-4 pt-3 pb-4 space-y-2">
+        <div className="lg:hidden bg-[#1e3a5f] border-t border-[#2a4a6f]">
+          <div className="px-3 sm:px-4 pt-3 pb-4 space-y-2 max-h-[80vh] overflow-y-auto">
             {navigation.map((item) => (
               <Link
                 key={item.name}

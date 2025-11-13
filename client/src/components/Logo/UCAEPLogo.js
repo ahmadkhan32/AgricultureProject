@@ -11,28 +11,28 @@ const UCAEPLogo = ({
   className = '',
   linkTo = '/'
 }) => {
-  // Size configurations
+  // Size configurations - Responsive for all devices
   const sizes = {
     small: {
-      emblem: 'w-[100px] h-16 md:w-[100px] md:h-14', // Increased width for rectangular box
-      topText: 'text-[8px]',
-      acronym: 'text-xs',
-      fullName: 'text-[8px]',
+      emblem: 'w-[80px] h-12 sm:w-[90px] sm:h-14 md:w-[100px] md:h-16 lg:w-[100px] lg:h-14', // Responsive width for rectangular box
+      topText: 'text-[7px] sm:text-[8px]',
+      acronym: 'text-[10px] sm:text-xs',
+      fullName: 'text-[7px] sm:text-[8px]',
       spacing: 'space-y-0.5'
     },
     medium: {
-      emblem: 'w-20 h-20 md:w-24 md:h-24',
-      topText: 'text-xs md:text-sm',
-      acronym: 'text-sm md:text-base',
-      fullName: 'text-[10px] md:text-xs',
+      emblem: 'w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28',
+      topText: 'text-[10px] sm:text-xs md:text-sm',
+      acronym: 'text-xs sm:text-sm md:text-base',
+      fullName: 'text-[9px] sm:text-[10px] md:text-xs',
       spacing: 'space-y-1'
     },
     large: {
-      emblem: 'w-24 h-24 md:w-[88px] md:h-20',
-      topText: 'text-xs md:text-sm',
-      acronym: 'text-sm md:text-base',
-      fullName: 'text-[10px] md:text-xs',
-      spacing: 'space-y-1'
+      emblem: 'w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32',
+      topText: 'text-xs sm:text-sm md:text-base',
+      acronym: 'text-sm sm:text-base md:text-lg',
+      fullName: 'text-[10px] sm:text-xs md:text-sm',
+      spacing: 'space-y-1 sm:space-y-2'
     }
   };
 

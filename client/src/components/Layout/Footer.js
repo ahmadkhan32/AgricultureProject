@@ -40,10 +40,10 @@ const Footer = () => {
   return (
     <footer className="relative w-full overflow-hidden">
       {/* Header Section with Logos */}
-      <div className="bg-white px-6 md:px-12 py-4 border-b border-gray-200">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
+      <div className="bg-white px-4 sm:px-6 md:px-12 py-3 sm:py-4 border-b border-gray-200">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 max-w-7xl mx-auto">
           {/* UCAEP Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 w-full sm:w-auto flex justify-center sm:justify-start">
             <UCAEPLogo 
               size="small" 
               showText={true}
@@ -54,32 +54,32 @@ const Footer = () => {
           </div>
 
           {/* Connecting Line */}
-          <div className="flex-1 mx-4 relative">
+          <div className="hidden sm:block flex-1 mx-4 relative">
             <div className="h-0.5 bg-green-600 relative">
               <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-3 h-3 bg-green-600 rounded-full"></div>
             </div>
           </div>
 
           {/* UCAEP Actu Logo */}
-          <div className="flex items-center space-x-2 flex-shrink-0">
-            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-              <Mail className="w-6 h-6 text-blue-600" />
+          <div className="flex items-center space-x-2 flex-shrink-0 w-full sm:w-auto justify-center sm:justify-end">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+              <Mail className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
             </div>
-            <div className="text-blue-700 font-bold text-lg italic">UCAEP Actu</div>
+            <div className="text-blue-700 font-bold text-sm sm:text-lg italic">UCAEP Actu</div>
           </div>
         </div>
       </div>
 
       {/* Main Footer - Two Panel Layout */}
-      <div className="relative flex flex-col md:flex-row">
+      <div className="relative flex flex-col lg:flex-row">
         {/* Left Panel - Dark Blue */}
-        <div className="bg-[#1e3a5f] text-white flex-[1.3] px-6 md:px-12 py-10 md:py-16 relative min-h-full">
+        <div className="bg-[#1e3a5f] text-white flex-[1.3] px-4 sm:px-6 md:px-12 py-8 sm:py-10 md:py-16 relative min-h-full">
           {/* Diagonal separator - creates angled edge */}
-          <div className="absolute top-0 right-0 bottom-0 w-32 bg-[#1e3a5f] transform skew-x-[-12deg] origin-right hidden md:block z-0"></div>
+          <div className="absolute top-0 right-0 bottom-0 w-32 bg-[#1e3a5f] transform skew-x-[-12deg] origin-right hidden lg:block z-0"></div>
           
           <div className="h-full relative z-10 flex flex-col">
             {/* Grid Layout for Content */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 flex-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 flex-1">
             {/* Company Info */}
             <div className="space-y-4">
               <div className="flex flex-col items-start">
@@ -206,36 +206,36 @@ const Footer = () => {
         </div>
 
         {/* Right Panel - Green */}
-        <div className="bg-[#2d7a3f] text-white flex-1 px-6 md:px-12 py-10 md:py-16 relative min-h-full">
+        <div className="bg-[#2d7a3f] text-white flex-1 px-4 sm:px-6 md:px-12 py-8 sm:py-10 md:py-16 relative min-h-full">
           {/* Diagonal separator - creates angled edge */}
-          <div className="absolute top-0 left-0 bottom-0 w-32 bg-[#2d7a3f] transform skew-x-[-12deg] origin-left hidden md:block z-0"></div>
+          <div className="absolute top-0 left-0 bottom-0 w-32 bg-[#2d7a3f] transform skew-x-[-12deg] origin-left hidden lg:block z-0"></div>
           <div className="h-full flex flex-col justify-center relative z-10">
-            <div className="w-full max-w-lg mx-auto space-y-6">
+            <div className="w-full max-w-lg mx-auto space-y-4 sm:space-y-6">
               {/* Newsletter Heading */}
               <div className="text-center space-y-2">
-                <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold">
+                <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">
                   Abonnez-vous à notre newsletter
                 </h3>
-                <p className="text-gray-100 text-sm md:text-base">
+                <p className="text-gray-100 text-xs sm:text-sm md:text-base">
                   Recevez les dernières actualités et informations directement dans votre boîte de réception
                 </p>
               </div>
 
               {/* Newsletter Form */}
-              <form onSubmit={handleNewsletterSubmit} className="space-y-5">
+              <form onSubmit={handleNewsletterSubmit} className="space-y-3 sm:space-y-5">
                 <div>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Votre adresse email"
-                    className="w-full px-5 py-4 rounded-lg bg-white text-gray-900 border-2 border-red-500 focus:outline-none focus:ring-2 focus:ring-orange-400 text-base"
+                    className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-lg bg-white text-gray-900 border-2 border-red-500 focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm sm:text-base"
                     required
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-[#1e3a5f] hover:bg-[#2a4a6f] text-white font-semibold px-6 py-4 rounded-lg transition-colors uppercase tracking-wide text-sm md:text-base shadow-lg"
+                  className="w-full bg-[#1e3a5f] hover:bg-[#2a4a6f] text-white font-semibold px-4 sm:px-6 py-3 sm:py-4 rounded-lg transition-colors uppercase tracking-wide text-xs sm:text-sm md:text-base shadow-lg"
                 >
                   S'abonner
                 </button>

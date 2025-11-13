@@ -35,16 +35,16 @@ const ThematicsSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-bg-light">
+    <section className="py-8 sm:py-12 md:py-16 bg-bg-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="section-title">Nos Thématiques</h2>
-          <p className="section-subtitle">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-500 mb-3 sm:mb-4 uppercase tracking-wide">Nos Thématiques</h2>
+          <p className="text-sm sm:text-base md:text-lg text-text-medium max-w-3xl mx-auto px-4">
             Les domaines d'intervention prioritaires pour le développement durable du secteur
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {thematics.map((thematic, index) => {
             const Icon = thematic.icon;
             return (
@@ -54,7 +54,7 @@ const ThematicsSection = () => {
                 className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
               >
                 {/* Background Image with Overlay */}
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
                   <img
                     src={thematic.image}
                     alt={thematic.title}
@@ -66,21 +66,21 @@ const ThematicsSection = () => {
                   <div className={`absolute inset-0 bg-gradient-to-br ${thematic.color} opacity-80`}></div>
                   
                   {/* Content Overlay */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                    <div className="mb-4">
-                      <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-3 group-hover:bg-white/30 transition-colors">
-                        <Icon className="w-6 h-6 text-white" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5 md:p-6 text-white">
+                    <div className="mb-3 sm:mb-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center mb-2 sm:mb-3 group-hover:bg-white/30 transition-colors">
+                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                       </div>
                     </div>
-                    <h3 className="text-2xl font-bold mb-2 uppercase tracking-wide">
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2 uppercase tracking-wide">
                       {thematic.title}
                     </h3>
-                    <p className="text-sm text-white/90 leading-relaxed mb-4">
+                    <p className="text-xs sm:text-sm text-white/90 leading-relaxed mb-3 sm:mb-4">
                       {thematic.description}
                     </p>
-                    <div className="flex items-center text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center text-xs sm:text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                       En savoir plus
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
                 </div>
