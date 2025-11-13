@@ -51,12 +51,12 @@ const Home = () => {
       <PartnersSection />
 
       {/* Section Services - Réseau FAR Style */}
-      <section className="bg-primary-500 text-white py-8 sm:py-12 md:py-16 relative overflow-hidden">
+      <section className="bg-primary-500 text-white py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-primary-600 opacity-20"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-8 sm:mb-10 md:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 uppercase tracking-wide">Nos Services</h2>
-            <p className="text-primary-100 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4 uppercase tracking-wide">Nos Services</h2>
+            <p className="text-primary-100 text-lg max-w-2xl mx-auto">
               Soutien complet pour les secteurs agricole, d'élevage et de pêche
             </p>
           </div>
@@ -65,28 +65,28 @@ const Home = () => {
       </section>
 
       {/* Section d'Appel à l'action - Réseau FAR Style */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-primary-500 text-center relative overflow-hidden">
+      <section className="py-16 lg:py-20 bg-primary-500 text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-primary-600 opacity-30"></div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4 uppercase tracking-wide">
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 uppercase tracking-wide">
             Prêt à rejoindre notre communauté ?
           </h2>
-          <p className="text-sm sm:text-base md:text-lg text-primary-100 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed px-4">
+          <p className="text-lg text-primary-100 mb-8 max-w-2xl mx-auto leading-relaxed">
             Inscrivez-vous comme producteur et connectez-vous avec la communauté agricole des Comores.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               to="/register"
-              className="bg-accent-500 hover:bg-accent-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 text-sm sm:text-base uppercase tracking-wide shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center w-full sm:w-auto"
+              className="bg-accent-500 hover:bg-accent-600 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 text-base uppercase tracking-wide shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center"
             >
-              <Users className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+              <Users className="w-5 h-5 mr-2" />
               S'inscrire maintenant
             </Link>
             <Link
               to="/contact"
-              className="border-2 border-white text-white hover:bg-white hover:text-primary-500 font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 text-sm sm:text-base uppercase tracking-wide shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center w-full sm:w-auto"
+              className="border-2 border-white text-white hover:bg-white hover:text-primary-500 font-bold py-4 px-8 rounded-lg transition-all duration-300 text-base uppercase tracking-wide shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center"
             >
-              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+              <CheckCircle className="w-5 h-5 mr-2" />
               Nous contacter
             </Link>
           </div>

@@ -36,7 +36,7 @@ const Navbar = () => {
       <div className="bg-[#1e3a5f] shadow-lg">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="flex justify-between items-center h-12 sm:h-14">
-            {/* Logo */}
+            {/* Logo - Visible on all screens */}
             <div className="flex-shrink-0 mr-2 sm:mr-4">
               <UCAEPLogo 
                 size="small" 
@@ -48,7 +48,7 @@ const Navbar = () => {
             </div>
             
             {/* Desktop Menu */}
-            <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 flex-1">
+            <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 flex-1 ml-4">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -61,13 +61,13 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Right Side Controls */}
+            {/* Right Side Controls - Desktop */}
             <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
               {/* Language Switcher */}
-              <LanguageSwitcher size="small" showLabel={false} className="dark navbar" />
+              <LanguageSwitcher size="default" showLabel={false} className="dark navbar" />
               
               {/* Search Icon */}
-              <button className="text-white hover:text-orange-400 transition p-1.5">
+              <button className="text-white hover:text-orange-400 transition p-1" aria-label="Search">
                 <Search className="w-4 h-4 xl:w-5 xl:h-5" />
               </button>
 
@@ -76,9 +76,10 @@ const Navbar = () => {
                 <div className="relative">
                   <button
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                    className="flex items-center gap-2 text-white hover:text-orange-400 transition"
+                    className="flex items-center gap-2 text-white hover:text-orange-400 transition p-1"
+                    aria-label="User menu"
                   >
-                    <User className="w-5 h-5" />
+                    <User className="w-4 h-4 xl:w-5 xl:h-5" />
                   </button>
 
                   {isUserMenuOpen && (
@@ -112,16 +113,16 @@ const Navbar = () => {
               )}
 
               {!user && (
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 xl:gap-3">
                   <Link
                     to="/login"
-                    className="text-white hover:text-orange-400 text-sm font-medium transition"
+                    className="text-white hover:text-orange-400 text-xs xl:text-sm font-medium transition whitespace-nowrap"
                   >
                     {t('navigation.login')}
                   </Link>
                   <Link
                     to="/register"
-                    className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-md"
+                    className="bg-orange-500 hover:bg-orange-600 text-white px-3 xl:px-4 py-1.5 xl:py-2 rounded-lg text-xs xl:text-sm font-medium transition shadow-md whitespace-nowrap"
                   >
                     {t('navigation.register')}
                   </Link>
@@ -129,18 +130,22 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Tablet/Mobile Menu Button */}
+            {/* Mobile/Tablet Menu Button */}
             <div className="lg:hidden flex items-center space-x-2 sm:space-x-3">
-              {/* Language Switcher for Tablet/Mobile */}
+              {/* Language Switcher - Mobile */}
               <div className="hidden sm:block">
                 <LanguageSwitcher size="small" showLabel={false} className="dark navbar" />
               </div>
-              <button className="text-white hover:text-orange-400 transition p-1.5">
+              
+              {/* Search Icon - Mobile */}
+              <button className="text-white hover:text-orange-400 transition p-1" aria-label="Search">
                 <Search className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
+              
+              {/* Menu Toggle */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-white hover:text-orange-400 focus:outline-none p-1.5"
+                className="text-white hover:text-orange-400 focus:outline-none p-1"
                 aria-label="Toggle menu"
               >
                 {isOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
@@ -156,20 +161,21 @@ const Navbar = () => {
 
       {/* Mobile/Tablet Dropdown */}
       {isOpen && (
-        <div className="lg:hidden bg-[#1e3a5f] border-t border-[#2a4a6f]">
-          <div className="px-3 sm:px-4 pt-3 pb-4 space-y-2 max-h-[80vh] overflow-y-auto">
+        <div className="lg:hidden bg-[#1e3a5f] border-t border-[#2a4a6f] max-h-[calc(100vh-3.5rem)] overflow-y-auto">
+          <div className="px-3 sm:px-4 pt-3 pb-4 space-y-1">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className="block text-white hover:text-orange-400 text-base font-bold py-2 border-b border-[#2a4a6f] uppercase tracking-wide"
+                className="block text-white hover:text-orange-400 text-sm sm:text-base font-bold py-2 sm:py-2.5 border-b border-[#2a4a6f] uppercase tracking-wide transition"
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
 
-            <div className="pt-3">
+            {/* Language Switcher - Mobile */}
+            <div className="pt-3 sm:hidden">
               <LanguageSwitcher size="default" showLabel={true} />
             </div>
 
@@ -177,21 +183,21 @@ const Navbar = () => {
               <div className="pt-3 border-t border-[#2a4a6f] space-y-2">
                 <Link
                   to="/dashboard"
-                  className="block text-white hover:text-orange-400 py-2"
+                  className="block text-white hover:text-orange-400 py-2 text-sm sm:text-base transition"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('navigation.dashboard')}
                 </Link>
                 <Link
                   to="/producer/profile"
-                  className="block text-white hover:text-orange-400 py-2"
+                  className="block text-white hover:text-orange-400 py-2 text-sm sm:text-base transition"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('producer_profile.title')}
                 </Link>
                 <button
                   onClick={handleSignOut}
-                  className="w-full text-left text-white hover:text-red-300 py-2 font-medium"
+                  className="w-full text-left text-white hover:text-red-300 py-2 font-medium text-sm sm:text-base transition"
                 >
                   {t('navigation.logout')}
                 </button>
@@ -200,14 +206,14 @@ const Navbar = () => {
               <div className="pt-3 border-t border-[#2a4a6f] space-y-2">
                 <Link
                   to="/login"
-                  className="block text-white hover:text-orange-400 py-2"
+                  className="block text-white hover:text-orange-400 py-2 text-sm sm:text-base transition"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('navigation.login')}
                 </Link>
                 <Link
                   to="/register"
-                  className="block bg-orange-500 hover:bg-orange-600 text-white text-center py-2 rounded-lg font-medium transition shadow-md"
+                  className="block bg-orange-500 hover:bg-orange-600 text-white text-center py-2.5 sm:py-3 rounded-lg font-medium transition shadow-md text-sm sm:text-base"
                   onClick={() => setIsOpen(false)}
                 >
                   {t('navigation.register')}

@@ -41,30 +41,30 @@ const ActionsSection = () => {
   ];
 
   return (
-    <section className="py-8 sm:py-12 md:py-16 bg-white">
+    <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 sm:mb-10 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-500 mb-3 sm:mb-4 uppercase tracking-wide">Nos Actions</h2>
-          <p className="text-sm sm:text-base md:text-lg text-text-medium max-w-3xl mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="section-title">Nos Actions</h2>
+          <p className="section-subtitle">
             Les actions clés que nous menons pour soutenir le développement agricole, d'élevage et de pêche aux Comores
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8">
           {actions.map((action, index) => {
             const Icon = action.icon;
             return (
               <div
                 key={index}
-                className="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-4 sm:p-5 md:p-6 border border-gray-100 hover:border-accent-200 hover:-translate-y-1"
+                className="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-100 hover:border-accent-200 hover:-translate-y-1"
               >
-                <div className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 ${action.bgColor} rounded-lg flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <Icon className={`w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 ${action.color}`} />
+                <div className={`w-16 h-16 ${action.bgColor} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <Icon className={`w-8 h-8 ${action.color}`} />
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-primary-500 mb-2 sm:mb-3 uppercase tracking-wide">
+                <h3 className="text-lg font-bold text-primary-500 mb-3 uppercase tracking-wide">
                   {action.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-text-medium leading-relaxed">
+                <p className="text-sm text-text-medium leading-relaxed">
                   {action.description}
                 </p>
               </div>

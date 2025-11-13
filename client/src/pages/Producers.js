@@ -144,76 +144,78 @@ const Producers = () => {
   );
 
   return (
-    <section className="bg-gray-50 min-h-screen py-16 px-6 md:px-12">
+    <section className="bg-gray-50 min-h-screen py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-12">
       {/* Header */}
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center justify-center bg-green-100 text-green-700 px-4 py-2 rounded-full mb-4">
-          <Leaf className="mr-2 w-5 h-5" />
+      <div className="text-center mb-8 sm:mb-12">
+        <div className="inline-flex items-center justify-center bg-green-100 text-green-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4 text-xs sm:text-sm">
+          <Leaf className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
           Nos Producteurs
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-3 sm:mb-4 px-2">
           Découvrez nos producteurs
-            </h1>
-        <p className="text-gray-600 max-w-3xl mx-auto">
+        </h1>
+        <p className="text-sm sm:text-base text-gray-600 max-w-3xl mx-auto px-4">
           Découvrez les agriculteurs, éleveurs et pêcheurs locaux membres de notre réseau.
           Connectez-vous avec les producteurs de votre région et explorez leurs produits.
-            </p>
-          </div>
+        </p>
+      </div>
 
       {/* Search and Filters */}
-      <div className="bg-white shadow-md rounded-2xl p-6 mb-10 flex flex-col md:flex-row gap-4 justify-between items-center">
-        <div className="relative w-full md:w-1/3">
-          <Search className="absolute left-3 top-3 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
+      <div className="bg-white shadow-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-8 sm:mb-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-between items-stretch sm:items-center">
+        <div className="relative w-full sm:w-1/2 md:w-1/3">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+          <input
+            type="text"
             placeholder="Rechercher un producteur..."
-            className="pl-10 pr-4 py-2 border rounded-full w-full"
+            className="pl-9 sm:pl-10 pr-4 py-2 sm:py-2.5 border rounded-full w-full focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none text-sm sm:text-base"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-                />
-              </div>
-                <select
-          className="border rounded-full px-4 py-2"
-          value={region}
-          onChange={(e) => setRegion(e.target.value)}
-        >
-          <option>Toutes les régions</option>
-          <option>Grande Comore</option>
-          <option>Anjouan</option>
-          <option>Mohéli</option>
-                </select>
-              <select
-          className="border rounded-full px-4 py-2"
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-        >
-          <option>Tous les types</option>
-          <option>Agriculture</option>
-          <option>Élevage</option>
-          <option>Pêche</option>
-              </select>
-            </div>
+          />
+        </div>
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
+          <select
+            className="border rounded-full px-3 sm:px-4 py-2 sm:py-2.5 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none text-sm sm:text-base w-full sm:w-auto"
+            value={region}
+            onChange={(e) => setRegion(e.target.value)}
+          >
+            <option>Toutes les régions</option>
+            <option>Grande Comore</option>
+            <option>Anjouan</option>
+            <option>Mohéli</option>
+          </select>
+          <select
+            className="border rounded-full px-3 sm:px-4 py-2 sm:py-2.5 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none text-sm sm:text-base w-full sm:w-auto"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+          >
+            <option>Tous les types</option>
+            <option>Agriculture</option>
+            <option>Élevage</option>
+            <option>Pêche</option>
+          </select>
+        </div>
+      </div>
 
       {/* Loading State */}
       {isLoading && (
-        <div className="text-center py-12">
+        <div className="text-center py-8 sm:py-12">
           <div className="spinner mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading producers...</p>
+          <p className="text-sm sm:text-base text-gray-600">Chargement des producteurs...</p>
         </div>
       )}
 
       {/* Producers Grid */}
       {!isLoading && (
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           {filtered.length > 0 ? filtered.map((producer) => (
           <div
             key={producer.id}
-            className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
+            className="bg-white rounded-xl sm:rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
           >
             <img
               src={producer.image || getDefaultImage(producer.business_type)}
               alt={producer.name || producer.business_name}
-              className="w-full h-56 object-cover"
+              className="w-full h-48 sm:h-56 object-cover"
               onError={(e) => {
                 // Fallback to default image if uploaded image fails to load
                 if (e.target.src !== getDefaultImage(producer.business_type)) {
@@ -221,37 +223,37 @@ const Producers = () => {
                 }
               }}
             />
-            <div className="p-6">
-              <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
+            <div className="p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 text-xs sm:text-sm text-gray-500 mb-3">
                 <span className="flex items-center">
-                  <MapPin className="w-4 h-4 mr-1" /> {producer.region}
+                  <MapPin className="w-3 h-3 sm:w-4 sm:h-4 mr-1" /> {producer.region}
                 </span>
                 <span className="flex items-center">
-                  {producer.type === "Agriculture" && <Leaf className="w-4 h-4 text-green-600" />}
-                  {producer.type === "Pêche" && <Fish className="w-4 h-4 text-blue-600" />}
-                  {producer.type === "Élevage" && <PawPrint className="w-4 h-4 text-amber-600" />}
+                  {producer.type === "Agriculture" && <Leaf className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />}
+                  {producer.type === "Pêche" && <Fish className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />}
+                  {producer.type === "Élevage" && <PawPrint className="w-3 h-3 sm:w-4 sm:h-4 text-amber-600" />}
                   <span className="ml-1">{producer.type}</span>
-                      </span>
-                    </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">{producer.name}</h3>
-              <p className="text-gray-600 text-sm mb-4">
+                </span>
+              </div>
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 line-clamp-1">{producer.name || producer.business_name}</h3>
+              <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 line-clamp-2">
                 {producer.description || `Produits : ${producer.products?.join(", ") || "Non spécifié"}`}
               </p>
               <button 
                 onClick={() => handleReadMore(producer)}
-                className="inline-flex items-center text-green-700 font-medium hover:underline"
+                className="inline-flex items-center text-green-700 font-medium hover:underline text-sm sm:text-base"
               >
                 {producer.isGenerated ? (
                   <>
-                    <Eye className="w-4 h-4 mr-2" />
+                    <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                     Lire le profil complet →
                   </>
                 ) : (
                   'Voir le profil →'
                 )}
               </button>
-                        </div>
-                  </div>
+            </div>
+          </div>
                 )) : (
                   <div className="col-span-3 text-center py-12">
                     <p className="text-gray-600 text-lg">No producers found matching your criteria.</p>

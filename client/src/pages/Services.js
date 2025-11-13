@@ -305,35 +305,35 @@ const Services = () => {
   return (
     <section className="bg-gray-50 min-h-screen py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-12">
       {/* Header Section */}
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center justify-center bg-green-100 text-green-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4">
-          <Users className="mr-2 w-5 h-5" />
+      <div className="text-center mb-8 sm:mb-12">
+        <div className="inline-flex items-center justify-center bg-green-100 text-green-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full mb-3 sm:mb-4 text-xs sm:text-sm">
+          <Users className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
           Nos Services
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-3 sm:mb-4 px-2">
           Des programmes complets de soutien
         </h1>
-        <p className="text-gray-600 max-w-3xl mx-auto">
+        <p className="text-sm sm:text-base text-gray-600 max-w-3xl mx-auto px-4">
           Conçus pour renforcer les professionnels de l'agriculture, de l'élevage et de la pêche à travers les Comores.
         </p>
       </div>
 
       {/* Search and Filter Section */}
-      <div className="bg-white shadow-md rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 mb-6 sm:mb-8 md:mb-10 flex flex-col md:flex-row gap-3 sm:gap-4 justify-between items-center">
-        <div className="relative w-full md:w-1/3">
-          <Search className="absolute left-3 top-3 text-gray-400 w-5 h-5" />
+      <div className="bg-white shadow-md rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-8 sm:mb-10 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-between items-stretch sm:items-center">
+        <div className="relative w-full sm:w-1/2 md:w-1/3">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
           <input
             type="text"
             placeholder="Rechercher un service..."
-            className="pl-10 pr-4 py-2 border rounded-full w-full focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
+            className="pl-9 sm:pl-10 pr-4 py-2 sm:py-2.5 border rounded-full w-full focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none text-sm sm:text-base"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="flex items-center space-x-2 w-full md:w-auto">
-          <Filter className="w-5 h-5 text-gray-400" />
+        <div className="flex items-center space-x-2 w-full sm:w-auto">
+          <Filter className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0" />
           <select
-            className="border rounded-full px-4 py-2 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
+            className="border rounded-full px-3 sm:px-4 py-2 sm:py-2.5 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none w-full sm:w-auto text-sm sm:text-base"
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
@@ -352,31 +352,31 @@ const Services = () => {
           {filteredServices.map((service) => (
             <div
               key={service.id}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
+              className="bg-white rounded-xl sm:rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col"
             >
               <img
                 src={service.image}
                 alt={service.title}
-                className="w-full h-48 object-contain bg-gray-100"
+                className="w-full h-40 sm:h-48 object-contain bg-gray-100"
               />
-              <div className="p-4 sm:p-5 md:p-6 flex-1 flex flex-col">
+              <div className="p-4 sm:p-6 flex-1 flex flex-col">
                 <div className="flex items-center justify-between mb-3 sm:mb-4">
-                  <div>{service.icon}</div>
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-[10px] sm:text-xs font-medium bg-green-100 text-green-800">
+                  <div className="scale-75 sm:scale-100">{service.icon}</div>
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
                     {service.category}
                   </span>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-3 line-clamp-2">
                   {service.title}
                 </h3>
-                 <p className="text-gray-600 mb-6">{service.description}</p>
+                 <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 line-clamp-3">{service.description}</p>
                  <button 
                    onClick={() => handleReadMore(service)}
-                   className="mt-auto inline-flex items-center text-green-700 font-medium hover:underline"
+                   className="mt-auto inline-flex items-center text-green-700 font-medium hover:underline text-sm sm:text-base"
                  >
                    {service.isGenerated ? (
                      <>
-                       <Eye className="w-4 h-4 mr-2" />
+                       <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                        Lire l'article complet →
                      </>
                    ) : (
