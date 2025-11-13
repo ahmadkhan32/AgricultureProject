@@ -31,39 +31,39 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-blue-500">
+    <section className="py-8 sm:py-12 md:py-16 bg-blue-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="section-title">Nos Services</h2>
-          <p className="section-subtitle text-white">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Nos Services</h2>
+          <p className="text-sm sm:text-base text-blue-100 max-w-3xl mx-auto px-2">
             Soutien complet pour les secteurs agricole, d'élevage et de pêche
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <div key={index} className="card hover:shadow-lg transition-shadow">
-                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-primary-600" />
+              <div key={index} className="bg-white rounded-lg shadow-md p-4 sm:p-6 hover:shadow-lg transition-shadow">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+                  <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{service.title}</h3>
-                <p className="text-gray-600 mb-4">{service.description}</p>
-                <ul className="space-y-2 mb-6">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">{service.title}</h3>
+                <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">{service.description}</p>
+                <ul className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6">
                   {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-sm text-gray-600">
-                      <div className="w-1.5 h-1.5 bg-primary-600 rounded-full mr-2"></div>
+                    <li key={featureIndex} className="flex items-center text-xs sm:text-sm text-gray-600">
+                      <div className="w-1.5 h-1.5 bg-primary-600 rounded-full mr-2 flex-shrink-0"></div>
                       {feature}
                     </li>
                   ))}
                 </ul>
                 <Link
                   to="/services"
-                  className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
+                  className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium text-sm sm:text-base"
                 >
                   En savoir plus
-                  <ArrowRight className="w-4 h-4 ml-1" />
+                  <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-1" />
                 </Link>
               </div>
             );
