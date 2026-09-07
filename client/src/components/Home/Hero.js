@@ -5,63 +5,198 @@ import { ArrowRight, Play } from 'lucide-react';
 const Hero = () => {
   return (
     <section
-      className="relative text-white min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] flex items-center"
       style={{
-        backgroundImage: `url(/images/hero_bg_hd.jpg)`,
+        position: 'relative',
+        minHeight: '100vh',
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        backgroundImage: 'url(/images/hero_bg_hd.jpg)',
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        /* Fallback color while image loads */
+        backgroundColor: '#1a3d1a',
+        /* WebKit fix for older Safari/Chrome */
+        WebkitBackgroundSize: 'cover',
       }}
     >
-      {/* Overlay for better contrast */}
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/40"></div>
+      {/* Dark gradient overlay — left side darker for text readability */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background:
+            'linear-gradient(to right, rgba(10,30,10,0.88) 0%, rgba(10,30,10,0.65) 55%, rgba(10,30,10,0.30) 100%)',
+          /* Also add a subtle bottom gradient for mobile where layout stacks */
+          backgroundImage:
+            'linear-gradient(to right, rgba(10,30,10,0.88) 0%, rgba(10,30,10,0.65) 55%, rgba(10,30,10,0.30) 100%), linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%)',
+        }}
+      />
 
       {/* Content */}
-      <div className="relative max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-center min-h-[50vh] sm:min-h-[60vh] md:min-h-[70vh]">
-          {/* Left Column */}
-          <div className="order-2 lg:order-1 flex flex-col justify-center">
-            <h1 className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold mb-2 sm:mb-3 md:mb-4 lg:mb-6 leading-tight">
-              Union des chambres d'agriculture, d'élevage et de la pêche des Comores
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          width: '100%',
+          maxWidth: '1280px',
+          margin: '0 auto',
+          padding: '80px 16px 60px',
+          boxSizing: 'border-box',
+        }}
+      >
+        <div className="hero-grid">
+          {/* Left Column — Text */}
+          <div className="hero-left">
+            <h1
+              style={{
+                fontSize: 'clamp(1.4rem, 4vw, 3.5rem)',
+                fontWeight: '800',
+                color: '#ffffff',
+                lineHeight: '1.2',
+                marginBottom: '20px',
+                textShadow: '0 2px 12px rgba(0,0,0,0.6)',
+                fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
+              }}
+            >
+              Union des chambres d&apos;agriculture,
+              <br />
+              d&apos;élevage et de la pêche des Comores
             </h1>
-            <p className="text-xs sm:text-sm md:text-base lg:text-lg text-primary-100 mb-3 sm:mb-4 md:mb-6 lg:mb-8 leading-relaxed max-w-2xl">
-              C'est une institution nationale comorienne qui regroupe les trois chambres
-              insulaires d'agriculture, d'élevage et de la pêche (Ngazidja, Mohéli, Anjouan)...
+            <p
+              style={{
+                fontSize: 'clamp(0.9rem, 2vw, 1.15rem)',
+                color: 'rgba(220,240,220,0.95)',
+                marginBottom: '36px',
+                lineHeight: '1.7',
+                maxWidth: '540px',
+                textShadow: '0 1px 6px rgba(0,0,0,0.5)',
+                fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
+              }}
+            >
+              C&apos;est une institution nationale comorienne qui regroupe les trois chambres
+              insulaires d&apos;agriculture, d&apos;élevage et de la pêche (Ngazidja, Mohéli, Anjouan)...
             </p>
 
-            <div className="flex flex-col xs:flex-row gap-2 sm:gap-3 md:gap-4">
+            <div className="hero-buttons">
               <Link
                 to="/register"
-                className="bg-accent-500 text-white hover:bg-accent-600 font-medium py-2 sm:py-2.5 md:py-3 px-3 sm:px-4 md:px-6 lg:px-8 rounded-lg transition flex items-center justify-center text-xs sm:text-sm md:text-base shadow-lg hover:shadow-xl"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  backgroundColor: '#f97316',
+                  color: '#fff',
+                  fontWeight: '600',
+                  padding: '14px 28px',
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  fontSize: 'clamp(0.85rem, 1.5vw, 1rem)',
+                  boxShadow: '0 4px 20px rgba(249,115,22,0.5)',
+                  transition: 'background-color 0.2s, transform 0.2s, box-shadow 0.2s',
+                  fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.backgroundColor = '#ea6a00';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 8px 28px rgba(249,115,22,0.6)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.backgroundColor = '#f97316';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(249,115,22,0.5)';
+                }}
               >
                 Rejoignez notre communauté
-                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1 sm:ml-1.5 md:ml-2" />
+                <ArrowRight size={18} />
               </Link>
 
               <Link
                 to="/about"
-                className="border-2 border-white text-white hover:bg-white hover:text-primary-500 font-medium py-2 sm:py-2.5 md:py-3 px-3 sm:px-4 md:px-6 lg:px-8 rounded-lg transition flex items-center justify-center text-xs sm:text-sm md:text-base shadow-lg hover:shadow-xl"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  backgroundColor: 'transparent',
+                  color: '#fff',
+                  fontWeight: '600',
+                  padding: '13px 28px',
+                  borderRadius: '8px',
+                  textDecoration: 'none',
+                  fontSize: 'clamp(0.85rem, 1.5vw, 1rem)',
+                  border: '2px solid rgba(255,255,255,0.75)',
+                  backdropFilter: 'blur(4px)',
+                  WebkitBackdropFilter: 'blur(4px)',
+                  transition: 'background-color 0.2s, border-color 0.2s, transform 0.2s',
+                  fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.15)';
+                  e.currentTarget.style.borderColor = '#fff';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.75)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
               >
                 Découvrir le réseau
-                <Play className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 ml-1 sm:ml-1.5 md:ml-2" />
+                <Play size={16} />
               </Link>
             </div>
           </div>
 
-          {/* Right Column */}
-          <div className="relative order-1 lg:order-2 flex items-center justify-center">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 border border-white/20 w-full max-w-md">
-              <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
+          {/* Right Column — Stats Card */}
+          <div className="hero-right">
+            <div
+              style={{
+                backgroundColor: 'rgba(10,30,10,0.75)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                borderRadius: '16px',
+                padding: 'clamp(20px, 4vw, 40px)',
+                maxWidth: '380px',
+                width: '100%',
+              }}
+            >
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: 'clamp(16px, 3vw, 28px)',
+                }}
+              >
                 {[
-                  { number: '1000', label: 'Active Producers' },
-                  { number: '4', label: 'Regions' },
-                  { number: '25+', label: 'Partners' },
-                  { number: '15+', label: 'Years' },
+                  { number: '1000', label: 'Producteurs actifs' },
+                  { number: '4', label: 'Régions' },
+                  { number: '25+', label: 'Partenaires' },
+                  { number: '15+', label: 'Années' },
                 ].map((item, i) => (
-                  <div key={i} className="text-center">
-                    <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-accent-300 mb-1 sm:mb-2">
+                  <div key={i} style={{ textAlign: 'center', padding: '8px 0' }}>
+                    <div
+                      style={{
+                        fontSize: 'clamp(1.6rem, 4vw, 2.8rem)',
+                        fontWeight: '800',
+                        color: '#f97316',
+                        lineHeight: '1',
+                        marginBottom: '6px',
+                        fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
+                      }}
+                    >
                       {item.number}
                     </div>
-                    <div className="text-xs sm:text-sm text-primary-100 leading-tight">{item.label}</div>
+                    <div
+                      style={{
+                        fontSize: 'clamp(0.75rem, 1.2vw, 0.9rem)',
+                        color: 'rgba(200,230,200,0.9)',
+                        fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
+                      }}
+                    >
+                      {item.label}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -70,9 +205,51 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-0 right-0 w-20 h-20 sm:w-32 sm:h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 bg-white/10 rounded-full -translate-y-10 sm:-translate-y-16 md:-translate-y-24 lg:-translate-y-32 translate-x-10 sm:translate-x-16 md:translate-x-24 lg:translate-x-32"></div>
-      <div className="absolute bottom-0 left-0 w-16 h-16 sm:w-24 sm:h-24 md:w-36 md:h-36 lg:w-48 lg:h-48 bg-white/10 rounded-full translate-y-8 sm:translate-y-12 md:translate-y-18 lg:translate-y-24 -translate-x-8 sm:-translate-x-12 md:-translate-x-18 lg:-translate-x-24"></div>
+      {/* Responsive styles via style tag */}
+      <style>{`
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 40px;
+          align-items: center;
+        }
+        .hero-left {
+          order: 1;
+        }
+        .hero-right {
+          order: 2;
+          display: flex;
+          justify-content: flex-end;
+        }
+        .hero-buttons {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+          align-items: center;
+        }
+        @media (max-width: 900px) {
+          .hero-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+          }
+          .hero-left {
+            order: 2;
+          }
+          .hero-right {
+            order: 1;
+            justify-content: center;
+          }
+        }
+        @media (max-width: 480px) {
+          .hero-buttons {
+            flex-direction: column;
+            align-items: stretch;
+          }
+          .hero-buttons a {
+            justify-content: center;
+          }
+        }
+      `}</style>
     </section>
   );
 };
