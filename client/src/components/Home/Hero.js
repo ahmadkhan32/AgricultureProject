@@ -5,15 +5,16 @@ import { ArrowRight, Play } from 'lucide-react';
 const Hero = () => {
   return (
     <section
-      className="relative text-white bg-primary-500 min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh]"
+      className="relative text-white min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] flex items-center"
       style={{
-        backgroundImage: `url(/images/pattern-light.svg)`,
+        backgroundImage: `url(/images/hero_bg_hd.jpg)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
       }}
     >
       {/* Overlay for better contrast */}
-      <div className="absolute inset-0 bg-primary-600 opacity-50"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-900/70 to-slate-900/40"></div>
 
       {/* Content */}
       <div className="relative max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24">
