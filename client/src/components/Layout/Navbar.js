@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTranslation } from '../../components/withTranslation';
 import { Menu, X, User, LogOut, Settings, Search, ChevronDown } from 'lucide-react';
-import UCAEPLogo from '../Logo/UCAEPLogo';
+
 import LanguageSwitcher from '../LanguageSwitcher';
 
 const Navbar = () => {
@@ -36,16 +36,7 @@ const Navbar = () => {
       <div className="bg-[#1e3a5f] shadow-lg">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <div className="flex justify-between items-center h-12 sm:h-14">
-            {/* Logo - Visible on all screens */}
-            <div className="flex-shrink-0 mr-2 sm:mr-4">
-              <UCAEPLogo 
-                size="small" 
-                showText={false}
-                showFullName={false}
-                variant="dark"
-                linkTo="/"
-              />
-            </div>
+
             
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center space-x-4 xl:space-x-6 flex-1 ml-4">
