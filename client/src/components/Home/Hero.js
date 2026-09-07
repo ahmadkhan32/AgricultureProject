@@ -10,7 +10,6 @@ const Hero = () => {
         backgroundImage: `url(/images/hero_bg_hd.jpg)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
       }}
     >
       {/* Overlay for better contrast */}
